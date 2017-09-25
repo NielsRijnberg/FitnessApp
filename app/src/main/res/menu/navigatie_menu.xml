@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/nav_Schemas"
+        android:title="Schema's" />
+    <item android:id="@+id/nav_Oefeningen"
+        android:title="Oefeningen" />
+    <item android:id="@+id/nav_Producten"
+        android:title="Producten" />
+    <item android:id="@+id/nav_Aankopen"
+        android:title="Aankopen" />
+    <item android:id="@+id/nav_Account"
+        android:title="Account" />
+    <item android:id="@+id/nav_Instellingen"
+        android:title="Instellingen" />
+    <item android:id="@+id/nav_Uitloggen"
+        android:title="Uitloggen" />
+</menu>
