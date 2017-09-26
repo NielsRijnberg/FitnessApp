@@ -16,8 +16,17 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activities.RegistreerActivity" />
-        <activity android:name=".Activities.OverzichtschermActivity" />
+        <activity
+            android:name=".Activities.RegistreerActivity"
+            android:parentActivityName=".Activities.LoginActivity" />
+        <activity
+            android:name=".Activities.OverzichtschermActivity"
+            android:parentActivityName=".Activities.LoginActivity" />
+        <activity android:name=".Activities.ProductActivity" />
+        <activity android:name=".Activities.AankopenActivity" />
+        <activity android:name=".Activities.AccountActivity" />
+        <activity android:name=".Activities.OefeningenActivity" />
+        <activity android:name=".Activities.SchemasActivity"></activity>
     </application>
 
 </manifest>
