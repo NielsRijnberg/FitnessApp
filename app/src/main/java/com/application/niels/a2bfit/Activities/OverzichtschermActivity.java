@@ -1,8 +1,8 @@
 package com.application.niels.a2bfit.Activities;
 
-import android.content.ClipData;
 import android.content.Intent;
 import android.support.design.widget.NavigationView;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -12,6 +12,14 @@ import android.widget.Toast;
 
 import com.application.niels.a2bfit.R;
 
+import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
+import android.os.Handler;
+
+import Classes.MyAdapter;
+import me.relex.circleindicator.CircleIndicator;
+
 
 public class OverzichtschermActivity extends AppCompatActivity {
 
@@ -19,10 +27,16 @@ public class OverzichtschermActivity extends AppCompatActivity {
     private ActionBarDrawerToggle mDrawerToggle;
     private NavigationView navigationView;
 
+    private static ViewPager mPager;
+    private static int currentPage = 0;
+    private static final Integer[] FOTOS = {R.drawable.apparaten_bfit, R.drawable.apparaten_bfitt, R.drawable.apparaten_bfittt};
+    private ArrayList<Integer> FOTOArray = new ArrayList<Integer>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_overzichtscherm);
+        init();
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.open, R.string.close);
@@ -102,5 +116,32 @@ public class OverzichtschermActivity extends AppCompatActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void init() {
+        for(int i = 0; i< FOTOS.length; i++)
+            FOTOArray.add(FOTOS[i]);
+
+        mPager = (ViewPager) findViewById(R.id.pager);
+        mPager.setAdapter(new MyAdapter(OverzichtschermActivity.this, FOTOArray));
+        CircleIndicator indicator = (CircleIndicator) findViewById(R.id.indicator);
+        indicator.setViewPager(mPager);
+
+        final Handler handler = new Handler();
+        final Runnable Update = new Runnable() {
+            public void run() {
+                if (currentPage == FOTOS.length) {
+                    currentPage = 0;
+                }
+                mPager.setCurrentItem(currentPage++, true);
+            }
+        };
+        Timer swipeTimer = new Timer();
+        swipeTimer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                handler.post(Update);
+            }
+        }, 2500, 2500);
     }
 }
