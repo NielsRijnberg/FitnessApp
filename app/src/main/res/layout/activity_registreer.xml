@@ -6,6 +6,14 @@
     android:layout_height="match_parent"
     tools:context="com.application.niels.a2bfit.Activities.RegistreerActivity">
 
+    <android.support.v7.widget.AppCompatImageView
+        android:layout_width="344dp"
+        android:layout_height="140dp"
+        android:src="@drawable/bfit_logo"
+        tools:layout_editor_absoluteY="0dp"
+        tools:layout_editor_absoluteX="8dp">
+    </android.support.v7.widget.AppCompatImageView>
+
     <EditText
         android:id="@+id/etNaam"
         android:layout_width="255dp"
@@ -19,7 +27,9 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintHorizontal_bias="0.505"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="8dp" />
+        android:layout_marginTop="160dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp" />
 
     <EditText
         android:id="@+id/etWachtwoord"
@@ -34,7 +44,9 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintHorizontal_bias="0.505"
         android:layout_marginTop="8dp"
-        app:layout_constraintTop_toBottomOf="@+id/etMail" />
+        app:layout_constraintTop_toBottomOf="@+id/etMail"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp" />
 
     <EditText
         android:id="@+id/etLeeftijd"
@@ -48,19 +60,26 @@
         android:layout_marginRight="8dp"
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginTop="8dp"
-        app:layout_constraintTop_toBottomOf="@+id/etWachtwoord" />
+        app:layout_constraintTop_toBottomOf="@+id/etWachtwoord"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp" />
 
     <Button
         android:id="@+id/btnRegistreer"
         android:layout_width="256dp"
-        android:layout_height="39dp"
+        android:layout_height="48dp"
         android:text="Registreer"
         android:layout_marginLeft="8dp"
+        android:background="@color/colorPrimary"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginRight="8dp"
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginTop="8dp"
-        app:layout_constraintTop_toBottomOf="@+id/etLeeftijd" />
+        app:layout_constraintTop_toBottomOf="@+id/etLeeftijd"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp" />
 
     <EditText
         android:id="@+id/etMail"
@@ -74,5 +93,7 @@
         android:inputType="textEmailAddress"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etNaam" />
+        app:layout_constraintTop_toBottomOf="@+id/etNaam"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp" />
 </android.support.constraint.ConstraintLayout>
