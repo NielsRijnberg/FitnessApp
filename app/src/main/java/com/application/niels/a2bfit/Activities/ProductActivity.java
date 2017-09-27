@@ -9,13 +9,11 @@ import Classes.DatabaseHelper;
 
 public class ProductActivity extends AppCompatActivity {
 
-    DatabaseHelper myDb;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product);
 
-        myDb = new DatabaseHelper(this);
+
     }
 }

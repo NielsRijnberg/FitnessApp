@@ -6,28 +6,53 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.application.niels.a2bfit.R;
 
+import Classes.DatabaseHelper;
+
 public class RegistreerActivity extends AppCompatActivity {
+
+    DatabaseHelper myDb;
+    EditText editNaam, editMail, editWachtwoord, editLeeftijd;
+    Button btnRegistreer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registreer);
 
-        final EditText etNaam = (EditText) findViewById(R.id.etNaam);
-        final EditText etMail = (EditText) findViewById(R.id.etMail);
-        final EditText etWachtwoord = (EditText) findViewById(R.id.etWachtwoord);
-        final EditText etLeeftijd = (EditText) findViewById(R.id.etLeeftijd);
+        myDb = new DatabaseHelper(this);
 
-        final Button btnRegistreer = (Button) findViewById(R.id.btnRegistreer);
+        editNaam = (EditText) findViewById(R.id.etNaam);
+        editMail = (EditText) findViewById(R.id.etMail);
+        editWachtwoord = (EditText) findViewById(R.id.etWachtwoord);
+        editLeeftijd = (EditText) findViewById(R.id.etLeeftijd);
+        btnRegistreer = (Button) findViewById(R.id.btnRegistreer);
 
+        RegistreerAbonnee();
+    }
+
+    public void RegistreerAbonnee() {
         btnRegistreer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent registreerIntent = new Intent(RegistreerActivity.this, LoginActivity.class);
-                RegistreerActivity.this.startActivity(registreerIntent);
+                boolean isInserted = myDb.insertData(editNaam.getText().toString(),
+                                                        editMail.getText().toString(),
+                                                        editWachtwoord.getText().toString(),
+                                                        editLeeftijd.getText().toString());
+                if (isInserted = true){
+                    Toast.makeText(RegistreerActivity.this, "Geregistreerd", Toast.LENGTH_LONG).show();
+                }
+                else {
+                    Toast.makeText(RegistreerActivity.this, "Database functie werkt niet", Toast.LENGTH_LONG).show();
+                }
+
+
+
+                /*Intent registreerIntent = new Intent(RegistreerActivity.this, LoginActivity.class);
+                RegistreerActivity.this.startActivity(registreerIntent);*/
             }
         });
     }
