@@ -39,9 +39,9 @@ public class RegistreerActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 boolean isInserted = myDb.insertData(editNaam.getText().toString(),
-                                                        editMail.getText().toString(),
                                                         editWachtwoord.getText().toString(),
-                                                        editLeeftijd.getText().toString());
+                                                        editLeeftijd.getText().toString(),
+                                                        editMail.getText().toString());
                 if (isInserted = true){
                     Toast.makeText(RegistreerActivity.this, "Geregistreerd", Toast.LENGTH_LONG).show();
                 }
