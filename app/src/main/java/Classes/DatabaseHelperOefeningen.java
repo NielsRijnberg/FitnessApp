@@ -20,7 +20,8 @@ public class DatabaseHelperOefeningen extends SQLiteOpenHelper{
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("create table "+TABLE_NAME+" ("+COLUMN_OEFENINGID+" INTEGER PRIMARY KEY AUTOINCREMENT, "+COLUMN_NAAM+" TEXT, "+COLUMN_AANTALSETS+" INTEGER, "+COLUMN_AANTALREPS+" INTEGER)");
+        String CREATE_OEFENING_TABLE = "create table if not exists "+TABLE_NAME+" ("+COLUMN_OEFENINGID+" INTEGER PRIMARY KEY AUTOINCREMENT, "+COLUMN_NAAM+" TEXT, "+COLUMN_AANTALSETS+" INTEGER, "+COLUMN_AANTALREPS+" INTEGER)";
+        db.execSQL(CREATE_OEFENING_TABLE);
     }
 
     @Override
