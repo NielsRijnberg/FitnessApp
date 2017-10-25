@@ -6,17 +6,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
-
 import com.application.niels.a2bfit.R;
-
+import java.util.List;
 import Classes.DatabaseHelper;
-import Classes.DatabaseHelperOefeningen;
+import Classes.Oefening;
+import Classes.Spiergroep;
 
 public class OefeningenActivity extends AppCompatActivity {
 
-    DatabaseHelperOefeningen myDb;
-
+    DatabaseHelper db;
     Button btnBekijkOefening;
 
     @Override
@@ -24,18 +22,18 @@ public class OefeningenActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_oefeningen);
 
-        myDb = new DatabaseHelperOefeningen(this);
+        db = new DatabaseHelper(this);
 
         btnBekijkOefening = (Button) findViewById(R.id.btnBekijkOefening);
 
-        HaalAlleOefeningenOp();
+        getOefeningen();
     }
 
-    public void HaalAlleOefeningenOp(){
+    public void getOefeningen(){
         btnBekijkOefening.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Cursor result = myDb.HaalAlleOefeningenOp();
+                Cursor result = db.HaalAlleOefeningenOp();
 
                 if (result.getCount() == 0){
                     showMessage("Error", "Geen oefeningen gevonden");

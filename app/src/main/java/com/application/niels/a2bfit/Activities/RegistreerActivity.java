@@ -38,7 +38,7 @@ public class RegistreerActivity extends AppCompatActivity {
         btnRegistreer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                boolean isInserted = myDb.insertData(editNaam.getText().toString(),
+                /*boolean isInserted = myDb.insertData(editNaam.getText().toString(),
                                                         editWachtwoord.getText().toString(),
                                                         editLeeftijd.getText().toString(),
                                                         editMail.getText().toString());
@@ -47,7 +47,7 @@ public class RegistreerActivity extends AppCompatActivity {
                 }
                 else {
                     Toast.makeText(RegistreerActivity.this, "Database functie werkt niet", Toast.LENGTH_LONG).show();
-                }
+                }*/
 
 
 

@@ -8,9 +8,7 @@ public class Aankoop {
     private Date datum;
     private Product product;
 
-    public int getAankoopID() {
-        return aankoopID;
-    }
+    public int getAankoopID() { return aankoopID; }
 
     public int getAantal() {
         return aantal;

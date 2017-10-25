@@ -24,7 +24,6 @@
             android:parentActivityName=".Activities.LoginActivity" />
         <activity android:name=".Activities.ProductActivity" />
         <activity android:name=".Activities.AankopenActivity" />
-        <activity android:name=".Activities.AccountActivity" />
         <activity android:name=".Activities.OefeningenActivity" />
         <activity android:name=".Activities.SchemasActivity"></activity>
     </application>

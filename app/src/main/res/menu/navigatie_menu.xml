@@ -9,10 +9,6 @@
         android:title="Producten" />
     <item android:id="@+id/nav_Aankopen"
         android:title="Aankopen" />
-    <item android:id="@+id/nav_Account"
-        android:title="Account" />
-    <item android:id="@+id/nav_Instellingen"
-        android:title="Instellingen" />
     <item android:id="@+id/nav_Uitloggen"
         android:title="Uitloggen" />
 </menu>

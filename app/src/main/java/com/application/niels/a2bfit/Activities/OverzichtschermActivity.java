@@ -1,6 +1,7 @@
 package com.application.niels.a2bfit.Activities;
 
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
@@ -17,6 +18,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 import android.os.Handler;
 
+import Classes.DatabaseHelper;
 import Classes.MyAdapter;
 import me.relex.circleindicator.CircleIndicator;
 
@@ -38,6 +40,8 @@ public class OverzichtschermActivity extends AppCompatActivity {
         setContentView(R.layout.activity_overzichtscherm);
         init();
 
+        initDatabase();
+
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.open, R.string.close);
 
@@ -48,6 +52,19 @@ public class OverzichtschermActivity extends AppCompatActivity {
         navigationView = (NavigationView) findViewById(R.id.navigation_view);
 
         //Setting Navigation View Item Selected Listener to handle the item click of the navigation menu
+        HandleMenuItems();
+    }
+
+    private void initDatabase() {
+        DatabaseHelper db = new DatabaseHelper(this);
+        SQLiteDatabase sqlDb = db.getWritableDatabase();
+        db.dropTables(sqlDb);
+        db.createTablesIfNotExists(sqlDb);
+        db.insertSampleData(sqlDb);
+        db.close();
+    }
+
+    private void HandleMenuItems() {
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
 
             // This method will trigger on item Click of navigation menu
@@ -77,14 +94,6 @@ public class OverzichtschermActivity extends AppCompatActivity {
                         Intent aankopenIntent = new Intent(OverzichtschermActivity.this, AankopenActivity.class);
                         startActivity(aankopenIntent);
                         return true;
-                    case R.id.nav_Account:
-                        Toast.makeText(getApplicationContext(), "Account", Toast.LENGTH_SHORT).show();
-                        Intent accountIntent = new Intent(OverzichtschermActivity.this, AccountActivity.class);
-                        startActivity(accountIntent);
-                        return true;
-                    case R.id.nav_Instellingen:
-                        Toast.makeText(getApplicationContext(), "Instellingen", Toast.LENGTH_SHORT).show();
-                        return true;
                     case R.id.nav_Oefeningen:
                         Toast.makeText(getApplicationContext(), "Oefeningen", Toast.LENGTH_SHORT).show();
                         Intent oefeningenIntent = new Intent(OverzichtschermActivity.this, OefeningenActivity.class);
@@ -101,7 +110,7 @@ public class OverzichtschermActivity extends AppCompatActivity {
                         startActivity(uitloggenIntent);
                         return true;
                     default:
-                        Toast.makeText(getApplicationContext(), "Somethings Wrong", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Er is iets mis gegaan...", Toast.LENGTH_SHORT).show();
                         return true;
 
                 }
