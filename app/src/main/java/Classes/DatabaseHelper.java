@@ -17,9 +17,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String DATABASE_NAME = "Sportschool";
 
     //region Table names
-    public static final String TABLE_AANKOOP = "aankopen";
-    public static final String TABLE_ABONNEE = "abonnees";
-    public static final String TABLE_ABONNEMENT = "abonnementen";
     public static final String TABLE_OEFENING = "oefeningen";
     public static final String TABLE_PRODUCT = "producten";
     public static final String TABLE_SCHEMA = "schemas";
@@ -33,26 +30,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     //region Column Names
     //Comon column names
     public static final String KEY_ID = "ID";
-    public static final String KEY_ABONNEEID = "abonneeID";
-    public static final String KEY_ABONNEMENTID = "abonnementID";
     public static final String KEY_SCHEMAID = "schemaID";
     public static final String KEY_OEFENINGID = "oefeningID";
     public static final String KEY_SPIERGROEPID = "spiergroepID";
-    public static final String KEY_AANKOOPID = "aankoopID";
-    public static final String KEY_PRODUCTID = "productID";
-
-    //aankopen column names
-    public static final String KEY_AANTAL = "aantal";
-    public static final String KEY_DATUM = "datum";
-
-    //abonnee column names
-    public static final String KEY_ABONNEENAAM = "abonneenaam";
-    public static final String KEY_WACHTWOORD = "wachtwoord";
-    public static final String KEY_LEEFTIJD = "leeftijd";
-    public static final String KEY_MAILADRES = "mailadres";
-
-    //abonnement column names
-    public static final String KEY_ABONNEMENTKOSTEN = "abonnementkosten";
 
     //oefening column names
     public static final String KEY_OEFENINGNAAM = "oefeningnaam";
@@ -73,26 +53,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     //endregion
 
     //region Create Tables
-    //aankoop table create
-    private static final String CREATE_TABLE_AANKOOP = "CREATE TABLE IF NOT EXISTS " + TABLE_AANKOOP +
-            "("+ KEY_ID +" INTEGER PRIMARY KEY AUTOINCREMENT, " +
-            KEY_ABONNEEID + " INTEGER, " +
-            KEY_AANTAL + " INTEGER, " +
-            KEY_DATUM + " TEXT)";
-
-    //abonnee table create
-    private static final String CREATE_TABLE_ABONNEE = "CREATE TABLE IF NOT EXISTS " + TABLE_ABONNEE +
-            "(" + KEY_ID +" INTEGER PRIMARY KEY AUTOINCREMENT, " +
-            KEY_ABONNEENAAM + " TEXT, " +
-            KEY_WACHTWOORD + " TEXT, " +
-            KEY_LEEFTIJD + " INTEGER, " +
-            KEY_MAILADRES + " TEXT)";
-
-    //abonnement table create
-    private static final String CREATE_TABLE_ABONNEMENT = "CREATE TABLE IF NOT EXISTS " + TABLE_ABONNEMENT +
-            "(" + KEY_ID +" INTEGER PRIMARY KEY AUTOINCREMENT, " +
-            KEY_ABONNEMENTKOSTEN + " REAL)";
-
     //oefening table create
     private static final String CREATE_TABLE_OEFENING = "CREATE TABLE IF NOT EXISTS " + TABLE_OEFENING +
             "(" + KEY_ID +" INTEGER PRIMARY KEY AUTOINCREMENT, " +
@@ -110,19 +70,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     //schema table create
     private static final String CREATE_TABLE_SCHEMA = "CREATE TABLE IF NOT EXISTS " + TABLE_SCHEMA +
             "(" + KEY_ID +" INTEGER PRIMARY KEY AUTOINCREMENT, " +
-            KEY_ABONNEEID + " INTEGER, " +
             KEY_SCHEMATYPE + " TEXT)";
 
     //spiergroep table create
     private static final String CREATE_TABLE_SPIERGROEP = "CREATE TABLE IF NOT EXISTS " + TABLE_SPIERGROEP +
             "(" + KEY_ID +" INTEGER PRIMARY KEY AUTOINCREMENT, " +
             KEY_SPIERGROEPNAAM + " TEXT)";
-
-    // abonnee_abonnement table create
-    /*private static final String CREATE_TABLE_ABONNEE_ABONNEMENT = "CREATE TABLE " + TABLE_ABONNEE_ABONNEMENT +
-            "(" + KEY_ABONNEEID + " INTEGER NOT NULL REFERENCES " + TABLE_ABONNEE(KEY_ID) +*/
-
-
 
     // schema_oefening table create
 
@@ -131,6 +84,44 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 
     // product_aankoop table create
+    //endregion
+
+    //region Insert producten
+    private static final String INSERT_SHAKEBEKER = "INSERT INTO " + TABLE_PRODUCT +
+            " (" + KEY_ID + "," + KEY_PRODUCTNAAM + "," + KEY_PRODUCTKOSTEN  + "," + KEY_OMSCHRIJVING +
+            ") VALUES (" + 1 + "," + "'Shakebeker'" + "," + 6.95 + "," + "''" + ")";
+
+    private static final String INSERT_BIDON = "INSERT INTO " + TABLE_PRODUCT +
+            " (" + KEY_ID + "," + KEY_PRODUCTNAAM + "," + KEY_PRODUCTKOSTEN  + "," + KEY_OMSCHRIJVING +
+            ") VALUES (" + 2 + "," + "'Bidon'" + "," + 3.75 + "," + "'Inhoud 500mL'" + ")";
+
+    private static final String INSERT_FITNESSHANDSCHOENEN = "INSERT INTO " + TABLE_PRODUCT +
+            " (" + KEY_ID + "," + KEY_PRODUCTNAAM + "," + KEY_PRODUCTKOSTEN  + "," + KEY_OMSCHRIJVING +
+            ") VALUES (" + 3 + "," + "'Fitnesshandschoenen'" + "," + 5.90 + "," + "'Voor goede grip en bescherming aan de hand'" + ")";
+
+    private static final String INSERT_WHEYPERFECTION336 = "INSERT INTO " + TABLE_PRODUCT +
+            " (" + KEY_ID + "," + KEY_PRODUCTNAAM + "," + KEY_PRODUCTKOSTEN  + "," + KEY_OMSCHRIJVING +
+            ") VALUES (" + 4 + "," + "'Whey perfection 336 gram'" + "," + 6.90 + "," + "''" + ")";
+
+    private static final String INSERT_WHEYPERFECTION750 = "INSERT INTO " + TABLE_PRODUCT +
+            " (" + KEY_ID + "," + KEY_PRODUCTNAAM + "," + KEY_PRODUCTKOSTEN  + "," + KEY_OMSCHRIJVING +
+            ") VALUES (" + 5 + "," + "'Whey perfection 750 gram'" + "," + 12.90 + "," + "''" + ")";
+
+    private static final String INSERT_WHEYPERFECTION2270 = "INSERT INTO " + TABLE_PRODUCT +
+            " (" + KEY_ID + "," + KEY_PRODUCTNAAM + "," + KEY_PRODUCTKOSTEN  + "," + KEY_OMSCHRIJVING +
+            ") VALUES (" + 6 + "," + "'Whey perfection 2270 gram'" + "," + 34.90 + "," + "''" + ")";
+
+    private static final String INSERT_WHEYPERFECTION4540 = "INSERT INTO " + TABLE_PRODUCT +
+            " (" + KEY_ID + "," + KEY_PRODUCTNAAM + "," + KEY_PRODUCTKOSTEN  + "," + KEY_OMSCHRIJVING +
+            ") VALUES (" + 7 + "," + "'Whey perfection 4540 gram'" + "," + 59.90 + "," + "''" + ")";
+
+    private static final String INSERT_CREATINE = "INSERT INTO " + TABLE_PRODUCT +
+            " (" + KEY_ID + "," + KEY_PRODUCTNAAM + "," + KEY_PRODUCTKOSTEN  + "," + KEY_OMSCHRIJVING +
+            ") VALUES (" + 8 + "," + "'Creatine 500 gram'" + "," + 12.50 + "," + "''" + ")";
+
+    private static final String INSERT_PROTEINBARS = "INSERT INTO " + TABLE_PRODUCT +
+            " (" + KEY_ID + "," + KEY_PRODUCTNAAM + "," + KEY_PRODUCTKOSTEN  + "," + KEY_OMSCHRIJVING +
+            ") VALUES (" + 9 + "," + "'Protein bars 12 repen'" + "," + 14.90 + "," + "''" + ")";
     //endregion
 
     //region Insert oefeningen
@@ -164,6 +155,26 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String INSERT_BICEPS = "INSERT INTO " + TABLE_SPIERGROEP +
             " (" + KEY_ID + "," + KEY_SPIERGROEPNAAM +
             ") VALUES (" + 2 + "," + "'Biceps'" + ")";
+
+    private static final String INSERT_TRICEPS = "INSERT INTO " + TABLE_SPIERGROEP +
+            " (" + KEY_ID + "," + KEY_SPIERGROEPNAAM +
+            ") VALUES (" + 3 + "," + "'Triceps'" + ")";
+
+    private static final String INSERT_BENEN = "INSERT INTO " + TABLE_SPIERGROEP +
+            " (" + KEY_ID + "," + KEY_SPIERGROEPNAAM +
+            ") VALUES (" + 4 + "," + "'Benen'" + ")";
+
+    private static final String INSERT_RUG = "INSERT INTO " + TABLE_SPIERGROEP +
+            " (" + KEY_ID + "," + KEY_SPIERGROEPNAAM +
+            ") VALUES (" + 5 + "," + "'Rug'" + ")";
+
+    private static final String INSERT_SCHOUDERS = "INSERT INTO " + TABLE_SPIERGROEP +
+            " (" + KEY_ID + "," + KEY_SPIERGROEPNAAM +
+            ") VALUES (" + 6 + "," + "'Schouders'" + ")";
+
+    private static final String INSERT_BORST = "INSERT INTO " + TABLE_SPIERGROEP +
+            " (" + KEY_ID + "," + KEY_SPIERGROEPNAAM +
+            ") VALUES (" + 7 + "," + "'Borst'" + ")";
     //endregion
 
     public DatabaseHelper(Context context) {
@@ -176,9 +187,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     public void createTablesIfNotExists(SQLiteDatabase db) {
-        db.execSQL(CREATE_TABLE_AANKOOP);
-        db.execSQL(CREATE_TABLE_ABONNEE);
-        db.execSQL(CREATE_TABLE_ABONNEMENT);
         db.execSQL(CREATE_TABLE_OEFENING);
         db.execSQL(CREATE_TABLE_PRODUCT);
         db.execSQL(CREATE_TABLE_SCHEMA);
@@ -193,19 +201,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     public void dropTables(SQLiteDatabase db) {
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_AANKOOP);
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_ABONNEE);
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_ABONNEMENT);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_OEFENING);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_PRODUCT);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_SCHEMA);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_SPIERGROEP);
     }
 
+
     public void insertSampleData(SQLiteDatabase db){
         insertOefeningen(db);
         insertSpiergroepen(db);
+        insertProducten(db);
     }
+
 
     private void insertOefeningen(SQLiteDatabase db){
         db.execSQL(INSERT_BENCHPRESS);
@@ -218,11 +226,41 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private void insertSpiergroepen(SQLiteDatabase db){
         db.execSQL(INSERT_BUIK);
         db.execSQL(INSERT_BICEPS);
+        db.execSQL(INSERT_BENEN);
+        db.execSQL(INSERT_BORST);
+        db.execSQL(INSERT_RUG);
+        db.execSQL(INSERT_SCHOUDERS);
+        db.execSQL(INSERT_TRICEPS);
     }
+
+    private void insertProducten(SQLiteDatabase db){
+        db.execSQL(INSERT_SHAKEBEKER);
+        db.execSQL(INSERT_BIDON);
+        db.execSQL(INSERT_FITNESSHANDSCHOENEN);
+        db.execSQL(INSERT_WHEYPERFECTION336);
+        db.execSQL(INSERT_WHEYPERFECTION750);
+        db.execSQL(INSERT_WHEYPERFECTION2270);
+        db.execSQL(INSERT_WHEYPERFECTION4540);
+        db.execSQL(INSERT_CREATINE);
+        db.execSQL(INSERT_PROTEINBARS);
+    }
+
 
     public Cursor HaalAlleOefeningenOp(){
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor result = db.rawQuery("select * from " + TABLE_OEFENING, null);
-        return  result;
+        return result;
+    }
+
+    public Cursor HaalAlleProductenOp(){
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor result = db.rawQuery("select * from " + TABLE_PRODUCT, null);
+        return result;
+    }
+
+    public Cursor HaalAlleSpiergroepenOp(){
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor result = db.rawQuery("select * from " + TABLE_SPIERGROEP, null);
+        return result;
     }
 }

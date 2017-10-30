@@ -71,7 +71,7 @@
         app:layout_constraintHorizontal_bias="0.508" />
 
     <ListView
-        android:id="@+id/listView"
+        android:id="@+id/listViewOefeningen"
         android:layout_width="281dp"
         android:layout_height="271dp"
         android:layout_marginEnd="8dp"

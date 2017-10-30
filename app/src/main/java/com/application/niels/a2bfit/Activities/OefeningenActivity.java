@@ -6,16 +6,17 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ListView;
+
 import com.application.niels.a2bfit.R;
-import java.util.List;
+
 import Classes.DatabaseHelper;
-import Classes.Oefening;
-import Classes.Spiergroep;
 
 public class OefeningenActivity extends AppCompatActivity {
 
     DatabaseHelper db;
     Button btnBekijkOefening;
+    ListView listViewOefeningen;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +26,7 @@ public class OefeningenActivity extends AppCompatActivity {
         db = new DatabaseHelper(this);
 
         btnBekijkOefening = (Button) findViewById(R.id.btnBekijkOefening);
+        listViewOefeningen = (ListView) findViewById(R.id.listViewOefeningen);
 
         getOefeningen();
     }
