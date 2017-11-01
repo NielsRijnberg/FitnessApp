@@ -16,15 +16,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 1;
     public static final String DATABASE_NAME = "Sportschool";
 
+
+
     //region Table names
     public static final String TABLE_OEFENING = "oefeningen";
     public static final String TABLE_PRODUCT = "producten";
     public static final String TABLE_SCHEMA = "schemas";
     public static final String TABLE_SPIERGROEP = "spiergroepen";
-    public static final String TABLE_ABONNEE_ABONNEMENT = "abonnees_abonnementen";
     public static final String TABLE_SCHEMA_OEFENING = "schemas_oefeningen";
     public static final String TABLE_OEFENING_SPIERGROEP = "oefeningen_spiergroepen";
-    public static final String TABLE_PRODUCT_AANKOOP = "producten_aankopen";
     //endregion
 
     //region Column Names
@@ -78,12 +78,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             KEY_SPIERGROEPNAAM + " TEXT)";
 
     // schema_oefening table create
-
+    private static final String CREATE_TABLE_SCHEMA_OEFENING = "CREATE TABLE IF NOT EXISTS " + TABLE_SCHEMA_OEFENING +
+            "(" + KEY_SCHEMAID + " INTEGER REFERENCES " + TABLE_SCHEMA + " (" + KEY_ID + "), " +
+            KEY_OEFENINGID + " INTEGER REFERENCES " + TABLE_OEFENING + " (" + KEY_ID + "))";
 
     // oefening_spiergroep table create
+    private static final String CREATE_TABLE_OEFENING_SPIERGROEP = "CREATE TABLE IF NOT EXISTS " + TABLE_OEFENING_SPIERGROEP +
+            "(" + KEY_OEFENINGID + " INTEGER REFERENCES " + TABLE_OEFENING + " (" + KEY_ID + "), " +
+            KEY_SPIERGROEPID + " INTEGER REFERENCES " + TABLE_SPIERGROEP + " (" + KEY_ID + "))";
 
-
-    // product_aankoop table create
     //endregion
 
     //region Insert producten
@@ -177,6 +180,40 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             ") VALUES (" + 7 + "," + "'Borst'" + ")";
     //endregion
 
+    //region Insert schema's
+    private static final String INSERT_BORSTSCHEMA = "INSERT INTO " + TABLE_SCHEMA +
+            " (" + KEY_ID + "," + KEY_SCHEMATYPE +
+            ") VALUES (" + 1 + "," + "'Borstschema'" + ")";
+
+    private static final String INSERT_BICEPSSCHEMA = "INSERT INTO " + TABLE_SCHEMA +
+            " (" + KEY_ID + "," + KEY_SCHEMATYPE +
+            ") VALUES (" + 2 + "," + "'Bicepsschema'" + ")";
+
+    private static final String INSERT_BENENSCHEMA = "INSERT INTO " + TABLE_SCHEMA +
+            " (" + KEY_ID + "," + KEY_SCHEMATYPE +
+            ") VALUES (" + 3 + "," + "'Benenschema'" + ")";
+    //endregion
+
+    //region Insert oefeningen van schema
+    private static final String INSERT_BENENSCHEMA_SQUATBACK = "INSERT INTO " + TABLE_SCHEMA_OEFENING +
+            " (" + KEY_SCHEMAID + "," + KEY_OEFENINGID +
+            ") VALUES (" + 3 + "," + 2 + ")";
+
+    private static final String INSERT_BENENSCHEMA_LEGEXTENSION = "INSERT INTO " + TABLE_SCHEMA_OEFENING +
+            " (" + KEY_SCHEMAID + "," + KEY_OEFENINGID +
+            ") VALUES (" + 3 + "," + 3 + ")";
+
+    private static final String INSERT_BENENSCHEMA_LYINGLEGCURL = "INSERT INTO " + TABLE_SCHEMA_OEFENING +
+            " (" + KEY_SCHEMAID + "," + KEY_OEFENINGID +
+            ") VALUES (" + 3 + "," + 4 + ")";
+
+    private static final String INSERT_BENENSCHEMA_SEATEDLEGPRESS = "INSERT INTO " + TABLE_SCHEMA_OEFENING +
+            " (" + KEY_SCHEMAID + "," + KEY_OEFENINGID +
+            ") VALUES (" + 3 + "," + 5 + ")";
+    //endregion
+
+
+
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
@@ -191,6 +228,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(CREATE_TABLE_PRODUCT);
         db.execSQL(CREATE_TABLE_SCHEMA);
         db.execSQL(CREATE_TABLE_SPIERGROEP);
+        db.execSQL(CREATE_TABLE_SCHEMA_OEFENING);
     }
 
     @Override
@@ -208,12 +246,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
 
+
     public void insertSampleData(SQLiteDatabase db){
         insertOefeningen(db);
         insertSpiergroepen(db);
         insertProducten(db);
+        insertSchemas(db);
+        insertOefeningenVanSchemas(db);
     }
-
 
     private void insertOefeningen(SQLiteDatabase db){
         db.execSQL(INSERT_BENCHPRESS);
@@ -245,6 +285,20 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(INSERT_PROTEINBARS);
     }
 
+    private void insertSchemas(SQLiteDatabase db){
+        db.execSQL(INSERT_BORSTSCHEMA);
+        db.execSQL(INSERT_BICEPSSCHEMA);
+        db.execSQL(INSERT_BENENSCHEMA);
+    }
+
+    private void insertOefeningenVanSchemas(SQLiteDatabase db){
+        db.execSQL(INSERT_BENENSCHEMA_SQUATBACK);
+        db.execSQL(INSERT_BENENSCHEMA_LEGEXTENSION);
+        db.execSQL(INSERT_BENENSCHEMA_LYINGLEGCURL);
+        db.execSQL(INSERT_BENENSCHEMA_SEATEDLEGPRESS);
+    }
+
+
 
     public Cursor HaalAlleOefeningenOp(){
         SQLiteDatabase db = this.getReadableDatabase();
@@ -261,6 +315,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public Cursor HaalAlleSpiergroepenOp(){
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor result = db.rawQuery("select * from " + TABLE_SPIERGROEP, null);
+        return result;
+    }
+
+    public Cursor HaalAlleSchemasOp() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor result = db.rawQuery("select * from " + TABLE_SCHEMA, null);
         return result;
     }
 }

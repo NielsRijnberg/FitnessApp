@@ -7,8 +7,6 @@
         android:title="Oefeningen" />
     <item android:id="@+id/nav_Producten"
         android:title="Producten" />
-    <item android:id="@+id/nav_Aankopen"
-        android:title="Aankopen" />
     <item android:id="@+id/nav_Uitloggen"
         android:title="Uitloggen" />
 </menu>

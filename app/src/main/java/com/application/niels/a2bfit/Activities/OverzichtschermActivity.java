@@ -89,11 +89,6 @@ public class OverzichtschermActivity extends AppCompatActivity {
                         Intent productIntent = new Intent(OverzichtschermActivity.this, ProductActivity.class);
                         startActivity(productIntent);
                         return true;
-                    case R.id.nav_Aankopen:
-                        Toast.makeText(getApplicationContext(), "Aankopen", Toast.LENGTH_SHORT).show();
-                        Intent aankopenIntent = new Intent(OverzichtschermActivity.this, AankopenActivity.class);
-                        startActivity(aankopenIntent);
-                        return true;
                     case R.id.nav_Oefeningen:
                         Toast.makeText(getApplicationContext(), "Oefeningen", Toast.LENGTH_SHORT).show();
                         Intent oefeningenIntent = new Intent(OverzichtschermActivity.this, OefeningenActivity.class);
