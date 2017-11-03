@@ -1,5 +1,6 @@
 package com.application.niels.a2bfit.Activities;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
@@ -29,6 +30,7 @@ import java.util.ListIterator;
 
 import Classes.DatabaseHelper;
 import Classes.Oefening;
+import Classes.Product;
 import Classes.Spiergroep;
 
 public class OefeningenActivity extends AppCompatActivity {
@@ -51,6 +53,7 @@ public class OefeningenActivity extends AppCompatActivity {
 
         getOefeningen();
         getSpiergroepen();
+        bekijkOefening();
     }
 
     public void getOefeningen() {
@@ -110,10 +113,31 @@ public class OefeningenActivity extends AppCompatActivity {
         }
     }
 
+    public void bekijkOefening(){
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+                Oefening selectedOefening = (Oefening) listView.getItemAtPosition(position);
+
+                int oefeningID = selectedOefening.getOefeningID();
+                String naam = selectedOefening.getNaam();
+                int aantalSets = selectedOefening.getAantalSets();
+                int aantalReps = selectedOefening.getAantalReps();
+
+                Intent oefeningDetailsIntent = new Intent(OefeningenActivity.this, OefeningDetailsActivity.class);
+
+                oefeningDetailsIntent.putExtra("ID", oefeningID);
+                oefeningDetailsIntent.putExtra("naam", naam);
+                oefeningDetailsIntent.putExtra("aantalSets", aantalSets);
+                oefeningDetailsIntent.putExtra("aantalReps", aantalReps);
+                startActivity(oefeningDetailsIntent);
+            }
+        });
+    }
 
 
-
-    public void putOefeningenBijSpiergroep() {
+    /*public void putOefeningenBijSpiergroep() {
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
@@ -125,7 +149,7 @@ public class OefeningenActivity extends AppCompatActivity {
 
             }
         });
-    }
+    }*/
 
     public void showMessage(String title, String message){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);

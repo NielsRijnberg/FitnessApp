@@ -26,7 +26,8 @@
         <activity android:name=".Activities.OefeningenActivity" />
         <activity android:name=".Activities.SchemasActivity" />
         <activity android:name=".Activities.StartTrainingActivity" />
-        <activity android:name=".Activities.ProductDetailsActivity"></activity>
+        <activity android:name=".Activities.ProductDetailsActivity" />
+        <activity android:name=".Activities.OefeningDetailsActivity"></activity>
     </application>
 
 </manifest>

@@ -38,7 +38,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
 
     private void setTextBoxes(){
         tvProductNaam.setText(naam);
-        tvProductKosten.setText("€ " + kosten);
+        tvProductKosten.setText("€ " + kosten + "0");
         tvProductOmschrijving.setText(omschrijving);
     }
 }
