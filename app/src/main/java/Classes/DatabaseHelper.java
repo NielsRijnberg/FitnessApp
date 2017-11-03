@@ -148,6 +148,150 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String INSERT_SEATED_LEG_PRESS= "INSERT INTO " + TABLE_OEFENING +
             " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS +
             ") VALUES (" + 5 + "," + "'Seated leg press'" + "," + 4 + "," + 10 + ")";
+
+    private static final String INSERT_SEATED_LEG_CURL= "INSERT INTO " + TABLE_OEFENING +
+            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS +
+            ") VALUES (" + 6 + "," + "'Seated leg curl'" + "," + 4 + "," + 10 + ")";
+
+    private static final String INSERT_PULL_DOWN_FRONT= "INSERT INTO " + TABLE_OEFENING +
+            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS +
+            ") VALUES (" + 7 + "," + "'Pull down front'" + "," + 4 + "," + 10 + ")";
+
+    private static final String INSERT_BARBELL_ROWING= "INSERT INTO " + TABLE_OEFENING +
+            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS +
+            ") VALUES (" + 8 + "," + "'Barbell rowing'" + "," + 4 + "," + 12 + ")";
+
+    private static final String INSERT_DUMBBELL_ROWING= "INSERT INTO " + TABLE_OEFENING +
+            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS +
+            ") VALUES (" + 9 + "," + "'Dumbbell rowing'" + "," + 4 + "," + 12 + ")";
+
+    private static final String INSERT_DUAL_SEATED_ROW_WIDE= "INSERT INTO " + TABLE_OEFENING +
+            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS +
+            ") VALUES (" + 10 + "," + "'Dual seated row wide'" + "," + 4 + "," + 10 + ")";
+
+    private static final String INSERT_HORIZONTAL_LAT_ROW= "INSERT INTO " + TABLE_OEFENING +
+            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS +
+            ") VALUES (" + 11 + "," + "'Horizontal lat row'" + "," + 4 + "," + 12 + ")";
+
+    private static final String INSERT_DUMBBELL_PRESS= "INSERT INTO " + TABLE_OEFENING +
+            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS +
+            ") VALUES (" + 12 + "," + "'Dumbbell press'" + "," + 4 + "," + 12 + ")";
+
+    private static final String INSERT_FLYES= "INSERT INTO " + TABLE_OEFENING +
+            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS +
+            ") VALUES (" + 13 + "," + "'Flyes'" + "," + 4 + "," + 12 + ")";
+
+    private static final String INSERT_CABLE_CROSS_OVER= "INSERT INTO " + TABLE_OEFENING +
+            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS +
+            ") VALUES (" + 14 + "," + "'Cable cross over'" + "," + 4 + "," + 12 + ")";
+
+    private static final String INSERT_INCLINE_BENCH_PRESS= "INSERT INTO " + TABLE_OEFENING +
+            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS +
+            ") VALUES (" + 15 + "," + "'Incline bench press'" + "," + 4 + "," + 12 + ")";
+
+    private static final String INSERT_INCLINE_DUMBBELL_PRESS= "INSERT INTO " + TABLE_OEFENING +
+            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS +
+            ") VALUES (" + 16 + "," + "'Incline dumbbell press'" + "," + 4 + "," + 12 + ")";
+
+    private static final String INSERT_DUMBBELL_PULL_OVER= "INSERT INTO " + TABLE_OEFENING +
+            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS +
+            ") VALUES (" + 17 + "," + "'Dumbbell pull over'" + "," + 4 + "," + 12 + ")";
+
+    private static final String INSERT_SEATED_CHEST_PRESS= "INSERT INTO " + TABLE_OEFENING +
+            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS +
+            ") VALUES (" + 18 + "," + "'Seated chest press'" + "," + 4 + "," + 12 + ")";
+
+    private static final String INSERT_FLY_MACHINE= "INSERT INTO " + TABLE_OEFENING +
+            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS +
+            ") VALUES (" + 19 + "," + "'Fly machine'" + "," + 4 + "," + 12 + ")";
+
+    private static final String INSERT_FRONT_PRESS_STANDING= "INSERT INTO " + TABLE_OEFENING +
+            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS +
+            ") VALUES (" + 20 + "," + "'Front press standing'" + "," + 4 + "," + 12 + ")";
+
+    private static final String INSERT_SHOULDER_PRESS_MACHINE= "INSERT INTO " + TABLE_OEFENING +
+            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS +
+            ") VALUES (" + 21 + "," + "'Shoulder press machine'" + "," + 4 + "," + 12 + ")";
+
+    private static final String INSERT_FRONT_RAISE_STANDING= "INSERT INTO " + TABLE_OEFENING +
+            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS +
+            ") VALUES (" + 22 + "," + "'Front raise standing'" + "," + 4 + "," + 12 + ")";
+
+    private static final String INSERT_BEND_OVER_RAISE_SEATED= "INSERT INTO " + TABLE_OEFENING +
+            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS +
+            ") VALUES (" + 23 + "," + "'Bend over raise seated'" + "," + 4 + "," + 12 + ")";
+
+    private static final String INSERT_UPRIGHT_ROWING= "INSERT INTO " + TABLE_OEFENING +
+            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS +
+            ") VALUES (" + 24 + "," + "'Upright rowing'" + "," + 4 + "," + 12 + ")";
+
+    private static final String INSERT_LATERAL_RAISE_STANDING= "INSERT INTO " + TABLE_OEFENING +
+            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS +
+            ") VALUES (" + 25 + "," + "'Lateral raise standing'" + "," + 4 + "," + 12 + ")";
+
+    private static final String INSERT_TRICEPS_EXTENSION_DUMBBELL= "INSERT INTO " + TABLE_OEFENING +
+            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS +
+            ") VALUES (" + 26 + "," + "'Triceps extension dumbbell'" + "," + 4 + "," + 12 + ")";
+
+    private static final String INSERT_TRICEPS_PULL_DOWN= "INSERT INTO " + TABLE_OEFENING +
+            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS +
+            ") VALUES (" + 27 + "," + "'Triceps pull down'" + "," + 4 + "," + 12 + ")";
+
+    private static final String INSERT_TRICEPS_PULL_DOWN_ROPE= "INSERT INTO " + TABLE_OEFENING +
+            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS +
+            ") VALUES (" + 28 + "," + "'Triceps pull down rope'" + "," + 4 + "," + 12 + ")";
+
+    private static final String INSERT_KICK_BACKS_DUMBBELL= "INSERT INTO " + TABLE_OEFENING +
+            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS +
+            ") VALUES (" + 29 + "," + "'Kick backs dumbbell'" + "," + 4 + "," + 12 + ")";
+
+    private static final String INSERT_TRICEPS_EXTENSION= "INSERT INTO " + TABLE_OEFENING +
+            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS +
+            ") VALUES (" + 30 + "," + "'Triceps extension'" + "," + 4 + "," + 12 + ")";
+
+    private static final String INSERT_BICEPS_CURL= "INSERT INTO " + TABLE_OEFENING +
+            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS +
+            ") VALUES (" + 31 + "," + "'Biceps curl'" + "," + 4 + "," + 12 + ")";
+
+    private static final String INSERT_DUMBBELL_CURL= "INSERT INTO " + TABLE_OEFENING +
+            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS +
+            ") VALUES (" + 32 + "," + "'Dumbbell curl'" + "," + 4 + "," + 12 + ")";
+
+    private static final String INSERT_CABLE_CURL= "INSERT INTO " + TABLE_OEFENING +
+            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS +
+            ") VALUES (" + 33 + "," + "'Cable curl'" + "," + 4 + "," + 12 + ")";
+
+    private static final String INSERT_PREACHER_CURL= "INSERT INTO " + TABLE_OEFENING +
+            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS +
+            ") VALUES (" + 34 + "," + "'Preacher curl'" + "," + 4 + "," + 12 + ")";
+
+    private static final String INSERT_HAMMER_CURL= "INSERT INTO " + TABLE_OEFENING +
+            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS +
+            ") VALUES (" + 35 + "," + "'Hammer curl'" + "," + 4 + "," + 12 + ")";
+
+    private static final String INSERT_SEATED_CALF_RAISE= "INSERT INTO " + TABLE_OEFENING +
+            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS +
+            ") VALUES (" + 36 + "," + "'Seated calf raise'" + "," + 4 + "," + 12 + ")";
+
+    private static final String INSERT_CRUNCH= "INSERT INTO " + TABLE_OEFENING +
+            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS +
+            ") VALUES (" + 37 + "," + "'Crunch'" + "," + 4 + "," + 12 + ")";
+
+    private static final String INSERT_SIDE_CRUNCH= "INSERT INTO " + TABLE_OEFENING +
+            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS +
+            ") VALUES (" + 38 + "," + "'Side crunch'" + "," + 4 + "," + 12 + ")";
+
+    private static final String INSERT_LEG_LIFT= "INSERT INTO " + TABLE_OEFENING +
+            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS +
+            ") VALUES (" + 39 + "," + "'Leg lift'" + "," + 4 + "," + 12 + ")";
+
+    private static final String INSERT_ABDOMINAL= "INSERT INTO " + TABLE_OEFENING +
+            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS +
+            ") VALUES (" + 40 + "," + "'Abdominal'" + "," + 4 + "," + 12 + ")";
+
+    private static final String INSERT_PLANK= "INSERT INTO " + TABLE_OEFENING +
+            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS +
+            ") VALUES (" + 41 + "," + "'Plank'" + "," + 4 + "," + 12 + ")";
     //endregion
 
     //region Insert spiergroepen
@@ -212,6 +356,173 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             ") VALUES (" + 3 + "," + 5 + ")";
     //endregion
 
+    //region Insert oefeningen van spiergroep
+    private static final String INSERT_BENCHPRESS_BORST = "INSERT INTO " + TABLE_OEFENING_SPIERGROEP +
+            " (" + KEY_OEFENINGID + "," + KEY_SPIERGROEPID +
+            ") VALUES (" + 1 + "," + 7 + ")";
+
+    private static final String INSERT_SQUATBACK_BENEN = "INSERT INTO " + TABLE_OEFENING_SPIERGROEP +
+            " (" + KEY_OEFENINGID + "," + KEY_SPIERGROEPID +
+            ") VALUES (" + 2 + "," + 4 + ")";
+
+    private static final String INSERT_LEGEXTENSION_BENEN = "INSERT INTO " + TABLE_OEFENING_SPIERGROEP +
+            " (" + KEY_OEFENINGID + "," + KEY_SPIERGROEPID +
+            ") VALUES (" + 3 + "," + 4 + ")";
+
+    private static final String INSERT_LYINGLEGCURL_BENEN = "INSERT INTO " + TABLE_OEFENING_SPIERGROEP +
+            " (" + KEY_OEFENINGID + "," + KEY_SPIERGROEPID +
+            ") VALUES (" + 4 + "," + 4 + ")";
+
+    private static final String INSERT_SEATEDLEGPRESS_BENEN = "INSERT INTO " + TABLE_OEFENING_SPIERGROEP +
+            " (" + KEY_OEFENINGID + "," + KEY_SPIERGROEPID +
+            ") VALUES (" + 5 + "," + 4 + ")";
+
+    private static final String INSERT_SEATEDLEGCURL_BENEN = "INSERT INTO " + TABLE_OEFENING_SPIERGROEP +
+            " (" + KEY_OEFENINGID + "," + KEY_SPIERGROEPID +
+            ") VALUES (" + 6 + "," + 4 + ")";
+
+    private static final String INSERT_PULLDOWNFRONT_RUG = "INSERT INTO " + TABLE_OEFENING_SPIERGROEP +
+            " (" + KEY_OEFENINGID + "," + KEY_SPIERGROEPID +
+            ") VALUES (" + 7 + "," + 5 + ")";
+
+    private static final String INSERT_BARBELLROWING_RUG = "INSERT INTO " + TABLE_OEFENING_SPIERGROEP +
+            " (" + KEY_OEFENINGID + "," + KEY_SPIERGROEPID +
+            ") VALUES (" + 8 + "," + 5 + ")";
+
+    private static final String INSERT_DUMBBELLROWING_RUG = "INSERT INTO " + TABLE_OEFENING_SPIERGROEP +
+            " (" + KEY_OEFENINGID + "," + KEY_SPIERGROEPID +
+            ") VALUES (" + 9 + "," + 5 + ")";
+
+    private static final String INSERT_DUALSEATEDROWWIDE_RUG = "INSERT INTO " + TABLE_OEFENING_SPIERGROEP +
+            " (" + KEY_OEFENINGID + "," + KEY_SPIERGROEPID +
+            ") VALUES (" + 10 + "," + 5 + ")";
+
+    private static final String INSERT_HORIZONTALLATROW_RUG = "INSERT INTO " + TABLE_OEFENING_SPIERGROEP +
+            " (" + KEY_OEFENINGID + "," + KEY_SPIERGROEPID +
+            ") VALUES (" + 11 + "," + 5 + ")";
+
+    private static final String INSERT_DUMBBELLPRESS_BORST = "INSERT INTO " + TABLE_OEFENING_SPIERGROEP +
+            " (" + KEY_OEFENINGID + "," + KEY_SPIERGROEPID +
+            ") VALUES (" + 12 + "," + 7 + ")";
+
+    private static final String INSERT_FLYES_BORST = "INSERT INTO " + TABLE_OEFENING_SPIERGROEP +
+            " (" + KEY_OEFENINGID + "," + KEY_SPIERGROEPID +
+            ") VALUES (" + 13 + "," + 7 + ")";
+
+    private static final String INSERT_CABLECROSSOVER_BORST = "INSERT INTO " + TABLE_OEFENING_SPIERGROEP +
+            " (" + KEY_OEFENINGID + "," + KEY_SPIERGROEPID +
+            ") VALUES (" + 14 + "," + 7 + ")";
+
+    private static final String INSERT_INCLINEBENCHPRESS_BORST = "INSERT INTO " + TABLE_OEFENING_SPIERGROEP +
+            " (" + KEY_OEFENINGID + "," + KEY_SPIERGROEPID +
+            ") VALUES (" + 15 + "," + 7 + ")";
+
+    private static final String INSERT_INCLINEDUMBBELLPRESS_BORST = "INSERT INTO " + TABLE_OEFENING_SPIERGROEP +
+            " (" + KEY_OEFENINGID + "," + KEY_SPIERGROEPID +
+            ") VALUES (" + 16 + "," + 7 + ")";
+
+    private static final String INSERT_DUMBBELLPULLOVER_BORST = "INSERT INTO " + TABLE_OEFENING_SPIERGROEP +
+            " (" + KEY_OEFENINGID + "," + KEY_SPIERGROEPID +
+            ") VALUES (" + 17 + "," + 7 + ")";
+
+    private static final String INSERT_SEATEDCHESTPRESS_BORST = "INSERT INTO " + TABLE_OEFENING_SPIERGROEP +
+            " (" + KEY_OEFENINGID + "," + KEY_SPIERGROEPID +
+            ") VALUES (" + 18 + "," + 7 + ")";
+
+    private static final String INSERT_FLYMACHINE_BORST = "INSERT INTO " + TABLE_OEFENING_SPIERGROEP +
+            " (" + KEY_OEFENINGID + "," + KEY_SPIERGROEPID +
+            ") VALUES (" + 19 + "," + 7 + ")";
+
+    private static final String INSERT_FRONTPRESSSTANDING_SCHOUDERS = "INSERT INTO " + TABLE_OEFENING_SPIERGROEP +
+            " (" + KEY_OEFENINGID + "," + KEY_SPIERGROEPID +
+            ") VALUES (" + 20 + "," + 6 + ")";
+
+    private static final String INSERT_SHOULDERPRESSMACHINE_SCHOUDERS = "INSERT INTO " + TABLE_OEFENING_SPIERGROEP +
+            " (" + KEY_OEFENINGID + "," + KEY_SPIERGROEPID +
+            ") VALUES (" + 21 + "," + 6 + ")";
+
+    private static final String INSERT_FRONTRAISESTANDING_SCHOUDERS = "INSERT INTO " + TABLE_OEFENING_SPIERGROEP +
+            " (" + KEY_OEFENINGID + "," + KEY_SPIERGROEPID +
+            ") VALUES (" + 22 + "," + 6 + ")";
+
+    private static final String INSERT_BENDOVERRAISESEATED_SCHOUDERS = "INSERT INTO " + TABLE_OEFENING_SPIERGROEP +
+            " (" + KEY_OEFENINGID + "," + KEY_SPIERGROEPID +
+            ") VALUES (" + 23 + "," + 6 + ")";
+
+    private static final String INSERT_UPRIGHTROWING_SCHOUDERS = "INSERT INTO " + TABLE_OEFENING_SPIERGROEP +
+            " (" + KEY_OEFENINGID + "," + KEY_SPIERGROEPID +
+            ") VALUES (" + 24 + "," + 6 + ")";
+
+    private static final String INSERT_LATERALRAISESTANDING_SCHOUDERS = "INSERT INTO " + TABLE_OEFENING_SPIERGROEP +
+            " (" + KEY_OEFENINGID + "," + KEY_SPIERGROEPID +
+            ") VALUES (" + 25 + "," + 6 + ")";
+
+    private static final String INSERT_TRICEPSEXTENSIONDUMBBELL_TRICEPS = "INSERT INTO " + TABLE_OEFENING_SPIERGROEP +
+            " (" + KEY_OEFENINGID + "," + KEY_SPIERGROEPID +
+            ") VALUES (" + 26 + "," + 3 + ")";
+
+    private static final String INSERT_TRICEPSPULLDOWN_TRICEPS = "INSERT INTO " + TABLE_OEFENING_SPIERGROEP +
+            " (" + KEY_OEFENINGID + "," + KEY_SPIERGROEPID +
+            ") VALUES (" + 27 + "," + 3 + ")";
+
+    private static final String INSERT_TRICEPSPULLDOWNROPE_TRICEPS = "INSERT INTO " + TABLE_OEFENING_SPIERGROEP +
+            " (" + KEY_OEFENINGID + "," + KEY_SPIERGROEPID +
+            ") VALUES (" + 28 + "," + 3 + ")";
+
+    private static final String INSERT_KICKBACKSDUMBBELL_TRICEPS = "INSERT INTO " + TABLE_OEFENING_SPIERGROEP +
+            " (" + KEY_OEFENINGID + "," + KEY_SPIERGROEPID +
+            ") VALUES (" + 29 + "," + 3 + ")";
+
+    private static final String INSERT_TRICEPSEXTENSION_TRICEPS = "INSERT INTO " + TABLE_OEFENING_SPIERGROEP +
+            " (" + KEY_OEFENINGID + "," + KEY_SPIERGROEPID +
+            ") VALUES (" + 30 + "," + 3 + ")";
+
+    private static final String INSERT_BICEPSCURL_BICEPS = "INSERT INTO " + TABLE_OEFENING_SPIERGROEP +
+            " (" + KEY_OEFENINGID + "," + KEY_SPIERGROEPID +
+            ") VALUES (" + 31 + "," + 2 + ")";
+
+    private static final String INSERT_DUMBBELLCURL_BICEPS = "INSERT INTO " + TABLE_OEFENING_SPIERGROEP +
+            " (" + KEY_OEFENINGID + "," + KEY_SPIERGROEPID +
+            ") VALUES (" + 32 + "," + 2 + ")";
+
+    private static final String INSERT_CABLECURL_BICEPS = "INSERT INTO " + TABLE_OEFENING_SPIERGROEP +
+            " (" + KEY_OEFENINGID + "," + KEY_SPIERGROEPID +
+            ") VALUES (" + 33 + "," + 2 + ")";
+
+    private static final String INSERT_PREACHERCURL_BICEPS = "INSERT INTO " + TABLE_OEFENING_SPIERGROEP +
+            " (" + KEY_OEFENINGID + "," + KEY_SPIERGROEPID +
+            ") VALUES (" + 34 + "," + 2 + ")";
+
+    private static final String INSERT_HAMMERCURL_BICEPS = "INSERT INTO " + TABLE_OEFENING_SPIERGROEP +
+            " (" + KEY_OEFENINGID + "," + KEY_SPIERGROEPID +
+            ") VALUES (" + 35 + "," + 2 + ")";
+
+    private static final String INSERT_SEATEDCALFRAISE_BENEN = "INSERT INTO " + TABLE_OEFENING_SPIERGROEP +
+            " (" + KEY_OEFENINGID + "," + KEY_SPIERGROEPID +
+            ") VALUES (" + 36 + "," + 4 + ")";
+
+    private static final String INSERT_CRUNCH_BUIK = "INSERT INTO " + TABLE_OEFENING_SPIERGROEP +
+            " (" + KEY_OEFENINGID + "," + KEY_SPIERGROEPID +
+            ") VALUES (" + 37 + "," + 1 + ")";
+
+    private static final String INSERT_SIDECRUNCH_BUIK = "INSERT INTO " + TABLE_OEFENING_SPIERGROEP +
+            " (" + KEY_OEFENINGID + "," + KEY_SPIERGROEPID +
+            ") VALUES (" + 38 + "," + 1 + ")";
+
+    private static final String INSERT_LEGLIFT_BUIK = "INSERT INTO " + TABLE_OEFENING_SPIERGROEP +
+            " (" + KEY_OEFENINGID + "," + KEY_SPIERGROEPID +
+            ") VALUES (" + 39 + "," + 1 + ")";
+
+    private static final String INSERT_ABDOMINAL_BUIK = "INSERT INTO " + TABLE_OEFENING_SPIERGROEP +
+            " (" + KEY_OEFENINGID + "," + KEY_SPIERGROEPID +
+            ") VALUES (" + 40 + "," + 1 + ")";
+
+    private static final String INSERT_PLANK_BUIK = "INSERT INTO " + TABLE_OEFENING_SPIERGROEP +
+            " (" + KEY_OEFENINGID + "," + KEY_SPIERGROEPID +
+            ") VALUES (" + 41 + "," + 1 + ")";
+
+    //endregion
+
 
 
     public DatabaseHelper(Context context) {
@@ -229,6 +540,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(CREATE_TABLE_SCHEMA);
         db.execSQL(CREATE_TABLE_SPIERGROEP);
         db.execSQL(CREATE_TABLE_SCHEMA_OEFENING);
+        db.execSQL(CREATE_TABLE_OEFENING_SPIERGROEP);
     }
 
     @Override
@@ -252,8 +564,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         insertSpiergroepen(db);
         insertProducten(db);
         insertSchemas(db);
+        insertOefeningenVanSpiergroep(db);
         insertOefeningenVanSchemas(db);
     }
+
 
     private void insertOefeningen(SQLiteDatabase db){
         db.execSQL(INSERT_BENCHPRESS);
@@ -261,6 +575,42 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(INSERT_LEG_EXTENSION);
         db.execSQL(INSERT_LYING_LEG_CURL);
         db.execSQL(INSERT_SEATED_LEG_PRESS);
+        db.execSQL(INSERT_SEATED_LEG_CURL);
+        db.execSQL(INSERT_PULL_DOWN_FRONT);
+        db.execSQL(INSERT_BARBELL_ROWING);
+        db.execSQL(INSERT_DUMBBELL_ROWING);
+        db.execSQL(INSERT_DUAL_SEATED_ROW_WIDE);
+        db.execSQL(INSERT_HORIZONTAL_LAT_ROW);
+        db.execSQL(INSERT_DUMBBELL_PRESS);
+        db.execSQL(INSERT_FLYES);
+        db.execSQL(INSERT_CABLE_CROSS_OVER);
+        db.execSQL(INSERT_INCLINE_BENCH_PRESS);
+        db.execSQL(INSERT_INCLINE_DUMBBELL_PRESS);
+        db.execSQL(INSERT_DUMBBELL_PULL_OVER);
+        db.execSQL(INSERT_SEATED_CHEST_PRESS);
+        db.execSQL(INSERT_FLY_MACHINE);
+        db.execSQL(INSERT_FRONT_PRESS_STANDING);
+        db.execSQL(INSERT_SHOULDER_PRESS_MACHINE);
+        db.execSQL(INSERT_FRONT_RAISE_STANDING);
+        db.execSQL(INSERT_BEND_OVER_RAISE_SEATED);
+        db.execSQL(INSERT_UPRIGHT_ROWING);
+        db.execSQL(INSERT_LATERAL_RAISE_STANDING);
+        db.execSQL(INSERT_TRICEPS_EXTENSION_DUMBBELL);
+        db.execSQL(INSERT_TRICEPS_PULL_DOWN);
+        db.execSQL(INSERT_TRICEPS_PULL_DOWN_ROPE);
+        db.execSQL(INSERT_KICK_BACKS_DUMBBELL);
+        db.execSQL(INSERT_TRICEPS_EXTENSION);
+        db.execSQL(INSERT_BICEPS_CURL);
+        db.execSQL(INSERT_DUMBBELL_CURL);
+        db.execSQL(INSERT_CABLE_CURL);
+        db.execSQL(INSERT_PREACHER_CURL);
+        db.execSQL(INSERT_HAMMER_CURL);
+        db.execSQL(INSERT_SEATED_CALF_RAISE);
+        db.execSQL(INSERT_CRUNCH);
+        db.execSQL(INSERT_SIDE_CRUNCH);
+        db.execSQL(INSERT_LEG_LIFT);
+        db.execSQL(INSERT_ABDOMINAL);
+        db.execSQL(INSERT_PLANK);
     }
 
     private void insertSpiergroepen(SQLiteDatabase db){
@@ -291,6 +641,50 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(INSERT_BENENSCHEMA);
     }
 
+    private void insertOefeningenVanSpiergroep(SQLiteDatabase db){
+        db.execSQL(INSERT_SQUATBACK_BENEN);
+        db.execSQL(INSERT_LEGEXTENSION_BENEN);
+        db.execSQL(INSERT_LYINGLEGCURL_BENEN);
+        db.execSQL(INSERT_SEATEDLEGPRESS_BENEN);
+        db.execSQL(INSERT_SEATEDLEGCURL_BENEN);
+        db.execSQL(INSERT_PULLDOWNFRONT_RUG);
+        db.execSQL(INSERT_BARBELLROWING_RUG);
+        db.execSQL(INSERT_DUMBBELLROWING_RUG);
+        db.execSQL(INSERT_DUALSEATEDROWWIDE_RUG);
+        db.execSQL(INSERT_HORIZONTALLATROW_RUG);
+        db.execSQL(INSERT_BENCHPRESS_BORST);
+        db.execSQL(INSERT_DUMBBELLPRESS_BORST);
+        db.execSQL(INSERT_FLYES_BORST);
+        db.execSQL(INSERT_CABLECROSSOVER_BORST);
+        db.execSQL(INSERT_INCLINEBENCHPRESS_BORST);
+        db.execSQL(INSERT_INCLINEDUMBBELLPRESS_BORST);
+        db.execSQL(INSERT_DUMBBELLPULLOVER_BORST);
+        db.execSQL(INSERT_SEATEDCHESTPRESS_BORST);
+        db.execSQL(INSERT_FLYMACHINE_BORST);
+        db.execSQL(INSERT_FRONTPRESSSTANDING_SCHOUDERS);
+        db.execSQL(INSERT_SHOULDERPRESSMACHINE_SCHOUDERS);
+        db.execSQL(INSERT_FRONTRAISESTANDING_SCHOUDERS);
+        db.execSQL(INSERT_BENDOVERRAISESEATED_SCHOUDERS);
+        db.execSQL(INSERT_UPRIGHTROWING_SCHOUDERS);
+        db.execSQL(INSERT_LATERALRAISESTANDING_SCHOUDERS);
+        db.execSQL(INSERT_TRICEPSEXTENSIONDUMBBELL_TRICEPS);
+        db.execSQL(INSERT_TRICEPSPULLDOWN_TRICEPS);
+        db.execSQL(INSERT_TRICEPSPULLDOWNROPE_TRICEPS);
+        db.execSQL(INSERT_KICKBACKSDUMBBELL_TRICEPS);
+        db.execSQL(INSERT_TRICEPSEXTENSION_TRICEPS);
+        db.execSQL(INSERT_BICEPSCURL_BICEPS);
+        db.execSQL(INSERT_DUMBBELLCURL_BICEPS);
+        db.execSQL(INSERT_CABLECURL_BICEPS);
+        db.execSQL(INSERT_PREACHERCURL_BICEPS);
+        db.execSQL(INSERT_HAMMERCURL_BICEPS);
+        db.execSQL(INSERT_SEATEDCALFRAISE_BENEN);
+        db.execSQL(INSERT_CRUNCH_BUIK);
+        db.execSQL(INSERT_SIDECRUNCH_BUIK);
+        db.execSQL(INSERT_LEGLIFT_BUIK);
+        db.execSQL(INSERT_ABDOMINAL_BUIK);
+        db.execSQL(INSERT_PLANK_BUIK);
+    }
+
     private void insertOefeningenVanSchemas(SQLiteDatabase db){
         db.execSQL(INSERT_BENENSCHEMA_SQUATBACK);
         db.execSQL(INSERT_BENENSCHEMA_LEGEXTENSION);
@@ -318,9 +712,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return result;
     }
 
-    public Cursor HaalAlleSchemasOp() {
+    public Cursor HaalAlleSchemasOp(){
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor result = db.rawQuery("select * from " + TABLE_SCHEMA, null);
         return result;
     }
+
+    /*public Cursor HaalOefeningenOpBijSpiergroep(Spiergroep spiergroep){
+        SQLiteDatabase db = this.getReadableDatabase();
+        *//*Cursor result = db.rawQuery("SELECT * FROM " + TABLE_OEFENING +
+                                            " INNER JOIN " + TABLE_OEFENING_SPIERGROEP + " ON oefeningen_spiergroepen.oefeningID = oefeningen.oefeningID " +
+                                            "WHERE oefeningen_spiergroepen.spiergroepID = " + spiergroep.spiergroepID);*//*
+
+    }*/
 }

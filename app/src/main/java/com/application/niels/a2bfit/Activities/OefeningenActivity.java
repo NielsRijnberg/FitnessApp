@@ -2,28 +2,41 @@ package com.application.niels.a2bfit.Activities;
 
 import android.database.Cursor;
 import android.graphics.Color;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.Spinner;
+import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 
 import com.application.niels.a2bfit.R;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
 
 import Classes.DatabaseHelper;
+import Classes.Oefening;
+import Classes.Spiergroep;
 
 public class OefeningenActivity extends AppCompatActivity {
 
     DatabaseHelper db;
     Button btnBekijkOefening;
     ListView listView;
+    Spinner spinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,21 +47,28 @@ public class OefeningenActivity extends AppCompatActivity {
 
         btnBekijkOefening = (Button) findViewById(R.id.btnBekijkOefening);
         listView = (ListView) findViewById(R.id.listViewOefeningen);
+        spinner = (Spinner) findViewById(R.id.spinner);
 
         getOefeningen();
+        getSpiergroepen();
     }
 
     public void getOefeningen() {
         Cursor result = db.HaalAlleOefeningenOp();
-        ArrayList<String> oefeningList = new ArrayList<>();
+        List<Oefening> oefeningList = new ArrayList<Oefening>();
 
         if (result.getCount() == 0) {
             showMessage("Error", "Geen oefeningen gevonden");
             return;
         } else {
             while (result.moveToNext()) {
-                oefeningList.add(result.getString(1));
-                ListAdapter listAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, android.R.id.text1, oefeningList){
+                int id = result.getInt(result.getColumnIndex("ID"));
+                String naam = result.getString(result.getColumnIndex("oefeningnaam"));
+                int aantalSets = result.getInt(result.getColumnIndex("aantalsets"));
+                int aantalReps = result.getInt(result.getColumnIndex("aantalreps"));
+                oefeningList.add(new Oefening(id, naam, aantalSets, aantalReps));
+
+                ListAdapter listAdapter = new ArrayAdapter<Oefening>(this, android.R.layout.simple_list_item_1, android.R.id.text1, oefeningList){
                     @Override
                     public View getView(int position, View convertView, ViewGroup parent){
                         View view = super.getView(position, convertView, parent);
@@ -62,28 +82,50 @@ public class OefeningenActivity extends AppCompatActivity {
         }
     }
 
-   /* public void bekijkOefening(){
-        btnBekijkOefening.setOnClickListener(new View.OnClickListener() {
+    public void getSpiergroepen() {
+        Cursor result = db.HaalAlleSpiergroepenOp();
+        List<Spiergroep> spiergroepList = new ArrayList<Spiergroep>();
+
+        if (result.getCount() == 0) {
+            showMessage("Error", "Geen spiergroepen gevonden");
+            return;
+        } else {
+            while (result.moveToNext()) {
+                int id = result.getInt(result.getColumnIndex("ID"));
+                String naam = result.getString(result.getColumnIndex("spiergroepnaam"));
+                spiergroepList.add(new Spiergroep(id, naam));
+
+                SpinnerAdapter spinnerAdapter = new ArrayAdapter<Spiergroep>(this, android.R.layout.simple_list_item_1, android.R.id.text1, spiergroepList){
+                    @Override
+                    public View getView(int position, View convertView, ViewGroup parent){
+                        View view = super.getView(position, convertView, parent);
+                        TextView textview = (TextView) view.findViewById(android.R.id.text1);
+                        textview.setTextColor(Color.BLUE);
+                        textview.setTextSize(20);
+                        return textview;
+                    }
+                };
+                spinner.setAdapter(spinnerAdapter);
+            }
+        }
+    }
+
+
+
+
+    public void putOefeningenBijSpiergroep() {
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onClick(View view) {
-                Cursor result = db.HaalAlleOefeningenOp();
+            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
 
-                if (result.getCount() == 0){
-                    showMessage("Error", "Geen oefeningen gevonden");
-                    return;
-                }
+            }
 
-                StringBuffer buffer = new StringBuffer();
-                while (result.moveToNext()){
-                    buffer.append("OefeningID :"+ result.getString(0)+ "\n");
-                    buffer.append("Naam :"+ result.getString(1)+ "\n");
-                    buffer.append("AantalSets :"+ result.getString(2)+ "\n");
-                    buffer.append("AantalReps :"+ result.getString(3)+ "\n\n");
-                }
-                showMessage("Data", buffer.toString());
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
             }
         });
-    }*/
+    }
 
     public void showMessage(String title, String message){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);

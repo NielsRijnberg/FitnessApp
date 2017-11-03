@@ -16,4 +16,9 @@ public class Spiergroep {
         this.spiergroepID = spiergroepID;
         this.naam = naam;
     }
+
+    @Override
+    public String toString(){
+        return naam;
+    }
 }

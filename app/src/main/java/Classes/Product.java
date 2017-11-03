@@ -36,4 +36,9 @@ public class Product {
         this.kosten = kosten;
         this.omschrijving = omschrijving;
     }
+
+    @Override
+    public String toString(){
+        return naam;
+    }
 }

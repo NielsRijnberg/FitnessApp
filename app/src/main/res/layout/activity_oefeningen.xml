@@ -27,14 +27,15 @@
 
     <Spinner
         android:id="@+id/spinner"
-        android:layout_width="250dp"
-        android:layout_height="27dp"
+        android:layout_width="175dp"
+        android:layout_height="34dp"
         android:layout_marginLeft="8dp"
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginRight="8dp"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginTop="8dp"
-        app:layout_constraintTop_toBottomOf="@+id/tvKiesSpiergroep"/>
+        android:layout_marginTop="-7dp"
+        app:layout_constraintTop_toBottomOf="@+id/tvKiesSpiergroep"
+        app:layout_constraintHorizontal_bias="0.502" />
 
     <TextView
         android:id="@+id/tvOefeningen"

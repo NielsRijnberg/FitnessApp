@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
@@ -17,8 +18,11 @@ import android.widget.TextView;
 import com.application.niels.a2bfit.R;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import Classes.DatabaseHelper;
+import Classes.Oefening;
+import Classes.Product;
 
 public class ProductActivity extends AppCompatActivity {
 
@@ -38,7 +42,7 @@ public class ProductActivity extends AppCompatActivity {
 
     public void getProducten(){
         Cursor result = db.HaalAlleProductenOp();
-        ArrayList<String> productList = new ArrayList<>();
+        List<Product> productList = new ArrayList<Product>();
 
         if (result.getCount() == 0){
             showMessage("Error", "Geen oefeningen gevonden");
@@ -46,8 +50,14 @@ public class ProductActivity extends AppCompatActivity {
         }
         else {
             while (result.moveToNext()) {
-                productList.add(result.getString(1));
-                ListAdapter listAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, android.R.id.text1, productList) {
+                int id = result.getInt(result.getColumnIndex("ID"));
+                String naam = result.getString(result.getColumnIndex("productnaam"));
+                double kosten = result.getDouble(result.getColumnIndex("productkosten"));
+                String omschrijving = result.getString(result.getColumnIndex("omschrijving"));
+
+                productList.add(new Product(id, naam, kosten, omschrijving));
+
+                ListAdapter listAdapter = new ArrayAdapter<Product>(this, android.R.layout.simple_list_item_1, android.R.id.text1, productList) {
                     @Override
                     public View getView(int position, View convertView, ViewGroup parent) {
                         View view = super.getView(position, convertView, parent);
@@ -59,6 +69,16 @@ public class ProductActivity extends AppCompatActivity {
                 listView.setAdapter(listAdapter);
             }
         }
+    }
+
+    public void bekijkProduct(){
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+
+            }
+        });
     }
 
     public void showMessage(String title, String message){

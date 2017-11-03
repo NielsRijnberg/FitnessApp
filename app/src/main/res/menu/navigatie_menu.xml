@@ -7,6 +7,8 @@
         android:title="Oefeningen" />
     <item android:id="@+id/nav_Producten"
         android:title="Producten" />
+    <item android:id="@+id/nav_StartTraining"
+        android:title="Start training" />
     <item android:id="@+id/nav_Uitloggen"
         android:title="Uitloggen" />
 </menu>

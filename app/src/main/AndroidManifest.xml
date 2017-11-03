@@ -24,7 +24,9 @@
             android:parentActivityName=".Activities.LoginActivity" />
         <activity android:name=".Activities.ProductActivity" />
         <activity android:name=".Activities.OefeningenActivity" />
-        <activity android:name=".Activities.SchemasActivity"></activity>
+        <activity android:name=".Activities.SchemasActivity" />
+        <activity android:name=".Activities.StartTrainingActivity" />
+        <activity android:name=".Activities.ProductDetailsActivity"></activity>
     </application>
 
 </manifest>
