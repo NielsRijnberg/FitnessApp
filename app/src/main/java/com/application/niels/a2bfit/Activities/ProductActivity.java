@@ -42,6 +42,8 @@ public class ProductActivity extends AppCompatActivity {
         db = new DatabaseHelper(this);
         listView = (ListView) findViewById(R.id.listViewProducten);
 
+        getSupportActionBar().setTitle("Producten");
+
         getProducten();
         bekijkProduct();
     }

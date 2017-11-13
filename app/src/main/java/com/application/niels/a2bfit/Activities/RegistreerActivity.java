@@ -31,6 +31,8 @@ public class RegistreerActivity extends AppCompatActivity {
         editLeeftijd = (EditText) findViewById(R.id.etLeeftijd);
         btnRegistreer = (Button) findViewById(R.id.btnRegistreer);
 
+        getSupportActionBar().setTitle("Registreer");
+
         RegistreerAbonnee();
     }
 
@@ -46,7 +48,7 @@ public class RegistreerActivity extends AppCompatActivity {
                     Toast.makeText(RegistreerActivity.this, "Geregistreerd", Toast.LENGTH_LONG).show();
                 }
                 else {
-                    Toast.makeText(RegistreerActivity.this, "Database functie werkt niet", Toast.LENGTH_LONG).show();
+                    Toast.makeText(RegistreerActivity.this, "db functie werkt niet", Toast.LENGTH_LONG).show();
                 }*/
 
 

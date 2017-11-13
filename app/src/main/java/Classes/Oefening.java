@@ -7,6 +7,7 @@ public class Oefening {
     String naam;
     int aantalSets;
     int aantalReps;
+    String foto;
 
     public int getOefeningID() {
         return oefeningID;
@@ -24,11 +25,16 @@ public class Oefening {
         return aantalReps;
     }
 
-    public Oefening(int oefeningID, String naam, int aantalSets, int aantalReps) {
+    public String getFoto() {
+        return foto;
+    }
+
+    public Oefening(int oefeningID, String naam, int aantalSets, int aantalReps, String foto) {
         this.oefeningID = oefeningID;
         this.naam = naam;
         this.aantalSets = aantalSets;
         this.aantalReps = aantalReps;
+        this.foto = foto;
     }
 
     @Override

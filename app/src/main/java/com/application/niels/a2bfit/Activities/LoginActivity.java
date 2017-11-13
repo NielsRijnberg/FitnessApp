@@ -22,6 +22,8 @@ public class LoginActivity extends AppCompatActivity {
         final Button btnLogIn = (Button) findViewById(R.id.btnLogIn);
         final TextView tvRegistreer = (TextView) findViewById(R.id.tvRegistreer);
 
+        getSupportActionBar().setTitle("Log in");
+
         tvRegistreer.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){

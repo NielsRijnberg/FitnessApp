@@ -12,7 +12,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     private static final String LOG = "DatabaseHelper";
 
-    //Database version and name
+    //DB version and name
     private static final int DATABASE_VERSION = 1;
     public static final String DATABASE_NAME = "Sportschool";
 
@@ -338,6 +338,22 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String INSERT_BENENSCHEMA = "INSERT INTO " + TABLE_SCHEMA +
             " (" + KEY_ID + "," + KEY_SCHEMATYPE +
             ") VALUES (" + 3 + "," + "'Benenschema'" + ")";
+
+    private static final String INSERT_BUIKSCHEMA = "INSERT INTO " + TABLE_SCHEMA +
+            " (" + KEY_ID + "," + KEY_SCHEMATYPE +
+            ") VALUES (" + 4 + "," + "'Buikschema'" + ")";
+
+    private static final String INSERT_TRICEPSSCHEMA = "INSERT INTO " + TABLE_SCHEMA +
+            " (" + KEY_ID + "," + KEY_SCHEMATYPE +
+            ") VALUES (" + 5 + "," + "'Tricepsschema'" + ")";
+
+    private static final String INSERT_RUGSCHEMA = "INSERT INTO " + TABLE_SCHEMA +
+            " (" + KEY_ID + "," + KEY_SCHEMATYPE +
+            ") VALUES (" + 6 + "," + "'Rugschema'" + ")";
+
+    private static final String INSERT_SCHOUDERSSCHEMA = "INSERT INTO " + TABLE_SCHEMA +
+            " (" + KEY_ID + "," + KEY_SCHEMATYPE +
+            ") VALUES (" + 7 + "," + "'Schoudersschema'" + ")";
     //endregion
 
     //region Insert oefeningen van schema
@@ -641,6 +657,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(INSERT_BORSTSCHEMA);
         db.execSQL(INSERT_BICEPSSCHEMA);
         db.execSQL(INSERT_BENENSCHEMA);
+        db.execSQL(INSERT_BUIKSCHEMA);
+        db.execSQL(INSERT_RUGSCHEMA);
+        db.execSQL(INSERT_SCHOUDERSSCHEMA);
+        db.execSQL(INSERT_TRICEPSSCHEMA);
     }
 
     private void insertOefeningenVanSpiergroep(SQLiteDatabase db){
@@ -720,11 +740,18 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return result;
     }
 
+    public Cursor HaalOefeningenOpBijSchema(int SchemaID){
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor result = db.rawQuery("select * from " + TABLE_OEFENING +
+                " inner join " + TABLE_SCHEMA_OEFENING + " ON " + TABLE_SCHEMA_OEFENING + "." + KEY_OEFENINGID + " = " + TABLE_OEFENING + "." + KEY_ID +
+                " where " + KEY_SCHEMAID + " = " + SchemaID);
+        return result;
+    }
+
+
     /*public Cursor HaalOefeningenOpBijSpiergroep(Spiergroep spiergroep){
         SQLiteDatabase db = this.getReadableDatabase();
-        *//*Cursor result = db.rawQuery("SELECT * FROM " + TABLE_OEFENING +
-                                            " INNER JOIN " + TABLE_OEFENING_SPIERGROEP + " ON oefeningen_spiergroepen.oefeningID = oefeningen.oefeningID " +
-                                            "WHERE oefeningen_spiergroepen.spiergroepID = " + spiergroep.spiergroepID);*//*
+        Cursor result = db.rawQuery("SELECT * FROM oefeningen INNER JOIN " + TABLE_OEFENING_SPIERGROEP + " ON oefeningID = oefeningen.oefeningID WHERE oefeningen_spiergroepen.spiergroepID = " + spiergroep.spiergroepID);
 
     }*/
 }

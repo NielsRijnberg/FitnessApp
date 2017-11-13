@@ -51,6 +51,8 @@ public class OverzichtschermActivity extends AppCompatActivity {
 
         navigationView = (NavigationView) findViewById(R.id.navigation_view);
 
+        getSupportActionBar().setTitle("2BFIT");
+
         //Setting Navigation View Item Selected Listener to handle the item click of the navigation menu
         HandleMenuItems();
     }

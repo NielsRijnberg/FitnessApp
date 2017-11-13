@@ -25,6 +25,8 @@ public class ProductDetailsActivity extends AppCompatActivity {
         tvProductKosten = (TextView) findViewById(R.id.tvProductKosten);
         tvProductOmschrijving = (TextView) findViewById(R.id.tvProductOmschrijving);
 
+        getSupportActionBar().setTitle("Product details");
+
         getProductDetails();
         setTextBoxes();
     }

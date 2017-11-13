@@ -51,6 +51,8 @@ public class OefeningenActivity extends AppCompatActivity {
         listView = (ListView) findViewById(R.id.listViewOefeningen);
         spinner = (Spinner) findViewById(R.id.spinner);
 
+        getSupportActionBar().setTitle("Oefeningen");
+
         getOefeningen();
         getSpiergroepen();
         bekijkOefening();
@@ -69,7 +71,8 @@ public class OefeningenActivity extends AppCompatActivity {
                 String naam = result.getString(result.getColumnIndex("oefeningnaam"));
                 int aantalSets = result.getInt(result.getColumnIndex("aantalsets"));
                 int aantalReps = result.getInt(result.getColumnIndex("aantalreps"));
-                oefeningList.add(new Oefening(id, naam, aantalSets, aantalReps));
+                String foto = result.getString(result.getColumnIndex("oefeningfoto"));
+                oefeningList.add(new Oefening(id, naam, aantalSets, aantalReps, foto));
 
                 ListAdapter listAdapter = new ArrayAdapter<Oefening>(this, android.R.layout.simple_list_item_1, android.R.id.text1, oefeningList){
                     @Override
@@ -124,6 +127,7 @@ public class OefeningenActivity extends AppCompatActivity {
                 String naam = selectedOefening.getNaam();
                 int aantalSets = selectedOefening.getAantalSets();
                 int aantalReps = selectedOefening.getAantalReps();
+                String foto = selectedOefening.getFoto();
 
                 Intent oefeningDetailsIntent = new Intent(OefeningenActivity.this, OefeningDetailsActivity.class);
 
@@ -131,6 +135,7 @@ public class OefeningenActivity extends AppCompatActivity {
                 oefeningDetailsIntent.putExtra("naam", naam);
                 oefeningDetailsIntent.putExtra("aantalSets", aantalSets);
                 oefeningDetailsIntent.putExtra("aantalReps", aantalReps);
+                oefeningDetailsIntent.putExtra("oefeningfoto", foto);
                 startActivity(oefeningDetailsIntent);
             }
         });
