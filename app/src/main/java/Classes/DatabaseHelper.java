@@ -38,6 +38,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String KEY_OEFENINGNAAM = "oefeningnaam";
     public static final String KEY_AANTALSETS = "aantalsets";
     public static final String KEY_AANTALREPS = "aantalreps";
+    public static final String KEY_OEFENINGFOTO = "oefeningfoto";
 
     //product column names
     public static final String KEY_PRODUCTNAAM = "productnaam";
@@ -58,7 +59,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             "(" + KEY_ID +" INTEGER PRIMARY KEY AUTOINCREMENT, " +
             KEY_OEFENINGNAAM + " TEXT, " +
             KEY_AANTALSETS + " INTEGER, " +
-            KEY_AANTALREPS + " INTEGER)";
+            KEY_AANTALREPS + " INTEGER, " +
+            KEY_OEFENINGFOTO + " TEXT)";
 
     //product table create
     private static final String CREATE_TABLE_PRODUCT = "CREATE TABLE IF NOT EXISTS " + TABLE_PRODUCT +
@@ -130,168 +132,168 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     //region Insert oefeningen
     //Inserts van oefeningen
     private static final String INSERT_BENCHPRESS= "INSERT INTO " + TABLE_OEFENING +
-            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS +
-            ") VALUES (" + 1 + "," + "'Benchpress'" + "," + 5 + "," + 5 + ")";
+            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS + "," + KEY_OEFENINGFOTO +
+            ") VALUES (" + 1 + "," + "'Benchpress'" + "," + 5 + "," + 5 + "," + "'benchpress.png'" + ")";
 
     private static final String INSERT_SQUAT_BACK= "INSERT INTO " + TABLE_OEFENING +
-            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS +
-            ") VALUES (" + 2 + "," + "'Squat back'" + "," + 4 + "," + 12 + ")";
+            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS + "," + KEY_OEFENINGFOTO +
+            ") VALUES (" + 2 + "," + "'Squat back'" + "," + 4 + "," + 12 + "," + "'squatback.png'" + ")";
 
     private static final String INSERT_LEG_EXTENSION= "INSERT INTO " + TABLE_OEFENING +
-            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS +
-            ") VALUES (" + 3 + "," + "'Leg extension'" + "," + 4 + "," + 10 + ")";
+            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS + "," + KEY_OEFENINGFOTO +
+            ") VALUES (" + 3 + "," + "'Leg extension'" + "," + 4 + "," + 10 + "," + "'legextension.png'" + ")";
 
     private static final String INSERT_LYING_LEG_CURL= "INSERT INTO " + TABLE_OEFENING +
-            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS +
-            ") VALUES (" + 4 + "," + "'Lying leg curl'" + "," + 4 + "," + 10 + ")";
+            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS + "," + KEY_OEFENINGFOTO +
+            ") VALUES (" + 4 + "," + "'Lying leg curl'" + "," + 4 + "," + 10 + "," + "'lyinglegcurl.png'" + ")";
 
     private static final String INSERT_SEATED_LEG_PRESS= "INSERT INTO " + TABLE_OEFENING +
-            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS +
-            ") VALUES (" + 5 + "," + "'Seated leg press'" + "," + 4 + "," + 10 + ")";
+            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS + "," + KEY_OEFENINGFOTO +
+            ") VALUES (" + 5 + "," + "'Seated leg press'" + "," + 4 + "," + 10 + "," + "'seatedlegpress.png'" + ")";
 
     private static final String INSERT_SEATED_LEG_CURL= "INSERT INTO " + TABLE_OEFENING +
-            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS +
-            ") VALUES (" + 6 + "," + "'Seated leg curl'" + "," + 4 + "," + 10 + ")";
+            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS + "," + KEY_OEFENINGFOTO +
+            ") VALUES (" + 6 + "," + "'Seated leg curl'" + "," + 4 + "," + 10 + "," + "'seatedlegcurl.png'" + ")";
 
     private static final String INSERT_PULL_DOWN_FRONT= "INSERT INTO " + TABLE_OEFENING +
-            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS +
-            ") VALUES (" + 7 + "," + "'Pull down front'" + "," + 4 + "," + 10 + ")";
+            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS + "," + KEY_OEFENINGFOTO +
+            ") VALUES (" + 7 + "," + "'Pull down front'" + "," + 4 + "," + 10 + "," + "'pulldownfront.png'" + ")";
 
     private static final String INSERT_BARBELL_ROWING= "INSERT INTO " + TABLE_OEFENING +
-            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS +
-            ") VALUES (" + 8 + "," + "'Barbell rowing'" + "," + 4 + "," + 12 + ")";
+            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS + "," + KEY_OEFENINGFOTO +
+            ") VALUES (" + 8 + "," + "'Barbell rowing'" + "," + 4 + "," + 12 + "," + "'barbellrowing.png'" + ")";
 
     private static final String INSERT_DUMBBELL_ROWING= "INSERT INTO " + TABLE_OEFENING +
-            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS +
-            ") VALUES (" + 9 + "," + "'Dumbbell rowing'" + "," + 4 + "," + 12 + ")";
+            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS + "," + KEY_OEFENINGFOTO +
+            ") VALUES (" + 9 + "," + "'Dumbbell rowing'" + "," + 4 + "," + 12 + "," + "'dumbbellrowing.png'" + ")";
 
     private static final String INSERT_DUAL_SEATED_ROW_WIDE= "INSERT INTO " + TABLE_OEFENING +
-            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS +
-            ") VALUES (" + 10 + "," + "'Dual seated row wide'" + "," + 4 + "," + 10 + ")";
+            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS + "," + KEY_OEFENINGFOTO +
+            ") VALUES (" + 10 + "," + "'Dual seated row wide'" + "," + 4 + "," + 10 + "," + "'dualseatedrowwide.png'" + ")";
 
     private static final String INSERT_HORIZONTAL_LAT_ROW= "INSERT INTO " + TABLE_OEFENING +
-            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS +
-            ") VALUES (" + 11 + "," + "'Horizontal lat row'" + "," + 4 + "," + 12 + ")";
+            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS + "," + KEY_OEFENINGFOTO +
+            ") VALUES (" + 11 + "," + "'Horizontal lat row'" + "," + 4 + "," + 12 + "," + "'horizontallatrow.png'" + ")";
 
     private static final String INSERT_DUMBBELL_PRESS= "INSERT INTO " + TABLE_OEFENING +
-            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS +
-            ") VALUES (" + 12 + "," + "'Dumbbell press'" + "," + 4 + "," + 12 + ")";
+            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS + "," + KEY_OEFENINGFOTO +
+            ") VALUES (" + 12 + "," + "'Dumbbell press'" + "," + 4 + "," + 12 + "," + "'dumbbellpress.png'" + ")";
 
     private static final String INSERT_FLYES= "INSERT INTO " + TABLE_OEFENING +
-            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS +
-            ") VALUES (" + 13 + "," + "'Flyes'" + "," + 4 + "," + 12 + ")";
+            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS + "," + KEY_OEFENINGFOTO +
+            ") VALUES (" + 13 + "," + "'Flyes'" + "," + 4 + "," + 12 + "," + "'flyes.png'" + ")";
 
     private static final String INSERT_CABLE_CROSS_OVER= "INSERT INTO " + TABLE_OEFENING +
-            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS +
-            ") VALUES (" + 14 + "," + "'Cable cross over'" + "," + 4 + "," + 12 + ")";
+            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS + "," + KEY_OEFENINGFOTO +
+            ") VALUES (" + 14 + "," + "'Cable cross over'" + "," + 4 + "," + 12 + "," + "'cablecrossover.png'" +")";
 
     private static final String INSERT_INCLINE_BENCH_PRESS= "INSERT INTO " + TABLE_OEFENING +
-            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS +
-            ") VALUES (" + 15 + "," + "'Incline bench press'" + "," + 4 + "," + 12 + ")";
+            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS + "," + KEY_OEFENINGFOTO +
+            ") VALUES (" + 15 + "," + "'Incline bench press'" + "," + 4 + "," + 12 + "," + "'inclinebenchpress.png'" + ")";
 
     private static final String INSERT_INCLINE_DUMBBELL_PRESS= "INSERT INTO " + TABLE_OEFENING +
-            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS +
-            ") VALUES (" + 16 + "," + "'Incline dumbbell press'" + "," + 4 + "," + 12 + ")";
+            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS + "," + KEY_OEFENINGFOTO +
+            ") VALUES (" + 16 + "," + "'Incline dumbbell press'" + "," + 4 + "," + 12 + "," + "'inclinedumbbellpress.png'" + ")";
 
     private static final String INSERT_DUMBBELL_PULL_OVER= "INSERT INTO " + TABLE_OEFENING +
-            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS +
-            ") VALUES (" + 17 + "," + "'Dumbbell pull over'" + "," + 4 + "," + 12 + ")";
+            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS + "," + KEY_OEFENINGFOTO +
+            ") VALUES (" + 17 + "," + "'Dumbbell pull over'" + "," + 4 + "," + 12 + "," + "'dumbbellpullover.png'" + ")";
 
     private static final String INSERT_SEATED_CHEST_PRESS= "INSERT INTO " + TABLE_OEFENING +
-            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS +
-            ") VALUES (" + 18 + "," + "'Seated chest press'" + "," + 4 + "," + 12 + ")";
+            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS + "," + KEY_OEFENINGFOTO +
+            ") VALUES (" + 18 + "," + "'Seated chest press'" + "," + 4 + "," + 12 + "," + "'seatedchestpress.png'" + ")";
 
     private static final String INSERT_FLY_MACHINE= "INSERT INTO " + TABLE_OEFENING +
-            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS +
-            ") VALUES (" + 19 + "," + "'Fly machine'" + "," + 4 + "," + 12 + ")";
+            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS + "," + KEY_OEFENINGFOTO +
+            ") VALUES (" + 19 + "," + "'Fly machine'" + "," + 4 + "," + 12 + "," + "'flymachine.png'" + ")";
 
     private static final String INSERT_FRONT_PRESS_STANDING= "INSERT INTO " + TABLE_OEFENING +
-            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS +
-            ") VALUES (" + 20 + "," + "'Front press standing'" + "," + 4 + "," + 12 + ")";
+            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS + "," + KEY_OEFENINGFOTO +
+            ") VALUES (" + 20 + "," + "'Front press standing'" + "," + 4 + "," + 12 + "," + "'frontpressstanding.png'" + ")";
 
     private static final String INSERT_SHOULDER_PRESS_MACHINE= "INSERT INTO " + TABLE_OEFENING +
-            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS +
-            ") VALUES (" + 21 + "," + "'Shoulder press machine'" + "," + 4 + "," + 12 + ")";
+            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS + "," + KEY_OEFENINGFOTO +
+            ") VALUES (" + 21 + "," + "'Shoulder press machine'" + "," + 4 + "," + 12 + "," + "'shoulderpressmachine.png'" + ")";
 
     private static final String INSERT_FRONT_RAISE_STANDING= "INSERT INTO " + TABLE_OEFENING +
-            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS +
-            ") VALUES (" + 22 + "," + "'Front raise standing'" + "," + 4 + "," + 12 + ")";
+            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS + "," + KEY_OEFENINGFOTO +
+            ") VALUES (" + 22 + "," + "'Front raise standing'" + "," + 4 + "," + 12 + "," + "'frontraisestanding.png'" + ")";
 
     private static final String INSERT_BEND_OVER_RAISE_SEATED= "INSERT INTO " + TABLE_OEFENING +
-            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS +
-            ") VALUES (" + 23 + "," + "'Bend over raise seated'" + "," + 4 + "," + 12 + ")";
+            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS + "," + KEY_OEFENINGFOTO +
+            ") VALUES (" + 23 + "," + "'Bend over raise seated'" + "," + 4 + "," + 12 + "," + "'bendoverraiseseated.png'" + ")";
 
     private static final String INSERT_UPRIGHT_ROWING= "INSERT INTO " + TABLE_OEFENING +
-            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS +
-            ") VALUES (" + 24 + "," + "'Upright rowing'" + "," + 4 + "," + 12 + ")";
+            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS + "," + KEY_OEFENINGFOTO +
+            ") VALUES (" + 24 + "," + "'Upright rowing'" + "," + 4 + "," + 12 + "," + "'uprightrowing.png'" + ")";
 
     private static final String INSERT_LATERAL_RAISE_STANDING= "INSERT INTO " + TABLE_OEFENING +
-            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS +
-            ") VALUES (" + 25 + "," + "'Lateral raise standing'" + "," + 4 + "," + 12 + ")";
+            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS + "," + KEY_OEFENINGFOTO +
+            ") VALUES (" + 25 + "," + "'Lateral raise standing'" + "," + 4 + "," + 12 + "," + "'lateralraisestanding.png'" + ")";
 
     private static final String INSERT_TRICEPS_EXTENSION_DUMBBELL= "INSERT INTO " + TABLE_OEFENING +
-            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS +
-            ") VALUES (" + 26 + "," + "'Triceps extension dumbbell'" + "," + 4 + "," + 12 + ")";
+            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS + "," + KEY_OEFENINGFOTO +
+            ") VALUES (" + 26 + "," + "'Triceps extension dumbbell'" + "," + 4 + "," + 12 + "," + "'tricepsextensiondumbbell.png'" + ")";
 
     private static final String INSERT_TRICEPS_PULL_DOWN= "INSERT INTO " + TABLE_OEFENING +
-            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS +
-            ") VALUES (" + 27 + "," + "'Triceps pull down'" + "," + 4 + "," + 12 + ")";
+            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS + "," + KEY_OEFENINGFOTO +
+            ") VALUES (" + 27 + "," + "'Triceps pull down'" + "," + 4 + "," + 12 + "," + "'tricepspulldown.png'" + ")";
 
     private static final String INSERT_TRICEPS_PULL_DOWN_ROPE= "INSERT INTO " + TABLE_OEFENING +
-            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS +
-            ") VALUES (" + 28 + "," + "'Triceps pull down rope'" + "," + 4 + "," + 12 + ")";
+            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS + "," + KEY_OEFENINGFOTO +
+            ") VALUES (" + 28 + "," + "'Triceps pull down rope'" + "," + 4 + "," + 12 + "," + "'tricepspulldownrope.png'" + ")";
 
     private static final String INSERT_KICK_BACKS_DUMBBELL= "INSERT INTO " + TABLE_OEFENING +
-            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS +
-            ") VALUES (" + 29 + "," + "'Kick backs dumbbell'" + "," + 4 + "," + 12 + ")";
+            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS + "," + KEY_OEFENINGFOTO +
+            ") VALUES (" + 29 + "," + "'Kick backs dumbbell'" + "," + 4 + "," + 12 + "," + "'kickbacksdumbbell.png'" + ")";
 
     private static final String INSERT_TRICEPS_EXTENSION= "INSERT INTO " + TABLE_OEFENING +
-            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS +
-            ") VALUES (" + 30 + "," + "'Triceps extension'" + "," + 4 + "," + 12 + ")";
+            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS + "," + KEY_OEFENINGFOTO +
+            ") VALUES (" + 30 + "," + "'Triceps extension'" + "," + 4 + "," + 12 + "," + "'tricepsextension.png'" + ")";
 
     private static final String INSERT_BICEPS_CURL= "INSERT INTO " + TABLE_OEFENING +
-            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS +
-            ") VALUES (" + 31 + "," + "'Biceps curl'" + "," + 4 + "," + 12 + ")";
+            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS + "," + KEY_OEFENINGFOTO +
+            ") VALUES (" + 31 + "," + "'Biceps curl'" + "," + 4 + "," + 12 + "," + "'bicepscurl.png'" + ")";
 
     private static final String INSERT_DUMBBELL_CURL= "INSERT INTO " + TABLE_OEFENING +
-            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS +
-            ") VALUES (" + 32 + "," + "'Dumbbell curl'" + "," + 4 + "," + 12 + ")";
+            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS + "," + KEY_OEFENINGFOTO +
+            ") VALUES (" + 32 + "," + "'Dumbbell curl'" + "," + 4 + "," + 12 + "," + "'dumbbellcurlstandingalternated.png'" + ")";
 
     private static final String INSERT_CABLE_CURL= "INSERT INTO " + TABLE_OEFENING +
-            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS +
-            ") VALUES (" + 33 + "," + "'Cable curl'" + "," + 4 + "," + 12 + ")";
+            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS + "," + KEY_OEFENINGFOTO +
+            ") VALUES (" + 33 + "," + "'Cable curl'" + "," + 4 + "," + 12 + "," + "'cablecurl.png'" + ")";
 
     private static final String INSERT_PREACHER_CURL= "INSERT INTO " + TABLE_OEFENING +
-            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS +
-            ") VALUES (" + 34 + "," + "'Preacher curl'" + "," + 4 + "," + 12 + ")";
+            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS + "," + KEY_OEFENINGFOTO +
+            ") VALUES (" + 34 + "," + "'Preacher curl'" + "," + 4 + "," + 12 + "," + "'preachercurl.png'" + ")";
 
     private static final String INSERT_HAMMER_CURL= "INSERT INTO " + TABLE_OEFENING +
-            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS +
-            ") VALUES (" + 35 + "," + "'Hammer curl'" + "," + 4 + "," + 12 + ")";
+            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS + "," + KEY_OEFENINGFOTO +
+            ") VALUES (" + 35 + "," + "'Hammer curl'" + "," + 4 + "," + 12 + "," + "'hammercurl.png'" + ")";
 
     private static final String INSERT_SEATED_CALF_RAISE= "INSERT INTO " + TABLE_OEFENING +
-            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS +
-            ") VALUES (" + 36 + "," + "'Seated calf raise'" + "," + 4 + "," + 12 + ")";
+            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS + "," + KEY_OEFENINGFOTO +
+            ") VALUES (" + 36 + "," + "'Seated calf raise'" + "," + 4 + "," + 12 + "," + "'seatedcalfraise.png'" + ")";
 
     private static final String INSERT_CRUNCH= "INSERT INTO " + TABLE_OEFENING +
-            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS +
-            ") VALUES (" + 37 + "," + "'Crunch'" + "," + 4 + "," + 12 + ")";
+            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS + "," + KEY_OEFENINGFOTO +
+            ") VALUES (" + 37 + "," + "'Crunch'" + "," + 4 + "," + 12 + "," + "'crunch.png'" + ")";
 
     private static final String INSERT_SIDE_CRUNCH= "INSERT INTO " + TABLE_OEFENING +
-            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS +
-            ") VALUES (" + 38 + "," + "'Side crunch'" + "," + 4 + "," + 12 + ")";
+            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS + "," + KEY_OEFENINGFOTO +
+            ") VALUES (" + 38 + "," + "'Side crunch'" + "," + 4 + "," + 12 + "," + "'sidecrunch.png'" + ")";
 
     private static final String INSERT_LEG_LIFT= "INSERT INTO " + TABLE_OEFENING +
-            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS +
-            ") VALUES (" + 39 + "," + "'Leg lift'" + "," + 4 + "," + 12 + ")";
+            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS + "," + KEY_OEFENINGFOTO +
+            ") VALUES (" + 39 + "," + "'Leg lift'" + "," + 4 + "," + 12 + "," + "'leglift.png'" + ")";
 
     private static final String INSERT_ABDOMINAL= "INSERT INTO " + TABLE_OEFENING +
-            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS +
-            ") VALUES (" + 40 + "," + "'Abdominal'" + "," + 4 + "," + 12 + ")";
+            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS + "," + KEY_OEFENINGFOTO +
+            ") VALUES (" + 40 + "," + "'Abdominal'" + "," + 4 + "," + 12 + "," + "'abdominal.png'" + ")";
 
     private static final String INSERT_PLANK= "INSERT INTO " + TABLE_OEFENING +
-            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS +
-            ") VALUES (" + 41 + "," + "'Plank'" + "," + 4 + "," + 12 + ")";
+            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS + "," + KEY_OEFENINGFOTO +
+            ") VALUES (" + 41 + "," + "'Plank'" + "," + 4 + "," + 12 + "," + "'plank.png'" + ")";
     //endregion
 
     //region Insert spiergroepen
