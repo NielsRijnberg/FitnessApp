@@ -749,7 +749,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return result;
     }
 
-
+    public Cursor HaalOefeningenOpBijSpiergroep(String spiergroepnaam){
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor result = db.rawQuery("SELECT * FROM oefeningen as o " +
+                "INNER JOIN oefeningen_spiergroepen os ON os.oefeningID = o.ID " +
+                "INNER JOIN spiergroepen s ON s.ID = os.spiergroepID " +
+                "WHERE s.spiergroepnaam = ?", new String[] {spiergroepnaam});
+        return result;
+    }
     /*public Cursor HaalOefeningenOpBijSpiergroep(Spiergroep spiergroep){
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor result = db.rawQuery("SELECT * FROM oefeningen INNER JOIN " + TABLE_OEFENING_SPIERGROEP + " ON oefeningID = oefeningen.oefeningID WHERE oefeningen_spiergroepen.spiergroepID = " + spiergroep.spiergroepID);

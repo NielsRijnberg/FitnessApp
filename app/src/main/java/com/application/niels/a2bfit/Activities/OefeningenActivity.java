@@ -19,6 +19,7 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.application.niels.a2bfit.R;
 
@@ -53,13 +54,28 @@ public class OefeningenActivity extends AppCompatActivity {
 
         getSupportActionBar().setTitle("Oefeningen");
 
-        getOefeningen();
         getSpiergroepen();
+        getOefeningenVanSpiergroep();
         bekijkOefening();
     }
 
+    public void getOefeningenVanSpiergroep(){
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                getOefeningen();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+                Toast.makeText(OefeningenActivity.this ,"Selecteer iets", Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
     public void getOefeningen() {
-        Cursor result = db.HaalAlleOefeningenOp();
+        Cursor result = db.HaalOefeningenOpBijSpiergroep(spinner.getSelectedItem().toString());
         List<Oefening> oefeningList = new ArrayList<Oefening>();
 
         if (result.getCount() == 0) {
@@ -118,7 +134,6 @@ public class OefeningenActivity extends AppCompatActivity {
 
     public void bekijkOefening(){
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
-
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
                 Oefening selectedOefening = (Oefening) listView.getItemAtPosition(position);
@@ -140,21 +155,6 @@ public class OefeningenActivity extends AppCompatActivity {
             }
         });
     }
-
-
-    /*public void putOefeningenBijSpiergroep() {
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
-
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
-    }*/
 
     public void showMessage(String title, String message){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
