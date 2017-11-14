@@ -740,11 +740,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return result;
     }
 
-    public Cursor HaalOefeningenOpBijSchema(int SchemaID){
+    public Cursor HaalOefeningenOpBijSchema(String type){
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor result = db.rawQuery("select * from " + TABLE_OEFENING +
-                " inner join " + TABLE_SCHEMA_OEFENING + " ON " + TABLE_SCHEMA_OEFENING + "." + KEY_OEFENINGID + " = " + TABLE_OEFENING + "." + KEY_ID +
-                " where " + KEY_SCHEMAID + " = " + SchemaID);
+        Cursor result = db.rawQuery("SELECT * FROM oefeningen as o " +
+                "INNER JOIN schemas_oefeningen so ON so.oefeningID = o.ID " +
+                "INNER JOIN schemas s ON s.ID = so.schemaID " +
+                "WHERE s.schematype = ?", new String[] {type});
         return result;
     }
 
