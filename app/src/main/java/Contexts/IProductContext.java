@@ -7,6 +7,4 @@ import Classes.Product;
 public interface IProductContext {
 
     List<Product> HaalAlleProductenOp();
-
-    void KoopProduct(Product product);
 }

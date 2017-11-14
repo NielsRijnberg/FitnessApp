@@ -9,12 +9,6 @@ import Contexts.ISchemaContext;
 public class SqlSchemaContext implements ISchemaContext{
     @Override
     public List<Schema> HaalAlleSchemasOp() {
-
         return null;
-    }
-
-    @Override
-    public void MaakSchema(List<Oefening> oefeningen) {
-
     }
 }

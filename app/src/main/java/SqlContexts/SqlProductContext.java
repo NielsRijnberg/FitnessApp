@@ -9,9 +9,4 @@ public class SqlProductContext implements IProductContext {
     public List<Product> HaalAlleProductenOp() {
         return null;
     }
-
-    @Override
-    public void KoopProduct(Product product) {
-
-    }
 }

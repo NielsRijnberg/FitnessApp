@@ -46,13 +46,11 @@ public class OefeningenActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_oefeningen);
 
+        getSupportActionBar().setTitle("Oefeningen");
         db = new DatabaseHelper(this);
-
         btnBekijkOefening = (Button) findViewById(R.id.btnBekijkOefening);
         listView = (ListView) findViewById(R.id.listViewOefeningen);
         spinner = (Spinner) findViewById(R.id.spinner);
-
-        getSupportActionBar().setTitle("Oefeningen");
 
         getSpiergroepen();
         getOefeningenVanSpiergroep();

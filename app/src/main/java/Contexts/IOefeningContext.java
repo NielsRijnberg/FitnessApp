@@ -10,9 +10,7 @@ public interface IOefeningContext {
 
     List<Oefening> HaalAlleOefeningenOp();
 
-    void VoegOefeningToeAanSchema(Oefening oefening, Schema schema);
-
-    void VerwijderOefeningUitSchema(Oefening oefening, Schema schema);
-
     List<Oefening> HaalOefeningenPerSpiergroepOp(Spiergroep spiergroep);
+
+    List<Oefening> HaalOefeningenOpBijSchema(Schema schema);
 }

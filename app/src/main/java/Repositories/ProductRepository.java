@@ -16,8 +16,4 @@ public class ProductRepository {
     public List<Product> HaalAlleProductenOp() {
         return context.HaalAlleProductenOp();
     }
-
-    public void KoopProduct(Product product){
-        context.KoopProduct(product);
-    }
 }

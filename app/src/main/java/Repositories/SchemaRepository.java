@@ -17,8 +17,4 @@ public class SchemaRepository {
     public List<Schema> HaalAlleSchemasOp(){
         return context.HaalAlleSchemasOp();
     }
-
-    public void MaakSchema(List<Oefening> oefeningen){
-        context.MaakSchema(oefeningen);
-    }
 }

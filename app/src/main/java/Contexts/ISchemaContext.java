@@ -8,6 +8,4 @@ import Classes.Schema;
 public interface ISchemaContext {
 
     List<Schema> HaalAlleSchemasOp();
-
-    void MaakSchema(List<Oefening> oefeningen);
 }

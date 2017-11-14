@@ -19,15 +19,11 @@ public class OefeningRepository {
         return context.HaalAlleOefeningenOp();
     }
 
-    public void VoegOefeningToeAanSchema(Oefening oefening, Schema schema) {
-        context.VoegOefeningToeAanSchema(oefening, schema);
-    }
-
-    public void VerwijderOefeningUitSchema(Oefening oefening, Schema schema){
-        context.VerwijderOefeningUitSchema(oefening, schema);
-    }
-
     public List<Oefening> HaalOefeningenPerSpiergroepOp(Spiergroep spiergroep){
         return context.HaalOefeningenPerSpiergroepOp(spiergroep);
+    }
+
+    public List<Oefening> HaalOefeningenOpBijSchema(Schema schema){
+        return context.HaalOefeningenOpBijSchema(schema);
     }
 }

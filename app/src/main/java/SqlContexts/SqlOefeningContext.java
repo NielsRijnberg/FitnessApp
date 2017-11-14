@@ -13,17 +13,12 @@ public class SqlOefeningContext implements IOefeningContext {
     }
 
     @Override
-    public void VoegOefeningToeAanSchema(Oefening oefening, Schema schema) {
-
-    }
-
-    @Override
-    public void VerwijderOefeningUitSchema(Oefening oefening, Schema schema) {
-
-    }
-
-    @Override
     public List<Oefening> HaalOefeningenPerSpiergroepOp(Spiergroep spiergroep) {
+        return null;
+    }
+
+    @Override
+    public List<Oefening> HaalOefeningenOpBijSchema(Schema schema) {
         return null;
     }
 }
