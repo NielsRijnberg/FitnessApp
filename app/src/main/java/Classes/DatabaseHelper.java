@@ -580,6 +580,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_SCHEMA_OEFENING);
     }
 
+
+    //region InsertData
     public void insertSampleData(SQLiteDatabase db){
         insertOefeningen(db);
         insertSpiergroepen(db);
@@ -588,7 +590,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         insertOefeningenVanSpiergroep(db);
         insertOefeningenVanSchemas(db);
     }
-
 
     private void insertOefeningen(SQLiteDatabase db){
         db.execSQL(INSERT_BENCHPRESS);
@@ -716,19 +717,22 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(INSERT_BENENSCHEMA_LYINGLEGCURL);
         db.execSQL(INSERT_BENENSCHEMA_SEATEDLEGPRESS);
     }
+    //endregion
 
-
-
-    public Cursor HaalAlleOefeningenOp(){
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor result = db.rawQuery("select * from " + TABLE_OEFENING, null);
-        return result;
-    }
-
-    public Cursor HaalAlleProductenOp(){
+    //region Queries
+    public List<Product> HaalAlleProductenOp(){
+        List<Product> productList = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor result = db.rawQuery("select * from " + TABLE_PRODUCT, null);
-        return result;
+
+        while (result.moveToNext()) {
+            int id = result.getInt(result.getColumnIndex("ID"));
+            String naam = result.getString(result.getColumnIndex("productnaam"));
+            double kosten = result.getDouble(result.getColumnIndex("productkosten"));
+            String omschrijving = result.getString(result.getColumnIndex("omschrijving"));
+            productList.add(new Product(id, naam, kosten, omschrijving));
+        }
+        return productList;
     }
 
     public List<Spiergroep> HaalAlleSpiergroepenOp(){
@@ -741,23 +745,39 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             String naam = result.getString(result.getColumnIndex("spiergroepnaam"));
             spiergroepList.add(new Spiergroep(id, naam));
         }
-
         return spiergroepList;
     }
 
-    public Cursor HaalAlleSchemasOp(){
+    public List<Schema> HaalAlleSchemasOp(){
+        List<Schema> schemaList = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor result = db.rawQuery("select * from " + TABLE_SCHEMA, null);
-        return result;
+
+        while (result.moveToNext()) {
+            int id = result.getInt(result.getColumnIndex("ID"));
+            String type = result.getString(result.getColumnIndex("schematype"));
+            schemaList.add(new Schema(id, type));
+        }
+        return schemaList;
     }
 
-    public Cursor HaalOefeningenOpBijSchema(String type){
+    public List<Oefening> HaalOefeningenOpBijSchema(String type){
+        List<Oefening> oefeningList = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor result = db.rawQuery("SELECT * FROM oefeningen as o " +
                 "INNER JOIN schemas_oefeningen so ON so.oefeningID = o.ID " +
                 "INNER JOIN schemas s ON s.ID = so.schemaID " +
                 "WHERE s.schematype = ?", new String[] {type});
-        return result;
+
+        while (result.moveToNext()) {
+            int id = result.getInt(result.getColumnIndex("ID"));
+            String naam = result.getString(result.getColumnIndex("oefeningnaam"));
+            int aantalSets = result.getInt(result.getColumnIndex("aantalsets"));
+            int aantalReps = result.getInt(result.getColumnIndex("aantalreps"));
+            String foto = result.getString(result.getColumnIndex("oefeningfoto"));
+            oefeningList.add(new Oefening(id, naam, aantalSets, aantalReps, foto));
+        }
+        return oefeningList;
     }
 
     public List<Oefening> HaalOefeningenOpBijSpiergroep(String spiergroepnaam){
@@ -778,9 +798,5 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
         return oefeningList;
     }
-    /*public Cursor HaalOefeningenOpBijSpiergroep(Spiergroep spiergroep){
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor result = db.rawQuery("SELECT * FROM oefeningen INNER JOIN " + TABLE_OEFENING_SPIERGROEP + " ON oefeningID = oefeningen.oefeningID WHERE oefeningen_spiergroepen.spiergroepID = " + spiergroep.spiergroepID);
-
-    }*/
+    //endregion
 }

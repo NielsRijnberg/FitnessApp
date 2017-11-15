@@ -25,6 +25,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import Adapters.MyLayoutAdapter;
 import Classes.DatabaseHelper;
 import Classes.Oefening;
 import Classes.Product;
@@ -49,33 +50,12 @@ public class ProductActivity extends AppCompatActivity {
     }
 
     public void getProducten(){
-        Cursor result = db.HaalAlleProductenOp();
-        List<Product> productList = new ArrayList<Product>();
+        List<Product> productList = db.HaalAlleProductenOp();
+        ListAdapter listAdapter = new MyLayoutAdapter<Product>(this, android.R.layout.simple_list_item_1, android.R.id.text1, productList);
+        listView.setAdapter(listAdapter);
 
-        if (result.getCount() == 0){
+        if (productList.isEmpty()){
             showMessage("Error", "Geen oefeningen gevonden");
-            return;
-        }
-        else {
-            while (result.moveToNext()) {
-                int id = result.getInt(result.getColumnIndex("ID"));
-                String naam = result.getString(result.getColumnIndex("productnaam"));
-                double kosten = result.getDouble(result.getColumnIndex("productkosten"));
-                String omschrijving = result.getString(result.getColumnIndex("omschrijving"));
-
-                productList.add(new Product(id, naam, kosten, omschrijving));
-
-                ListAdapter listAdapter = new ArrayAdapter<Product>(this, android.R.layout.simple_list_item_1, android.R.id.text1, productList) {
-                    @Override
-                    public View getView(int position, View convertView, ViewGroup parent) {
-                        View view = super.getView(position, convertView, parent);
-                        TextView textview = (TextView) view.findViewById(android.R.id.text1);
-                        textview.setTextColor(Color.WHITE);
-                        return textview;
-                    }
-                };
-                listView.setAdapter(listAdapter);
-            }
         }
     }
 

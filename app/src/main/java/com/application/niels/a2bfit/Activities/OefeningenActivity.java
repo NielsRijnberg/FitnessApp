@@ -91,24 +91,6 @@ public class OefeningenActivity extends AppCompatActivity {
         }
     }
 
-
-
-    /*public void getSpiergroepen() {
-        List<Spiergroep> spiergroepen = spiergroepRepo.HaalSpiergroepenOp();
-        SpinnerAdapter spinnerAdapter = new ArrayAdapter<Spiergroep>(this, android.R.layout.simple_list_item_1, android.R.id.text1, spiergroepen){
-            @Override
-            public View getView(int position, View convertView, ViewGroup parent){
-                View view = super.getView(position, convertView, parent);
-                TextView textview = (TextView) view.findViewById(android.R.id.text1);
-                textview.setTextColor(Color.BLUE);
-                textview.setTextSize(20);
-                return textview;
-            }
-        };
-        spinner.setAdapter(spinnerAdapter);
-    }*/
-
-
     public void getSpiergroepen() {
         List<Spiergroep> spiergroepList = db.HaalAlleSpiergroepenOp();
         SpinnerAdapter spinnerAdapter = new MyLayoutAdapter<Spiergroep>(this, android.R.layout.simple_list_item_1, android.R.id.text1, spiergroepList, 20, Color.BLUE);

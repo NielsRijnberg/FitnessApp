@@ -19,6 +19,7 @@ import com.application.niels.a2bfit.R;
 import java.util.ArrayList;
 import java.util.List;
 
+import Adapters.MyLayoutAdapter;
 import Classes.DatabaseHelper;
 import Classes.Schema;
 
@@ -42,30 +43,12 @@ public class StartTrainingActivity extends AppCompatActivity {
     }
 
     public void getSchemas(){
-        Cursor result = db.HaalAlleSchemasOp();
-        List<Schema> schemaList = new ArrayList<Schema>();
+        List<Schema> schemaList = db.HaalAlleSchemasOp();
+        SpinnerAdapter spinnerAdapter = new MyLayoutAdapter<Schema>(this, android.R.layout.simple_list_item_1, android.R.id.text1, schemaList, 20, Color.BLUE);
+        spinner.setAdapter(spinnerAdapter);
 
-        if (result.getCount() == 0) {
+        if (schemaList.isEmpty()) {
             showMessage("Error", "Geen spiergroepen gevonden");
-            return;
-        } else {
-            while (result.moveToNext()) {
-                int id = result.getInt(result.getColumnIndex("ID"));
-                String type = result.getString(result.getColumnIndex("schematype"));
-                schemaList.add(new Schema(id, type));
-
-                SpinnerAdapter spinnerAdapter = new ArrayAdapter<Schema>(this, android.R.layout.simple_list_item_1, android.R.id.text1, schemaList){
-                    @Override
-                    public View getView(int position, View convertView, ViewGroup parent){
-                        View view = super.getView(position, convertView, parent);
-                        TextView textview = (TextView) view.findViewById(android.R.id.text1);
-                        textview.setTextColor(Color.BLUE);
-                        textview.setTextSize(20);
-                        return textview;
-                    }
-                };
-                spinner.setAdapter(spinnerAdapter);
-            }
         }
     }
 

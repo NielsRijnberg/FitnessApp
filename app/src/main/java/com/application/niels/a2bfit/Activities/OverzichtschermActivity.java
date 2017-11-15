@@ -38,8 +38,8 @@ public class OverzichtschermActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_overzichtscherm);
-        init();
 
+        initPhotoSlider();
         initDatabase();
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
@@ -121,7 +121,7 @@ public class OverzichtschermActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void init() {
+    private void initPhotoSlider() {
         for(int i = 0; i< FOTOS.length; i++)
             FOTOArray.add(FOTOS[i]);
 

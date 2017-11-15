@@ -59,7 +59,7 @@ public class OefeningDetailsActivity extends AppCompatActivity {
         tvAantalSets.setText("Sets: " + aantalSets);
         tvAantalReps.setText("Reps: " + aantalReps);
 
-
+        //TODO
         int id = getResources().getIdentifier("com.application.niels.a2bfit:drawable/" + foto, null, null);
         ivOefeningFoto.setImageResource(id);
 
