@@ -109,16 +109,14 @@ public class OefeningenActivity extends AppCompatActivity {
 
                 int oefeningID = selectedOefening.getOefeningID();
                 String naam = selectedOefening.getNaam();
-                int aantalSets = selectedOefening.getAantalSets();
-                int aantalReps = selectedOefening.getAantalReps();
                 String foto = selectedOefening.getFoto();
+                String omschrijving = selectedOefening.getOmschrijving();
 
                 Intent oefeningDetailsIntent = new Intent(OefeningenActivity.this, OefeningDetailsActivity.class);
                 oefeningDetailsIntent.putExtra("ID", oefeningID);
                 oefeningDetailsIntent.putExtra("naam", naam);
-                oefeningDetailsIntent.putExtra("aantalSets", aantalSets);
-                oefeningDetailsIntent.putExtra("aantalReps", aantalReps);
                 oefeningDetailsIntent.putExtra("oefeningfoto", foto);
+                oefeningDetailsIntent.putExtra("oefeningomschrijving", omschrijving);
                 startActivity(oefeningDetailsIntent);
             }
         });

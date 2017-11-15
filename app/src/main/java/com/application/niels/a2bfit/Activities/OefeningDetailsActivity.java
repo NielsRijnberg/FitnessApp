@@ -20,12 +20,10 @@ public class OefeningDetailsActivity extends AppCompatActivity {
 
     int oefeningID;
     String naam;
-    int aantalSets;
-    int aantalReps;
     String foto;
+    String omschrijving;
     TextView tvOefeningNaam;
-    TextView tvAantalSets;
-    TextView tvAantalReps;
+    TextView tvOefeningOmschrijving;
     ImageView ivOefeningFoto;
     EditText content;
 
@@ -36,8 +34,7 @@ public class OefeningDetailsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_oefening_details);
 
         tvOefeningNaam = (TextView) findViewById(R.id.tvOefeningNaam);
-        tvAantalSets = (TextView) findViewById(R.id.tvAantalSets);
-        tvAantalReps = (TextView) findViewById(R.id.tvAantalReps);
+        tvOefeningOmschrijving = (TextView) findViewById(R.id.tvOefeningOmschrijving);
         ivOefeningFoto = (ImageView) findViewById(R.id.OefeningImageView);
 
         getSupportActionBar().setTitle("Oefening details");
@@ -49,15 +46,13 @@ public class OefeningDetailsActivity extends AppCompatActivity {
     private void getOefeningDetails(){
         oefeningID = getIntent().getExtras().getInt("ID");
         naam = getIntent().getExtras().getString("naam");
-        aantalSets = getIntent().getExtras().getInt("aantalSets");
-        aantalReps = getIntent().getExtras().getInt("aantalReps");
         foto = getIntent().getExtras().getString("oefeningfoto");
+        omschrijving = getIntent().getExtras().getString("oefeningomschrijving");
     }
 
     private void setTextBoxes(){
         tvOefeningNaam.setText(naam);
-        tvAantalSets.setText("Sets: " + aantalSets);
-        tvAantalReps.setText("Reps: " + aantalReps);
+        tvOefeningOmschrijving.setText(omschrijving);
 
         //TODO
         int id = getResources().getIdentifier("com.application.niels.a2bfit:drawable/" + foto, null, null);

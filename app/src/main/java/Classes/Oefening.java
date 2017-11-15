@@ -5,9 +5,8 @@ import java.util.List;
 public class Oefening {
     int oefeningID;
     String naam;
-    int aantalSets;
-    int aantalReps;
     String foto;
+    String omschrijving;
 
     public int getOefeningID() {
         return oefeningID;
@@ -17,24 +16,19 @@ public class Oefening {
         return naam;
     }
 
-    public int getAantalSets() {
-        return aantalSets;
-    }
-
-    public int getAantalReps() {
-        return aantalReps;
-    }
-
     public String getFoto() {
         return foto;
     }
 
-    public Oefening(int oefeningID, String naam, int aantalSets, int aantalReps, String foto) {
+    public String getOmschrijving() {
+        return omschrijving;
+    }
+
+    public Oefening(int oefeningID, String naam, String foto, String omschrijving) {
         this.oefeningID = oefeningID;
         this.naam = naam;
-        this.aantalSets = aantalSets;
-        this.aantalReps = aantalReps;
         this.foto = foto;
+        this.omschrijving = omschrijving;
     }
 
     @Override

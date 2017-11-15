@@ -41,6 +41,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String KEY_OEFENINGNAAM = "oefeningnaam";
     public static final String KEY_AANTALSETS = "aantalsets";
     public static final String KEY_AANTALREPS = "aantalreps";
+    public static final String KEY_OEFENINGOMSCHRIJVING = "oefeningomschrijving";
     public static final String KEY_OEFENINGFOTO = "oefeningfoto";
 
     //product column names
@@ -61,9 +62,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String CREATE_TABLE_OEFENING = "CREATE TABLE IF NOT EXISTS " + TABLE_OEFENING +
             "(" + KEY_ID +" INTEGER PRIMARY KEY AUTOINCREMENT, " +
             KEY_OEFENINGNAAM + " TEXT, " +
-            KEY_AANTALSETS + " INTEGER, " +
-            KEY_AANTALREPS + " INTEGER, " +
-            KEY_OEFENINGFOTO + " TEXT)";
+            KEY_OEFENINGFOTO + " TEXT, " +
+            KEY_OEFENINGOMSCHRIJVING + " TEXT)";
 
     //product table create
     private static final String CREATE_TABLE_PRODUCT = "CREATE TABLE IF NOT EXISTS " + TABLE_PRODUCT +
@@ -85,7 +85,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     // schema_oefening table create
     private static final String CREATE_TABLE_SCHEMA_OEFENING = "CREATE TABLE IF NOT EXISTS " + TABLE_SCHEMA_OEFENING +
             "(" + KEY_SCHEMAID + " INTEGER REFERENCES " + TABLE_SCHEMA + " (" + KEY_ID + "), " +
-            KEY_OEFENINGID + " INTEGER REFERENCES " + TABLE_OEFENING + " (" + KEY_ID + "))";
+            KEY_OEFENINGID + " INTEGER REFERENCES " + TABLE_OEFENING + " (" + KEY_ID + "), " +
+            KEY_AANTALSETS + " INTEGER, " +
+            KEY_AANTALREPS + " INTEGER)";
 
     // oefening_spiergroep table create
     private static final String CREATE_TABLE_OEFENING_SPIERGROEP = "CREATE TABLE IF NOT EXISTS " + TABLE_OEFENING_SPIERGROEP +
@@ -135,168 +137,168 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     //region Insert oefeningen
     //Inserts van oefeningen
     private static final String INSERT_BENCHPRESS= "INSERT INTO " + TABLE_OEFENING +
-            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS + "," + KEY_OEFENINGFOTO +
-            ") VALUES (" + 1 + "," + "'Benchpress'" + "," + 5 + "," + 5 + "," + "'benchpress.png'" + ")";
+            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_OEFENINGFOTO + "," + KEY_OEFENINGOMSCHRIJVING +
+            ") VALUES (" + 1 + "," + "'Benchpress'" + "," + "'benchpress.png'" + "," + "'Greep breder dan schouderbreedte, zak tot ellebogen lager dan schouders, armen uitstrekken en beweeg boven het midden van de borst'" + ")";
 
     private static final String INSERT_SQUAT_BACK= "INSERT INTO " + TABLE_OEFENING +
-            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS + "," + KEY_OEFENINGFOTO +
-            ") VALUES (" + 2 + "," + "'Squat back'" + "," + 4 + "," + 12 + "," + "'squatback.png'" + ")";
+            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_OEFENINGFOTO + "," + KEY_OEFENINGOMSCHRIJVING +
+            ") VALUES (" + 2 + "," + "'Squat back'" + "," + "'squatback.png'" + "," + "'Voeten op heupbreedte, barbell in de nek, borst naar voren, onderrug hol, zak niet dieper dan 90 graden'" + ")";
 
     private static final String INSERT_LEG_EXTENSION= "INSERT INTO " + TABLE_OEFENING +
-            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS + "," + KEY_OEFENINGFOTO +
-            ") VALUES (" + 3 + "," + "'Leg extension'" + "," + 4 + "," + 10 + "," + "'legextension.png'" + ")";
+            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_OEFENINGFOTO + "," + KEY_OEFENINGOMSCHRIJVING +
+            ") VALUES (" + 3 + "," + "'Leg extension'" + "," + "'legextension.png'" + "," + "'Toestel instellen naar lichaamsmaten, instructie toesten opvolgen, instructie schema opvolgen'" + ")";
 
     private static final String INSERT_LYING_LEG_CURL= "INSERT INTO " + TABLE_OEFENING +
-            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS + "," + KEY_OEFENINGFOTO +
-            ") VALUES (" + 4 + "," + "'Lying leg curl'" + "," + 4 + "," + 10 + "," + "'lyinglegcurl.png'" + ")";
+            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_OEFENINGFOTO + "," + KEY_OEFENINGOMSCHRIJVING +
+            ") VALUES (" + 4 + "," + "'Lying leg curl'" + "," + "'lyinglegcurl.png'" + "," + "'Toestel instellen naar lichaamsmaten, instructie toesten opvolgen, instructie schema opvolgen'" + ")";
 
     private static final String INSERT_SEATED_LEG_PRESS= "INSERT INTO " + TABLE_OEFENING +
-            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS + "," + KEY_OEFENINGFOTO +
-            ") VALUES (" + 5 + "," + "'Seated leg press'" + "," + 4 + "," + 10 + "," + "'seatedlegpress.png'" + ")";
+            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_OEFENINGFOTO + "," + KEY_OEFENINGOMSCHRIJVING +
+            ") VALUES (" + 5 + "," + "'Seated leg press'" + "," + "'seatedlegpress.png'" + "," + "'Toestel instellen naar lichaamsmaten, instructie toesten opvolgen, instructie schema opvolgen'" + ")";
 
     private static final String INSERT_SEATED_LEG_CURL= "INSERT INTO " + TABLE_OEFENING +
-            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS + "," + KEY_OEFENINGFOTO +
-            ") VALUES (" + 6 + "," + "'Seated leg curl'" + "," + 4 + "," + 10 + "," + "'seatedlegcurl.png'" + ")";
+            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_OEFENINGFOTO + "," + KEY_OEFENINGOMSCHRIJVING +
+            ") VALUES (" + 6 + "," + "'Seated leg curl'" + "," + "'seatedlegcurl.png'" + "," + "'Toestel instellen naar lichaamsmaten, instructie toesten opvolgen, instructie schema opvolgen'" + ")";
 
     private static final String INSERT_PULL_DOWN_FRONT= "INSERT INTO " + TABLE_OEFENING +
-            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS + "," + KEY_OEFENINGFOTO +
-            ") VALUES (" + 7 + "," + "'Pull down front'" + "," + 4 + "," + 10 + "," + "'pulldownfront.png'" + ")";
+            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_OEFENINGFOTO + "," + KEY_OEFENINGOMSCHRIJVING +
+            ") VALUES (" + 7 + "," + "'Pull down front'" + "," + "'pulldownfront.png'" + "," + "'Pak stang op schuine delen wijd, trek omlaag tot sleutelbeen, strek tot je armen bijna gestrekt zijn'" + ")";
 
     private static final String INSERT_BARBELL_ROWING= "INSERT INTO " + TABLE_OEFENING +
-            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS + "," + KEY_OEFENINGFOTO +
-            ") VALUES (" + 8 + "," + "'Barbell rowing'" + "," + 4 + "," + 12 + "," + "'barbellrowing.png'" + ")";
+            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_OEFENINGFOTO + "," + KEY_OEFENINGOMSCHRIJVING +
+            ") VALUES (" + 8 + "," + "'Barbell rowing'" + "," + "'barbellrowing.png'" + "," + "'Pak barbell onderhands, handen op schouderbreedte, knieen licht gebogen, optrekken tot middenrif, laten zakken tot je armen bijna gestrekt zijn'" + ")";
 
     private static final String INSERT_DUMBBELL_ROWING= "INSERT INTO " + TABLE_OEFENING +
-            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS + "," + KEY_OEFENINGFOTO +
-            ") VALUES (" + 9 + "," + "'Dumbbell rowing'" + "," + 4 + "," + 12 + "," + "'dumbbellrowing.png'" + ")";
+            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_OEFENINGFOTO + "," + KEY_OEFENINGOMSCHRIJVING +
+            ") VALUES (" + 9 + "," + "'Dumbbell rowing'" + "," + "'dumbbellrowing.png'" + "," + "'Linker hand op bank, linker knie op bank, dumbbell in rechter hand, trek dumbbell verticaal tot naast het lichaam, terug tot arm bijna gestrekt is'" + ")";
 
     private static final String INSERT_DUAL_SEATED_ROW_WIDE= "INSERT INTO " + TABLE_OEFENING +
-            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS + "," + KEY_OEFENINGFOTO +
-            ") VALUES (" + 10 + "," + "'Dual seated row wide'" + "," + 4 + "," + 10 + "," + "'dualseatedrowwide.png'" + ")";
+            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_OEFENINGFOTO + "," + KEY_OEFENINGOMSCHRIJVING +
+            ") VALUES (" + 10 + "," + "'Dual seated row wide'" + "," + "'dualseatedrowwide.png'" + "," + "'Toestel instellen naar lichaamsmaten, instructie toesten opvolgen, instructie schema opvolgen'" + ")";
 
     private static final String INSERT_HORIZONTAL_LAT_ROW= "INSERT INTO " + TABLE_OEFENING +
-            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS + "," + KEY_OEFENINGFOTO +
-            ") VALUES (" + 11 + "," + "'Horizontal lat row'" + "," + 4 + "," + 12 + "," + "'horizontallatrow.png'" + ")";
+            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_OEFENINGFOTO + "," + KEY_OEFENINGOMSCHRIJVING +
+            ") VALUES (" + 11 + "," + "'Horizontal lat row'" + "," + "'horizontallatrow.png'" + "," + "'Toestel instellen naar lichaamsmaten, instructie toesten opvolgen, instructie schema opvolgen'" + ")";
 
     private static final String INSERT_DUMBBELL_PRESS= "INSERT INTO " + TABLE_OEFENING +
-            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS + "," + KEY_OEFENINGFOTO +
-            ") VALUES (" + 12 + "," + "'Dumbbell press'" + "," + 4 + "," + 12 + "," + "'dumbbellpress.png'" + ")";
+            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_OEFENINGFOTO + "," + KEY_OEFENINGOMSCHRIJVING +
+            ") VALUES (" + 12 + "," + "'Dumbbell press'" + "," + "'dumbbellpress.png'" + "," + "'Greep met handpalmen naar voeten, zakken tot ellebogen lager dan schouders zijn, uitstrekken tot armen gestrekt zijn'" + ")";
 
     private static final String INSERT_FLYES= "INSERT INTO " + TABLE_OEFENING +
-            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS + "," + KEY_OEFENINGFOTO +
-            ") VALUES (" + 13 + "," + "'Flyes'" + "," + 4 + "," + 12 + "," + "'flyes.png'" + ")";
+            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_OEFENINGFOTO + "," + KEY_OEFENINGOMSCHRIJVING +
+            ") VALUES (" + 13 + "," + "'Flyes'" + "," + "'flyes.png'" + "," + "'Greep met handpalmen naar lichaam, armen licht gebogen, zak naar buiten tot dumbbells op schouderhoogte'" + ")";
 
     private static final String INSERT_CABLE_CROSS_OVER= "INSERT INTO " + TABLE_OEFENING +
-            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS + "," + KEY_OEFENINGFOTO +
-            ") VALUES (" + 14 + "," + "'Cable cross over'" + "," + 4 + "," + 12 + "," + "'cablecrossover.png'" +")";
+            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_OEFENINGFOTO + "," + KEY_OEFENINGOMSCHRIJVING +
+            ") VALUES (" + 14 + "," + "'Cable cross over'" + "," + "'cablecrossover.png'" + "," + "'Sta tussen pulleys, 1 voet voor, bovenlichaam licht voorover, beweeg in ruime boog tot voor je borst'" +")";
 
     private static final String INSERT_INCLINE_BENCH_PRESS= "INSERT INTO " + TABLE_OEFENING +
-            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS + "," + KEY_OEFENINGFOTO +
-            ") VALUES (" + 15 + "," + "'Incline bench press'" + "," + 4 + "," + 12 + "," + "'inclinebenchpress.png'" + ")";
+            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_OEFENINGFOTO + "," + KEY_OEFENINGOMSCHRIJVING +
+            ") VALUES (" + 15 + "," + "'Incline bench press'" + "," + "'inclinebenchpress.png'" + "," + "'Greep breder dan schouderbreedte, zak tot ellebogen iets lager dan schouders zijn, uitstrekken tot armen bijna gestrekt zijn'" + ")";
 
     private static final String INSERT_INCLINE_DUMBBELL_PRESS= "INSERT INTO " + TABLE_OEFENING +
-            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS + "," + KEY_OEFENINGFOTO +
-            ") VALUES (" + 16 + "," + "'Incline dumbbell press'" + "," + 4 + "," + 12 + "," + "'inclinedumbbellpress.png'" + ")";
+            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_OEFENINGFOTO + "," + KEY_OEFENINGOMSCHRIJVING +
+            ") VALUES (" + 16 + "," + "'Incline dumbbell press'" + "," + "'inclinedumbbellpress.png'" + "," + "'Greep met handpalmen naar voeten, zakken tot ellebogen iets lager zijn dan schouders, uitstrekken tot armen bijna gestrekt zijn'" + ")";
 
     private static final String INSERT_DUMBBELL_PULL_OVER= "INSERT INTO " + TABLE_OEFENING +
-            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS + "," + KEY_OEFENINGFOTO +
-            ") VALUES (" + 17 + "," + "'Dumbbell pull over'" + "," + 4 + "," + 12 + "," + "'dumbbellpullover.png'" + ")";
+            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_OEFENINGFOTO + "," + KEY_OEFENINGOMSCHRIJVING +
+            ") VALUES (" + 17 + "," + "'Dumbbell pull over'" + "," + "'dumbbellpullover.png'" + "," + "'Greep tussen duimen en wijsvingers, armen licht gebogen, zak naar achter tot dumbbell achter je hoofd is'" + ")";
 
     private static final String INSERT_SEATED_CHEST_PRESS= "INSERT INTO " + TABLE_OEFENING +
-            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS + "," + KEY_OEFENINGFOTO +
-            ") VALUES (" + 18 + "," + "'Seated chest press'" + "," + 4 + "," + 12 + "," + "'seatedchestpress.png'" + ")";
+            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_OEFENINGFOTO + "," + KEY_OEFENINGOMSCHRIJVING +
+            ") VALUES (" + 18 + "," + "'Seated chest press'" + "," + "'seatedchestpress.png'" + "," + "'Toestel instellen naar lichaamsmaten, instructie toesten opvolgen, instructie schema opvolgen'" + ")";
 
     private static final String INSERT_FLY_MACHINE= "INSERT INTO " + TABLE_OEFENING +
-            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS + "," + KEY_OEFENINGFOTO +
-            ") VALUES (" + 19 + "," + "'Fly machine'" + "," + 4 + "," + 12 + "," + "'flymachine.png'" + ")";
+            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_OEFENINGFOTO + "," + KEY_OEFENINGOMSCHRIJVING +
+            ") VALUES (" + 19 + "," + "'Fly machine'" + "," + "'flymachine.png'" + "," + "'Toestel instellen naar lichaamsmaten, instructie toesten opvolgen, instructie schema opvolgen'" + ")";
 
     private static final String INSERT_FRONT_PRESS_STANDING= "INSERT INTO " + TABLE_OEFENING +
-            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS + "," + KEY_OEFENINGFOTO +
-            ") VALUES (" + 20 + "," + "'Front press standing'" + "," + 4 + "," + 12 + "," + "'frontpressstanding.png'" + ")";
+            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_OEFENINGFOTO + "," + KEY_OEFENINGOMSCHRIJVING +
+            ") VALUES (" + 20 + "," + "'Front press standing'" + "," + "'frontpressstanding.png'" + "," + "'Sta met barbell op sleutelbenen, duw uit tot armen bijna gestrekt, houd rug recht en houdt romp stil'" + ")";
 
     private static final String INSERT_SHOULDER_PRESS_MACHINE= "INSERT INTO " + TABLE_OEFENING +
-            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS + "," + KEY_OEFENINGFOTO +
-            ") VALUES (" + 21 + "," + "'Shoulder press machine'" + "," + 4 + "," + 12 + "," + "'shoulderpressmachine.png'" + ")";
+            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_OEFENINGFOTO + "," + KEY_OEFENINGOMSCHRIJVING +
+            ") VALUES (" + 21 + "," + "'Shoulder press machine'" + "," + "'shoulderpressmachine.png'" + "," + "'Toestel instellen naar lichaamsmaten, instructie toesten opvolgen, instructie schema opvolgen'" + ")";
 
     private static final String INSERT_FRONT_RAISE_STANDING= "INSERT INTO " + TABLE_OEFENING +
-            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS + "," + KEY_OEFENINGFOTO +
-            ") VALUES (" + 22 + "," + "'Front raise standing'" + "," + 4 + "," + 12 + "," + "'frontraisestanding.png'" + ")";
+            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_OEFENINGFOTO + "," + KEY_OEFENINGOMSCHRIJVING +
+            ") VALUES (" + 22 + "," + "'Front raise standing'" + "," + "'frontraisestanding.png'" + "," + "'Sta met dumbbells voor dijbenen, hef dumbbells voorwaarts tot ooghoogte, armen licht gebogen, rug recht'" + ")";
 
     private static final String INSERT_BEND_OVER_RAISE_SEATED= "INSERT INTO " + TABLE_OEFENING +
-            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS + "," + KEY_OEFENINGFOTO +
-            ") VALUES (" + 23 + "," + "'Bend over raise seated'" + "," + 4 + "," + 12 + "," + "'bendoverraiseseated.png'" + ")";
+            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_OEFENINGFOTO + "," + KEY_OEFENINGOMSCHRIJVING +
+            ") VALUES (" + 23 + "," + "'Bend over raise seated'" + "," + "'bendoverraiseseated.png'" + "," + "'Zit stil met dumbbells naast kuiten, borst op knieen, hef dumbbells zijwaarts tot ellebogen op schouderhoogte, armen licht gebogen'" + ")";
 
     private static final String INSERT_UPRIGHT_ROWING= "INSERT INTO " + TABLE_OEFENING +
-            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS + "," + KEY_OEFENINGFOTO +
-            ") VALUES (" + 24 + "," + "'Upright rowing'" + "," + 4 + "," + 12 + "," + "'uprightrowing.png'" + ")";
+            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_OEFENINGFOTO + "," + KEY_OEFENINGOMSCHRIJVING +
+            ") VALUES (" + 24 + "," + "'Upright rowing'" + "," + "'uprightrowing.png'" + "," + "'Sta met licht gebogen knieen, rechte rug en ez-bar voor heupen, armen bijna gestrekt, hef langs lichaam tot boven het borstbeen'" + ")";
 
     private static final String INSERT_LATERAL_RAISE_STANDING= "INSERT INTO " + TABLE_OEFENING +
-            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS + "," + KEY_OEFENINGFOTO +
-            ") VALUES (" + 25 + "," + "'Lateral raise standing'" + "," + 4 + "," + 12 + "," + "'lateralraisestanding.png'" + ")";
+            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_OEFENINGFOTO + "," + KEY_OEFENINGOMSCHRIJVING +
+            ") VALUES (" + 25 + "," + "'Lateral raise standing'" + "," + "'lateralraisestanding.png'" + "," + "'Sta met dumbbells naast heupen, hef dumbbells zijwaarts tot ellebogen op schouderhoogte, armen licht gebogen'" + ")";
 
     private static final String INSERT_TRICEPS_EXTENSION_DUMBBELL= "INSERT INTO " + TABLE_OEFENING +
-            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS + "," + KEY_OEFENINGFOTO +
-            ") VALUES (" + 26 + "," + "'Triceps extension dumbbell'" + "," + 4 + "," + 12 + "," + "'tricepsextensiondumbbell.png'" + ")";
+            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_OEFENINGFOTO + "," + KEY_OEFENINGOMSCHRIJVING +
+            ") VALUES (" + 26 + "," + "'Triceps extension dumbbell'" + "," + "'tricepsextensiondumbbell.png'" + "," + "'Pak dumbbell in hand, arm langs oor, buig tot hand lager dan elleboog, dumbbell achter hoofd'" + ")";
 
     private static final String INSERT_TRICEPS_PULL_DOWN= "INSERT INTO " + TABLE_OEFENING +
-            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS + "," + KEY_OEFENINGFOTO +
-            ") VALUES (" + 27 + "," + "'Triceps pull down'" + "," + 4 + "," + 12 + "," + "'tricepspulldown.png'" + ")";
+            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_OEFENINGFOTO + "," + KEY_OEFENINGOMSCHRIJVING +
+            ") VALUES (" + 27 + "," + "'Triceps pull down'" + "," + "'tricepspulldown.png'" + "," + "'Sta met knieen licht gebogen, pak barbell in bovengreep, ellebogen in zij, beweeg van volledig gestrekt tot hand boven ellebooghoogte'" + ")";
 
     private static final String INSERT_TRICEPS_PULL_DOWN_ROPE= "INSERT INTO " + TABLE_OEFENING +
-            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS + "," + KEY_OEFENINGFOTO +
-            ") VALUES (" + 28 + "," + "'Triceps pull down rope'" + "," + 4 + "," + 12 + "," + "'tricepspulldownrope.png'" + ")";
+            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_OEFENINGFOTO + "," + KEY_OEFENINGOMSCHRIJVING +
+            ") VALUES (" + 28 + "," + "'Triceps pull down rope'" + "," + "'tricepspulldownrope.png'" + "," + "'Sta rechtop, knieen licht gebogen, pak rope, ellebogen in zij, beweeg van volledig gestrekt tot hand boven ellebooghoogte'" + ")";
 
     private static final String INSERT_KICK_BACKS_DUMBBELL= "INSERT INTO " + TABLE_OEFENING +
-            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS + "," + KEY_OEFENINGFOTO +
-            ") VALUES (" + 29 + "," + "'Kick backs dumbbell'" + "," + 4 + "," + 12 + "," + "'kickbacksdumbbell.png'" + ")";
+            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_OEFENINGFOTO + "," + KEY_OEFENINGOMSCHRIJVING +
+            ") VALUES (" + 29 + "," + "'Kick backs dumbbell'" + "," + "'kickbacksdumbbell.png'" + "," + "'Linker hand en linker knie op bank, pak dumbbell in rechter hand, beweeg onderarm omhoog'" + ")";
 
     private static final String INSERT_TRICEPS_EXTENSION= "INSERT INTO " + TABLE_OEFENING +
-            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS + "," + KEY_OEFENINGFOTO +
-            ") VALUES (" + 30 + "," + "'Triceps extension'" + "," + 4 + "," + 12 + "," + "'tricepsextension.png'" + ")";
+            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_OEFENINGFOTO + "," + KEY_OEFENINGOMSCHRIJVING +
+            ") VALUES (" + 30 + "," + "'Triceps extension'" + "," + "'tricepsextension.png'" + "," + "'Rugligging, armen gestrekt tot handen lager dan elleboog, ez-bar bij voorhoofd'" + ")";
 
     private static final String INSERT_BICEPS_CURL= "INSERT INTO " + TABLE_OEFENING +
-            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS + "," + KEY_OEFENINGFOTO +
-            ") VALUES (" + 31 + "," + "'Biceps curl'" + "," + 4 + "," + 12 + "," + "'bicepscurl.png'" + ")";
+            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_OEFENINGFOTO + "," + KEY_OEFENINGOMSCHRIJVING +
+            ") VALUES (" + 31 + "," + "'Biceps curl'" + "," + "'bicepscurl.png'" + "," + "'Sta rechtop, knieen licht gebogen, pak ez-bar in ondergreep, beweeg van bijna gestrekt tot voor sleutelbeen'" + ")";
 
     private static final String INSERT_DUMBBELL_CURL= "INSERT INTO " + TABLE_OEFENING +
-            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS + "," + KEY_OEFENINGFOTO +
-            ") VALUES (" + 32 + "," + "'Dumbbell curl'" + "," + 4 + "," + 12 + "," + "'dumbbellcurlstandingalternated.png'" + ")";
+            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_OEFENINGFOTO + "," + KEY_OEFENINGOMSCHRIJVING +
+            ") VALUES (" + 32 + "," + "'Dumbbell curl'" + "," + "'dumbbellcurlstandingalternated.png'" + "," + "'Sta met dumbbells naast heupen, handpalmen naar binnen, buig armen en draai duim naar buiten'" + ")";
 
     private static final String INSERT_CABLE_CURL= "INSERT INTO " + TABLE_OEFENING +
-            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS + "," + KEY_OEFENINGFOTO +
-            ") VALUES (" + 33 + "," + "'Cable curl'" + "," + 4 + "," + 12 + "," + "'cablecurl.png'" + ")";
+            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_OEFENINGFOTO + "," + KEY_OEFENINGOMSCHRIJVING +
+            ") VALUES (" + 33 + "," + "'Cable curl'" + "," + "'cablecurl.png'" + "," + "'Sta rechtop met licht gebogen knieen, pak barbell in ondergreep, duw ellebogen in zij van bijna gestrekt tot naar voor'" + ")";
 
     private static final String INSERT_PREACHER_CURL= "INSERT INTO " + TABLE_OEFENING +
-            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS + "," + KEY_OEFENINGFOTO +
-            ") VALUES (" + 34 + "," + "'Preacher curl'" + "," + 4 + "," + 12 + "," + "'preachercurl.png'" + ")";
+            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_OEFENINGFOTO + "," + KEY_OEFENINGOMSCHRIJVING +
+            ") VALUES (" + 34 + "," + "'Preacher curl'" + "," + "'preachercurl.png'" + "," + "'Zit met bovenarmen op bank, pak ez-bar in ondergreep, beweeg van bijna gestrekt tot oor'" + ")";
 
     private static final String INSERT_HAMMER_CURL= "INSERT INTO " + TABLE_OEFENING +
-            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS + "," + KEY_OEFENINGFOTO +
-            ") VALUES (" + 35 + "," + "'Hammer curl'" + "," + 4 + "," + 12 + "," + "'hammercurl.png'" + ")";
+            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_OEFENINGFOTO + "," + KEY_OEFENINGOMSCHRIJVING +
+            ") VALUES (" + 35 + "," + "'Hammer curl'" + "," + "'hammercurl.png'" + "," + "'Sta met dumbbell naast heup, handpalm naar binnen, buig arm met duim omhoog'" + ")";
 
     private static final String INSERT_SEATED_CALF_RAISE= "INSERT INTO " + TABLE_OEFENING +
-            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS + "," + KEY_OEFENINGFOTO +
-            ") VALUES (" + 36 + "," + "'Seated calf raise'" + "," + 4 + "," + 12 + "," + "'seatedcalfraise.png'" + ")";
+            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_OEFENINGFOTO + "," + KEY_OEFENINGOMSCHRIJVING +
+            ") VALUES (" + 36 + "," + "'Seated calf raise'" + "," + "'seatedcalfraise.png'" + "," + "'Toestel instellen naar lichaamsmaten, instructie toesten opvolgen, instructie schema opvolgen'" + ")";
 
     private static final String INSERT_CRUNCH= "INSERT INTO " + TABLE_OEFENING +
-            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS + "," + KEY_OEFENINGFOTO +
-            ") VALUES (" + 37 + "," + "'Crunch'" + "," + 4 + "," + 12 + "," + "'crunch.png'" + ")";
+            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_OEFENINGFOTO + "," + KEY_OEFENINGOMSCHRIJVING +
+            ") VALUES (" + 37 + "," + "'Crunch'" + "," + "'crunch.png'" + "," + "'Rugligging, voeten plat op de vloer, rol schouders van vloer, kijk naar plafond en ondersteun hoofd, zak terug en houd spanning op de buik'" + ")";
 
     private static final String INSERT_SIDE_CRUNCH= "INSERT INTO " + TABLE_OEFENING +
-            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS + "," + KEY_OEFENINGFOTO +
-            ") VALUES (" + 38 + "," + "'Side crunch'" + "," + 4 + "," + 12 + "," + "'sidecrunch.png'" + ")";
+            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_OEFENINGFOTO + "," + KEY_OEFENINGOMSCHRIJVING +
+            ") VALUES (" + 38 + "," + "'Side crunch'" + "," + "'sidecrunch.png'" + "," + "'Rugligging, voeten plat op de vloer, rol schouders, draai rechter elleboog naar linker knie, zak terug en houd spanning op de buik'" + ")";
 
     private static final String INSERT_LEG_LIFT= "INSERT INTO " + TABLE_OEFENING +
-            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS + "," + KEY_OEFENINGFOTO +
-            ") VALUES (" + 39 + "," + "'Leg lift'" + "," + 4 + "," + 12 + "," + "'leglift.png'" + ")";
+            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_OEFENINGFOTO + "," + KEY_OEFENINGOMSCHRIJVING +
+            ") VALUES (" + 39 + "," + "'Leg lift'" + "," + "'leglift.png'" + "," + "'Benen gestrekt, armen langs lichaam op de vloer, hef benen verticaal'" + ")";
 
     private static final String INSERT_ABDOMINAL= "INSERT INTO " + TABLE_OEFENING +
-            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS + "," + KEY_OEFENINGFOTO +
-            ") VALUES (" + 40 + "," + "'Abdominal'" + "," + 4 + "," + 12 + "," + "'abdominal.png'" + ")";
+            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_OEFENINGFOTO + "," + KEY_OEFENINGOMSCHRIJVING +
+            ") VALUES (" + 40 + "," + "'Abdominal'" + "," + "'abdominal.png'" + "," + "'Toestel instellen naar lichaamsmaten, instructie toesten opvolgen, instructie schema opvolgen'" + ")";
 
     private static final String INSERT_PLANK= "INSERT INTO " + TABLE_OEFENING +
-            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_AANTALSETS  + "," + KEY_AANTALREPS + "," + KEY_OEFENINGFOTO +
-            ") VALUES (" + 41 + "," + "'Plank'" + "," + 4 + "," + 12 + "," + "'plank.png'" + ")";
+            " (" + KEY_ID + "," + KEY_OEFENINGNAAM + "," + KEY_OEFENINGFOTO + "," + KEY_OEFENINGOMSCHRIJVING +
+            ") VALUES (" + 41 + "," + "'Plank'" + "," + "'plank.png'" + "," + "'Geen uitleg beschikbaar'" + ")";
     //endregion
 
     //region Insert spiergroepen
@@ -361,20 +363,20 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     //region Insert oefeningen van schema
     private static final String INSERT_BENENSCHEMA_SQUATBACK = "INSERT INTO " + TABLE_SCHEMA_OEFENING +
-            " (" + KEY_SCHEMAID + "," + KEY_OEFENINGID +
-            ") VALUES (" + 3 + "," + 2 + ")";
+            " (" + KEY_SCHEMAID + "," + KEY_OEFENINGID + "," + KEY_AANTALSETS + "," + KEY_AANTALREPS +
+            ") VALUES (" + 3 + "," + 2 + "," + 4 + "," + 10 + ")";
 
     private static final String INSERT_BENENSCHEMA_LEGEXTENSION = "INSERT INTO " + TABLE_SCHEMA_OEFENING +
-            " (" + KEY_SCHEMAID + "," + KEY_OEFENINGID +
-            ") VALUES (" + 3 + "," + 3 + ")";
+            " (" + KEY_SCHEMAID + "," + KEY_OEFENINGID + "," + KEY_AANTALSETS + "," + KEY_AANTALREPS +
+            ") VALUES (" + 3 + "," + 3 + "," + 4 + "," + 10 + ")";
 
     private static final String INSERT_BENENSCHEMA_LYINGLEGCURL = "INSERT INTO " + TABLE_SCHEMA_OEFENING +
-            " (" + KEY_SCHEMAID + "," + KEY_OEFENINGID +
-            ") VALUES (" + 3 + "," + 4 + ")";
+            " (" + KEY_SCHEMAID + "," + KEY_OEFENINGID + "," + KEY_AANTALSETS + "," + KEY_AANTALREPS +
+            ") VALUES (" + 3 + "," + 4 + "," + 4 + "," + 10 + ")";
 
     private static final String INSERT_BENENSCHEMA_SEATEDLEGPRESS = "INSERT INTO " + TABLE_SCHEMA_OEFENING +
-            " (" + KEY_SCHEMAID + "," + KEY_OEFENINGID +
-            ") VALUES (" + 3 + "," + 5 + ")";
+            " (" + KEY_SCHEMAID + "," + KEY_OEFENINGID + "," + KEY_AANTALSETS + "," + KEY_AANTALREPS +
+            ") VALUES (" + 3 + "," + 5 + "," + 4 + "," + 10 + ")";
     //endregion
 
     //region Insert oefeningen van spiergroep
@@ -772,10 +774,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         while (result.moveToNext()) {
             int id = result.getInt(result.getColumnIndex("ID"));
             String naam = result.getString(result.getColumnIndex("oefeningnaam"));
-            int aantalSets = result.getInt(result.getColumnIndex("aantalsets"));
-            int aantalReps = result.getInt(result.getColumnIndex("aantalreps"));
             String foto = result.getString(result.getColumnIndex("oefeningfoto"));
-            oefeningList.add(new Oefening(id, naam, aantalSets, aantalReps, foto));
+            String omschrijving = result.getString(result.getColumnIndex("oefeningomschrijving"));
+            oefeningList.add(new Oefening(id, naam, foto, omschrijving));
         }
         return oefeningList;
     }
@@ -791,10 +792,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         while (result.moveToNext()) {
             int id = result.getInt(result.getColumnIndex("ID"));
             String naam = result.getString(result.getColumnIndex("oefeningnaam"));
-            int aantalSets = result.getInt(result.getColumnIndex("aantalsets"));
-            int aantalReps = result.getInt(result.getColumnIndex("aantalreps"));
             String foto = result.getString(result.getColumnIndex("oefeningfoto"));
-            oefeningList.add(new Oefening(id, naam, aantalSets, aantalReps, foto));
+            String omschrijving = result.getString(result.getColumnIndex("oefeningomschrijving"));
+            oefeningList.add(new Oefening(id, naam, foto, omschrijving));
         }
         return oefeningList;
     }
