@@ -1,4 +1,4 @@
-package Classes;
+package Adapters;
 
 import android.support.v4.view.PagerAdapter;
 import android.content.Context;
@@ -10,13 +10,13 @@ import com.application.niels.a2bfit.R;
 
 import java.util.ArrayList;
 
-public class MyAdapter extends PagerAdapter{
+public class MyImageAdapter extends PagerAdapter{
 
     private ArrayList<Integer> images;
     private LayoutInflater inflater;
     private Context context;
 
-    public MyAdapter(Context context, ArrayList<Integer> images) {
+    public MyImageAdapter(Context context, ArrayList<Integer> images) {
         this.context = context;
         this.images=images;
         inflater = LayoutInflater.from(context);

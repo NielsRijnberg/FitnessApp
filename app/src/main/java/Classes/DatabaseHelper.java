@@ -6,6 +6,9 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static android.os.Build.ID;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
@@ -573,9 +576,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_PRODUCT);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_SCHEMA);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_SPIERGROEP);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_OEFENING_SPIERGROEP);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_SCHEMA_OEFENING);
     }
-
-
 
     public void insertSampleData(SQLiteDatabase db){
         insertOefeningen(db);
@@ -728,10 +731,18 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return result;
     }
 
-    public Cursor HaalAlleSpiergroepenOp(){
+    public List<Spiergroep> HaalAlleSpiergroepenOp(){
+        List<Spiergroep> spiergroepList = new ArrayList<Spiergroep>();
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor result = db.rawQuery("select * from " + TABLE_SPIERGROEP, null);
-        return result;
+
+        while (result.moveToNext()) {
+            int id = result.getInt(result.getColumnIndex("ID"));
+            String naam = result.getString(result.getColumnIndex("spiergroepnaam"));
+            spiergroepList.add(new Spiergroep(id, naam));
+        }
+
+        return spiergroepList;
     }
 
     public Cursor HaalAlleSchemasOp(){
@@ -749,13 +760,23 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return result;
     }
 
-    public Cursor HaalOefeningenOpBijSpiergroep(String spiergroepnaam){
+    public List<Oefening> HaalOefeningenOpBijSpiergroep(String spiergroepnaam){
+        List<Oefening> oefeningList = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor result = db.rawQuery("SELECT * FROM oefeningen as o " +
                 "INNER JOIN oefeningen_spiergroepen os ON os.oefeningID = o.ID " +
                 "INNER JOIN spiergroepen s ON s.ID = os.spiergroepID " +
                 "WHERE s.spiergroepnaam = ?", new String[] {spiergroepnaam});
-        return result;
+
+        while (result.moveToNext()) {
+            int id = result.getInt(result.getColumnIndex("ID"));
+            String naam = result.getString(result.getColumnIndex("oefeningnaam"));
+            int aantalSets = result.getInt(result.getColumnIndex("aantalsets"));
+            int aantalReps = result.getInt(result.getColumnIndex("aantalreps"));
+            String foto = result.getString(result.getColumnIndex("oefeningfoto"));
+            oefeningList.add(new Oefening(id, naam, aantalSets, aantalReps, foto));
+        }
+        return oefeningList;
     }
     /*public Cursor HaalOefeningenOpBijSpiergroep(Spiergroep spiergroep){
         SQLiteDatabase db = this.getReadableDatabase();

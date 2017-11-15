@@ -19,7 +19,7 @@ import java.util.TimerTask;
 import android.os.Handler;
 
 import Classes.DatabaseHelper;
-import Classes.MyAdapter;
+import Adapters.MyImageAdapter;
 import me.relex.circleindicator.CircleIndicator;
 
 
@@ -126,7 +126,7 @@ public class OverzichtschermActivity extends AppCompatActivity {
             FOTOArray.add(FOTOS[i]);
 
         mPager = (ViewPager) findViewById(R.id.pager);
-        mPager.setAdapter(new MyAdapter(OverzichtschermActivity.this, FOTOArray));
+        mPager.setAdapter(new MyImageAdapter(OverzichtschermActivity.this, FOTOArray));
         CircleIndicator indicator = (CircleIndicator) findViewById(R.id.indicator);
         indicator.setViewPager(mPager);
 

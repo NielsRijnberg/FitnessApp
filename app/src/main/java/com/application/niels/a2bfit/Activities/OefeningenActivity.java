@@ -29,10 +29,14 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 
+import Adapters.MyLayoutAdapter;
 import Classes.DatabaseHelper;
 import Classes.Oefening;
 import Classes.Product;
 import Classes.Spiergroep;
+import Contexts.ISpiergroepContext;
+import Repositories.SpiergroepRepository;
+import SqlContexts.SqlSpiergroepContext;
 
 public class OefeningenActivity extends AppCompatActivity {
 
@@ -41,13 +45,18 @@ public class OefeningenActivity extends AppCompatActivity {
     ListView listView;
     Spinner spinner;
 
+    SpiergroepRepository spiergroepRepo;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_oefeningen);
 
         getSupportActionBar().setTitle("Oefeningen");
+
         db = new DatabaseHelper(this);
+        spiergroepRepo = new SpiergroepRepository(new SqlSpiergroepContext());
+
         btnBekijkOefening = (Button) findViewById(R.id.btnBekijkOefening);
         listView = (ListView) findViewById(R.id.listViewOefeningen);
         spinner = (Spinner) findViewById(R.id.spinner);
@@ -73,60 +82,40 @@ public class OefeningenActivity extends AppCompatActivity {
     }
 
     public void getOefeningen() {
-        Cursor result = db.HaalOefeningenOpBijSpiergroep(spinner.getSelectedItem().toString());
-        List<Oefening> oefeningList = new ArrayList<Oefening>();
+        List<Oefening> oefeningList = db.HaalOefeningenOpBijSpiergroep(spinner.getSelectedItem().toString());
+        ListAdapter listAdapter = new MyLayoutAdapter<Oefening>(this, android.R.layout.simple_list_item_1, android.R.id.text1, oefeningList);
+        listView.setAdapter(listAdapter);
 
-        if (result.getCount() == 0) {
+        if (oefeningList.isEmpty()) {
             showMessage("Error", "Geen oefeningen gevonden");
-            return;
-        } else {
-            while (result.moveToNext()) {
-                int id = result.getInt(result.getColumnIndex("ID"));
-                String naam = result.getString(result.getColumnIndex("oefeningnaam"));
-                int aantalSets = result.getInt(result.getColumnIndex("aantalsets"));
-                int aantalReps = result.getInt(result.getColumnIndex("aantalreps"));
-                String foto = result.getString(result.getColumnIndex("oefeningfoto"));
-                oefeningList.add(new Oefening(id, naam, aantalSets, aantalReps, foto));
-
-                ListAdapter listAdapter = new ArrayAdapter<Oefening>(this, android.R.layout.simple_list_item_1, android.R.id.text1, oefeningList){
-                    @Override
-                    public View getView(int position, View convertView, ViewGroup parent){
-                        View view = super.getView(position, convertView, parent);
-                        TextView textview = (TextView) view.findViewById(android.R.id.text1);
-                        textview.setTextColor(Color.WHITE);
-                        return textview;
-                    }
-                };
-                listView.setAdapter(listAdapter);
-            }
         }
     }
 
-    public void getSpiergroepen() {
-        Cursor result = db.HaalAlleSpiergroepenOp();
-        List<Spiergroep> spiergroepList = new ArrayList<Spiergroep>();
 
-        if (result.getCount() == 0) {
-            showMessage("Error", "Geen spiergroepen gevonden");
-            return;
-        } else {
-            while (result.moveToNext()) {
-                int id = result.getInt(result.getColumnIndex("ID"));
-                String naam = result.getString(result.getColumnIndex("spiergroepnaam"));
-                spiergroepList.add(new Spiergroep(id, naam));
 
-                SpinnerAdapter spinnerAdapter = new ArrayAdapter<Spiergroep>(this, android.R.layout.simple_list_item_1, android.R.id.text1, spiergroepList){
-                    @Override
-                    public View getView(int position, View convertView, ViewGroup parent){
-                        View view = super.getView(position, convertView, parent);
-                        TextView textview = (TextView) view.findViewById(android.R.id.text1);
-                        textview.setTextColor(Color.BLUE);
-                        textview.setTextSize(20);
-                        return textview;
-                    }
-                };
-                spinner.setAdapter(spinnerAdapter);
+    /*public void getSpiergroepen() {
+        List<Spiergroep> spiergroepen = spiergroepRepo.HaalSpiergroepenOp();
+        SpinnerAdapter spinnerAdapter = new ArrayAdapter<Spiergroep>(this, android.R.layout.simple_list_item_1, android.R.id.text1, spiergroepen){
+            @Override
+            public View getView(int position, View convertView, ViewGroup parent){
+                View view = super.getView(position, convertView, parent);
+                TextView textview = (TextView) view.findViewById(android.R.id.text1);
+                textview.setTextColor(Color.BLUE);
+                textview.setTextSize(20);
+                return textview;
             }
+        };
+        spinner.setAdapter(spinnerAdapter);
+    }*/
+
+
+    public void getSpiergroepen() {
+        List<Spiergroep> spiergroepList = db.HaalAlleSpiergroepenOp();
+        SpinnerAdapter spinnerAdapter = new MyLayoutAdapter<Spiergroep>(this, android.R.layout.simple_list_item_1, android.R.id.text1, spiergroepList, 20, Color.BLUE);
+        spinner.setAdapter(spinnerAdapter);
+
+        if (spiergroepList.isEmpty()) {
+            showMessage("Error", "Geen spiergroepen gevonden");
         }
     }
 
@@ -143,7 +132,6 @@ public class OefeningenActivity extends AppCompatActivity {
                 String foto = selectedOefening.getFoto();
 
                 Intent oefeningDetailsIntent = new Intent(OefeningenActivity.this, OefeningDetailsActivity.class);
-
                 oefeningDetailsIntent.putExtra("ID", oefeningID);
                 oefeningDetailsIntent.putExtra("naam", naam);
                 oefeningDetailsIntent.putExtra("aantalSets", aantalSets);
