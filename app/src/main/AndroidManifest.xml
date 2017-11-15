@@ -27,7 +27,9 @@
         <activity android:name=".Activities.SchemasActivity" />
         <activity android:name=".Activities.StartTrainingActivity" />
         <activity android:name=".Activities.ProductDetailsActivity" />
-        <activity android:name=".Activities.OefeningDetailsActivity"></activity>
+        <activity android:name=".Activities.OefeningDetailsActivity" />
+        <activity android:name=".Activities.StartTrainingMetSchemaActivity" />
+        <activity android:name=".Activities.PickDateActivity"></activity>
     </application>
 
 </manifest>
