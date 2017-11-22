@@ -41,7 +41,6 @@ import SqlContexts.SqlSpiergroepContext;
 public class OefeningenActivity extends AppCompatActivity {
 
     DatabaseHelper db;
-    Button btnBekijkOefening;
     ListView listView;
     Spinner spinner;
 
@@ -57,7 +56,6 @@ public class OefeningenActivity extends AppCompatActivity {
         db = new DatabaseHelper(this);
         spiergroepRepo = new SpiergroepRepository(new SqlSpiergroepContext());
 
-        btnBekijkOefening = (Button) findViewById(R.id.btnBekijkOefening);
         listView = (ListView) findViewById(R.id.listViewOefeningen);
         spinner = (Spinner) findViewById(R.id.spinner);
 

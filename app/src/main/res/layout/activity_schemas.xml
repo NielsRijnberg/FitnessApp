@@ -8,7 +8,7 @@
 
     <TextView
         android:id="@+id/tvSchemas"
-        android:layout_width="wrap_content"
+        android:layout_width="280dp"
         android:layout_height="wrap_content"
         android:text="Schema's"
         android:layout_marginRight="8dp"
@@ -20,11 +20,12 @@
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:textSize="30sp"
+        android:textAlignment="center"
         android:textColor="@color/colorBFitLogoOranje"/>
 
     <Spinner
         android:id="@+id/SchemaSpinner"
-        android:layout_width="243dp"
+        android:layout_width="280dp"
         android:layout_height="38dp"
         android:layout_marginEnd="8dp"
         android:layout_marginLeft="8dp"
@@ -38,7 +39,7 @@
 
     <TextView
         android:id="@+id/tvOefeningenVanSchema"
-        android:layout_width="wrap_content"
+        android:layout_width="280dp"
         android:layout_height="wrap_content"
         android:text="Oefeningen van schema"
         android:layout_marginLeft="8dp"
@@ -47,11 +48,11 @@
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintTop_toBottomOf="@+id/SchemaSpinner"
-        app:layout_constraintHorizontal_bias="0.52"
-        android:textSize="30sp"
-        android:textColor="@color/colorBFitLogoOranje"/>
+        app:layout_constraintHorizontal_bias="0.515"
+        android:textSize="26sp"
+        android:textColor="@color/colorBFitLogoOranje"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/ListViewOefeningenVanSchema" />
 
     <Button
         android:id="@+id/btnBekijkOefeningVanSchema"
@@ -70,14 +71,14 @@
 
     <ListView
         android:id="@+id/ListViewOefeningenVanSchema"
-        android:layout_width="281dp"
+        android:layout_width="280dp"
         android:layout_height="276dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginTop="10dp"
         android:background="@color/colorPrimary"
         app:layout_constraintHorizontal_bias="0.507"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvOefeningenVanSchema" />
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/btnBekijkOefeningVanSchema" />
 </android.support.constraint.ConstraintLayout>

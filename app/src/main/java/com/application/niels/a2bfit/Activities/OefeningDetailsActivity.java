@@ -1,5 +1,8 @@
 package com.application.niels.a2bfit.Activities;
 
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.media.Image;
@@ -54,11 +57,9 @@ public class OefeningDetailsActivity extends AppCompatActivity {
         tvOefeningNaam.setText(naam);
         tvOefeningOmschrijving.setText(omschrijving);
 
-        //TODO
-        int id = getResources().getIdentifier("com.application.niels.a2bfit:drawable/" + foto, null, null);
-        ivOefeningFoto.setImageResource(id);
-
-        /*int id = getResources().getIdentifier(foto, "drawable", getPackageName());
-        ivOefeningFoto.setImageResource(id);*/
+        String fnm = foto;
+        String PACKAGE_NAME = getApplicationContext().getPackageName();
+        int imgId = getResources().getIdentifier(PACKAGE_NAME+":drawable/"+fnm , null, null);
+        ivOefeningFoto.setImageBitmap(BitmapFactory.decodeResource(getResources(),imgId));
     }
 }

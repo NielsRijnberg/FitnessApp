@@ -28,10 +28,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String TABLE_SPIERGROEP = "spiergroepen";
     public static final String TABLE_SCHEMA_OEFENING = "schemas_oefeningen";
     public static final String TABLE_OEFENING_SPIERGROEP = "oefeningen_spiergroepen";
+    public static final String TABLE_TRAINING = "trainingen";
     //endregion
 
     //region Column Names
-    //Comon column names
+    //Common column names
     public static final String KEY_ID = "ID";
     public static final String KEY_SCHEMAID = "schemaID";
     public static final String KEY_OEFENINGID = "oefeningID";
@@ -54,6 +55,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     //spiergroep column names
     public static final String KEY_SPIERGROEPNAAM = "spiergroepnaam";
+
+    //training column names
+    public static final String KEY_OEFENINGNAAMTRAINING = "oefeningnaamtraining";
+    public static final String KEY_GEWICHT = "gewicht";
+    public static final String KEY_DATUM = "datum";
 
     //endregion
 
@@ -93,6 +99,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String CREATE_TABLE_OEFENING_SPIERGROEP = "CREATE TABLE IF NOT EXISTS " + TABLE_OEFENING_SPIERGROEP +
             "(" + KEY_OEFENINGID + " INTEGER REFERENCES " + TABLE_OEFENING + " (" + KEY_ID + "), " +
             KEY_SPIERGROEPID + " INTEGER REFERENCES " + TABLE_SPIERGROEP + " (" + KEY_ID + "))";
+
+    //training table create
+    private static final String CREATE_TABLE_TRAINING = "CREATE TABLE IF NOT EXISTS " + TABLE_TRAINING +
+            "(" + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+            KEY_OEFENINGNAAMTRAINING + " TEXT, " +
+            KEY_GEWICHT + " INTEGER, " +
+            KEY_DATUM + " TEXT)";
 
     //endregion
 
@@ -564,6 +577,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(CREATE_TABLE_SPIERGROEP);
         db.execSQL(CREATE_TABLE_SCHEMA_OEFENING);
         db.execSQL(CREATE_TABLE_OEFENING_SPIERGROEP);
+        db.execSQL(CREATE_TABLE_TRAINING);
     }
 
     @Override
@@ -580,6 +594,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_SPIERGROEP);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_OEFENING_SPIERGROEP);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_SCHEMA_OEFENING);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_TRAINING);
     }
 
 
@@ -797,6 +812,18 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             oefeningList.add(new Oefening(id, naam, foto, omschrijving));
         }
         return oefeningList;
+    }
+
+    public void VinkTrainingAf(Training training){
+        int ID = training.trainingID;
+        String oefeningNaam = training.oefeningNaam;
+        int gewicht = training.gewicht;
+        String datum = training.datum;
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "INSERT INTO trainingen (ID, oefeningnaamtraining, gewicht, datum) VALUES (?, ?, ?, ?)";
+        db.execSQL(query, new String[]{""+ID, oefeningNaam, ""+gewicht, datum});
+
     }
     //endregion
 }
