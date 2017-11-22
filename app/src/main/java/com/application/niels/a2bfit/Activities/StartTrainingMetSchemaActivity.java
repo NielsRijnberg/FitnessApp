@@ -70,7 +70,7 @@ public class StartTrainingMetSchemaActivity extends AppCompatActivity {
         lvOefeningenVanSchema.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                selectedOefeningNaam = (String) lvOefeningenVanSchema.getItemAtPosition(i).toString();
+                selectedOefeningNaam = lvOefeningenVanSchema.getItemAtPosition(i).toString();
             }
         });
     }
@@ -112,7 +112,7 @@ public class StartTrainingMetSchemaActivity extends AppCompatActivity {
 
         etDatum.setText(sdf.format(calendar.getTime()));
     }
-    
+
     public void VinkOefeningAf(){
         btnOefeningAfvinken.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -120,7 +120,7 @@ public class StartTrainingMetSchemaActivity extends AppCompatActivity {
                 String gewichtAsString = etGewicht.getText().toString();
                 String datum = etDatum.getText().toString();
                 if (gewichtAsString.length() != 0 && datum.length() != 0){
-                    int gewicht = new Integer(gewichtAsString).intValue();
+                    int gewicht = Integer.valueOf(gewichtAsString);
 
                     if (selectedOefeningNaam != null){
                         Training currentTraining = new Training(selectedOefeningNaam, gewicht, datum);

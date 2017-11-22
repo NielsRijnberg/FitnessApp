@@ -56,10 +56,6 @@ public class OefeningDetailsActivity extends AppCompatActivity {
     private void setTextBoxes(){
         tvOefeningNaam.setText(naam);
         tvOefeningOmschrijving.setText(omschrijving);
-
-        String fnm = foto;
-        String PACKAGE_NAME = getApplicationContext().getPackageName();
-        int imgId = getResources().getIdentifier(PACKAGE_NAME+":drawable/"+fnm , null, null);
-        ivOefeningFoto.setImageBitmap(BitmapFactory.decodeResource(getResources(),imgId));
+        ivOefeningFoto.setImageResource(getResources().getIdentifier(foto.replace(".png", ""), "drawable", this.getPackageName()));
     }
 }
