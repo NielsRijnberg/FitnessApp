@@ -19,12 +19,14 @@ import android.widget.TextView;
 import com.application.niels.a2bfit.R;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import Adapters.MyLayoutAdapter;
 import Classes.DatabaseHelper;
 import Classes.Oefening;
 import Classes.Schema;
+import Classes.Training;
 
 public class StartTrainingActivity extends AppCompatActivity {
 
@@ -67,11 +69,16 @@ public class StartTrainingActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 int schemaID = selectedSchema.getSchemaID();
-                String type = selectedSchema.getType();
+                String datum = new Date().toString();
+
+                Training training = new Training(schemaID, datum);
+                int trainingID = (int)db.StartTraining(training);
 
                 Intent startTrainingMetSchema = new Intent(StartTrainingActivity.this, StartTrainingMetSchemaActivity.class);
-                startTrainingMetSchema.putExtra("ID", schemaID);
-                startTrainingMetSchema.putExtra("type", type);
+                startTrainingMetSchema.putExtra("schemaID", schemaID);
+                startTrainingMetSchema.putExtra("trainingID", trainingID);
+                startTrainingMetSchema.putExtra("datum", datum);
+
                 startActivity(startTrainingMetSchema);
             }
         });

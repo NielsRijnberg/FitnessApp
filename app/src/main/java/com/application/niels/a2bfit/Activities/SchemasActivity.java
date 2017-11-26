@@ -67,7 +67,7 @@ public class SchemasActivity extends AppCompatActivity {
     }
 
     public void getOefeningen() {
-        List<Oefening> oefeningList = db.HaalOefeningenOpBijSchema(spinner.getSelectedItem().toString());
+        List<Oefening> oefeningList = db.HaalOefeningenOpBijSchema(((Schema) spinner.getSelectedItem()).getSchemaID());
         ListAdapter listAdapter = new MyLayoutAdapter<Oefening>(this, android.R.layout.simple_list_item_1, android.R.id.text1, oefeningList);
         listview.setAdapter(listAdapter);
 

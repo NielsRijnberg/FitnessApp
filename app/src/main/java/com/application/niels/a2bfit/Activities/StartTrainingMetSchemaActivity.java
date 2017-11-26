@@ -29,6 +29,7 @@ import Adapters.MyLayoutAdapter;
 import Classes.DatabaseHelper;
 import Classes.Oefening;
 import Classes.Training;
+import Classes.TrainingsOefening;
 
 public class StartTrainingMetSchemaActivity extends AppCompatActivity {
 
@@ -39,7 +40,7 @@ public class StartTrainingMetSchemaActivity extends AppCompatActivity {
     DatabaseHelper db;
     ListView lvOefeningenVanSchema;
     Button btnOefeningAfvinken;
-    String selectedOefeningNaam;
+    int selectedIndex;
     List<Oefening> oefeningenVanSchema;
 
     int[] VINKJESFOTO = {R.drawable.checkmark};
@@ -70,14 +71,14 @@ public class StartTrainingMetSchemaActivity extends AppCompatActivity {
         lvOefeningenVanSchema.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                selectedOefeningNaam = lvOefeningenVanSchema.getItemAtPosition(i).toString();
+                 selectedIndex = i;
             }
         });
     }
 
     public void setOefeningenListbox(){
-        String type = getIntent().getExtras().getString("type");
-        oefeningenVanSchema = db.HaalOefeningenOpBijSchema(type);
+        int schemaID = getIntent().getExtras().getInt("schemaID");
+        oefeningenVanSchema = db.HaalOefeningenOpBijSchema(schemaID);
         ListAdapter listAdapter = new MyLayoutAdapter<Oefening>(this, android.R.layout.simple_list_item_1, android.R.id.text1, oefeningenVanSchema);
         lvOefeningenVanSchema.setAdapter(listAdapter);
 
@@ -118,13 +119,15 @@ public class StartTrainingMetSchemaActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String gewichtAsString = etGewicht.getText().toString();
-                String datum = etDatum.getText().toString();
-                if (gewichtAsString.length() != 0 && datum.length() != 0){
+                if (gewichtAsString.length() != 0){
                     int gewicht = Integer.valueOf(gewichtAsString);
 
-                    if (selectedOefeningNaam != null){
-                        Training currentTraining = new Training(selectedOefeningNaam, gewicht, datum);
-                        db.VinkTrainingAf(currentTraining);
+                    if (selectedIndex > -1){
+                        int trainingID = getIntent().getExtras().getInt("trainingID");
+                        int oefeningID = ((Oefening)lvOefeningenVanSchema.getItemAtPosition(selectedIndex)).getOefeningID();
+
+                        TrainingsOefening currentTrainingsOefening = new TrainingsOefening(trainingID, oefeningID, gewicht);
+                        db.VinkTrainingAf(currentTrainingsOefening);
                         Toast.makeText(StartTrainingMetSchemaActivity.this, "Training afgevinkt", Toast.LENGTH_LONG).show();
                     }
                     else {

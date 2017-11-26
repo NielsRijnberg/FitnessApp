@@ -29,6 +29,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String TABLE_SCHEMA_OEFENING = "schemas_oefeningen";
     public static final String TABLE_OEFENING_SPIERGROEP = "oefeningen_spiergroepen";
     public static final String TABLE_TRAINING = "trainingen";
+    public static final String TABLE_TRAINING_OEFENING = "trainingen_oefeningen";
     //endregion
 
     //region Column Names
@@ -37,6 +38,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String KEY_SCHEMAID = "schemaID";
     public static final String KEY_OEFENINGID = "oefeningID";
     public static final String KEY_SPIERGROEPID = "spiergroepID";
+    public static final String KEY_TRAININGID = "trainingID";
 
     //oefening column names
     public static final String KEY_OEFENINGNAAM = "oefeningnaam";
@@ -57,7 +59,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String KEY_SPIERGROEPNAAM = "spiergroepnaam";
 
     //training column names
-    public static final String KEY_OEFENINGNAAMTRAINING = "oefeningnaamtraining";
     public static final String KEY_GEWICHT = "gewicht";
     public static final String KEY_DATUM = "datum";
 
@@ -103,10 +104,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     //training table create
     private static final String CREATE_TABLE_TRAINING = "CREATE TABLE IF NOT EXISTS " + TABLE_TRAINING +
             "(" + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-            KEY_OEFENINGNAAMTRAINING + " TEXT, " +
-            KEY_GEWICHT + " INTEGER, " +
+            KEY_SCHEMAID + " INTEGER REFERENCES " + TABLE_SCHEMA + " (" + KEY_ID + "), " +
             KEY_DATUM + " TEXT)";
 
+    private static final String CREATE_TABLE_TRAINING_OEFENING = "CREATE TABLE IF NOT EXISTS " + TABLE_TRAINING +
+            "(" + KEY_OEFENINGID + " INTEGER REFERENCES " + TABLE_OEFENING + " (" + KEY_ID + "), " +
+            KEY_TRAININGID + " INTEGER REFERENCES " + TABLE_TRAINING + " (" + KEY_ID + "), " +
+            KEY_GEWICHT + " INTEGER)";
     //endregion
 
     //region Insert producten
@@ -578,6 +582,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(CREATE_TABLE_SCHEMA_OEFENING);
         db.execSQL(CREATE_TABLE_OEFENING_SPIERGROEP);
         db.execSQL(CREATE_TABLE_TRAINING);
+        db.execSQL(CREATE_TABLE_TRAINING_OEFENING);
     }
 
     @Override
@@ -595,6 +600,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_OEFENING_SPIERGROEP);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_SCHEMA_OEFENING);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_TRAINING);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_TRAINING_OEFENING);
     }
 
 
@@ -778,13 +784,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return schemaList;
     }
 
-    public List<Oefening> HaalOefeningenOpBijSchema(String type){
+    public List<Oefening> HaalOefeningenOpBijSchema(int schemaID){
         List<Oefening> oefeningList = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor result = db.rawQuery("SELECT * FROM oefeningen as o " +
                 "INNER JOIN schemas_oefeningen so ON so.oefeningID = o.ID " +
                 "INNER JOIN schemas s ON s.ID = so.schemaID " +
-                "WHERE s.schematype = ?", new String[] {type});
+                "WHERE s.ID = ?", new String[] {""+schemaID});
 
         while (result.moveToNext()) {
             int id = result.getInt(result.getColumnIndex("ID"));
@@ -814,15 +820,23 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return oefeningList;
     }
 
-    public void VinkTrainingAf(Training training){
-        int ID = training.trainingID;
-        String oefeningNaam = training.oefeningNaam;
-        int gewicht = training.gewicht;
-        String datum = training.datum;
+    public long StartTraining(Training training){
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("schemaID", training.getSchemaID());
+        contentValues.put("datum", training.getDatum());
 
         SQLiteDatabase db = this.getWritableDatabase();
-        String query = "INSERT INTO trainingen (ID, oefeningnaamtraining, gewicht, datum) VALUES (?, ?, ?, ?)";
-        db.execSQL(query, new String[]{""+ID, oefeningNaam, ""+gewicht, datum});
+        return db.insert(TABLE_TRAINING, null, contentValues);
+    }
+
+    public void VinkTrainingAf(TrainingsOefening trainingsOefening){
+        int trainingID = trainingsOefening.getTrainingID();
+        int oefeningID = trainingsOefening.getOefeningID();
+        int gewicht = trainingsOefening.getGewicht();
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "INSERT INTO " + TABLE_TRAINING_OEFENING + " (oefeningID, trainingID, gewicht) VALUES (?, ?, ?)";
+        db.execSQL(query, new String[]{""+oefeningID, ""+trainingID, ""+gewicht});
 
     }
     //endregion
