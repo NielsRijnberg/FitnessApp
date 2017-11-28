@@ -1,6 +1,7 @@
 package com.application.niels.a2bfit.Activities;
 
 import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.provider.CalendarContract;
@@ -35,13 +36,14 @@ public class StartTrainingMetSchemaActivity extends AppCompatActivity {
 
     TextView tvSchemaType;
     EditText etGewicht;
-    EditText etDatum;
-    Calendar calendar;
     DatabaseHelper db;
     ListView lvOefeningenVanSchema;
     Button btnOefeningAfvinken;
+    Button btnTrainingBeeindigen;
     int selectedIndex;
     List<Oefening> oefeningenVanSchema;
+    ListAdapter listAdapter;
+    boolean clickedListItem = false;
 
     int[] VINKJESFOTO = {R.drawable.checkmark};
 
@@ -53,18 +55,15 @@ public class StartTrainingMetSchemaActivity extends AppCompatActivity {
 
         tvSchemaType = (TextView) findViewById(R.id.tvSchemaType);
         etGewicht = (EditText) findViewById(R.id.etGewicht);
-        etDatum = (EditText) findViewById(R.id.etDatum);
-        etDatum.setFocusable(false);
-        etDatum.setClickable(true);
-        calendar = Calendar.getInstance();
         db = new DatabaseHelper(this);
         lvOefeningenVanSchema = (ListView) findViewById(R.id.lvOefeningenVanSchema);
         btnOefeningAfvinken = (Button) findViewById(R.id.btnOefeningAfvinken);
+        btnTrainingBeeindigen = (Button) findViewById(R.id.btnTrainingBeeindigen);
 
         setOefeningenListbox();
         getClickedOefening();
-        goToDatePicker();
         VinkOefeningAf();
+        TrainingBeeindigen();
     }
 
     public void getClickedOefening(){
@@ -72,6 +71,7 @@ public class StartTrainingMetSchemaActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                  selectedIndex = i;
+                clickedListItem = true;
             }
         });
     }
@@ -79,7 +79,7 @@ public class StartTrainingMetSchemaActivity extends AppCompatActivity {
     public void setOefeningenListbox(){
         int schemaID = getIntent().getExtras().getInt("schemaID");
         oefeningenVanSchema = db.HaalOefeningenOpBijSchema(schemaID);
-        ListAdapter listAdapter = new MyLayoutAdapter<Oefening>(this, android.R.layout.simple_list_item_1, android.R.id.text1, oefeningenVanSchema);
+        listAdapter = new MyLayoutAdapter<Oefening>(this, android.R.layout.simple_list_item_1, android.R.id.text1, oefeningenVanSchema);
         lvOefeningenVanSchema.setAdapter(listAdapter);
 
         if (oefeningenVanSchema.isEmpty()){
@@ -87,42 +87,17 @@ public class StartTrainingMetSchemaActivity extends AppCompatActivity {
         }
     }
 
-    DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener(){
-        @Override
-        public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-            calendar.set(Calendar.YEAR, year);
-            calendar.set(Calendar.MONTH, monthOfYear);
-            calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-            updateLabel();
-        }
 
-    };
-
-    public void goToDatePicker(){
-        etDatum.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                new DatePickerDialog(StartTrainingMetSchemaActivity.this,R.style.DatePickerTheme, date, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show();
-            }
-        });
-    }
-
-    public void updateLabel(){
-        String myFormat = "dd/MM/yy"; //In which you need put here
-        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.GERMANY);
-
-        etDatum.setText(sdf.format(calendar.getTime()));
-    }
-
+    //TODO zorgen dat ifstatement die checkt op gewicht het doet
     public void VinkOefeningAf(){
         btnOefeningAfvinken.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String gewichtAsString = etGewicht.getText().toString();
-                if (gewichtAsString.length() != 0){
+                if (!gewichtAsString.isEmpty()){
                     int gewicht = Integer.valueOf(gewichtAsString);
 
-                    if (selectedIndex > -1){
+                    if (clickedListItem){
                         int trainingID = getIntent().getExtras().getInt("trainingID");
                         int oefeningID = ((Oefening)lvOefeningenVanSchema.getItemAtPosition(selectedIndex)).getOefeningID();
 
@@ -135,7 +110,34 @@ public class StartTrainingMetSchemaActivity extends AppCompatActivity {
                     }
                 }
                 else{
-                    Toast.makeText(StartTrainingMetSchemaActivity.this, "Vul gewicht en datum in", Toast.LENGTH_LONG).show();
+                    Toast.makeText(StartTrainingMetSchemaActivity.this, "Vul een gewicht in", Toast.LENGTH_LONG).show();
+                }
+                oefeningenVanSchema.remove(selectedIndex);
+                lvOefeningenVanSchema.invalidateViews();
+            }
+        });
+    }
+
+    public void TrainingBeeindigen(){
+        btnTrainingBeeindigen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (oefeningenVanSchema.size() > 0){
+                    AlertDialog.Builder adb=new AlertDialog.Builder(StartTrainingMetSchemaActivity.this);
+                    adb.setTitle("Training beëindigen");
+                    adb.setMessage("Weet je zeker dat je de training wilt beëindigen, er zijn nog oefeningen over");
+                    adb.setNegativeButton("Cancel", null);
+                    adb.setPositiveButton("Ok", new AlertDialog.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            Intent overzichtSchermIntent = new Intent(StartTrainingMetSchemaActivity.this, OverzichtschermActivity.class);
+                            startActivity(overzichtSchermIntent);
+                        }});
+                    adb.show();
+                }
+                else{
+                    Intent overzichtSchermIntent = new Intent(StartTrainingMetSchemaActivity.this, OverzichtschermActivity.class);
+                    startActivity(overzichtSchermIntent);
+                    Toast.makeText(StartTrainingMetSchemaActivity.this ,"Training beëindigd", Toast.LENGTH_LONG).show();
                 }
             }
         });

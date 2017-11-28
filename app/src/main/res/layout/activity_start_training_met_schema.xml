@@ -41,31 +41,15 @@
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginLeft="8dp"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/etDatum" />
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/lvOefeningenVanSchema" />
 
-    <EditText
-        android:id="@+id/etDatum"
-        android:layout_width="280dp"
-        android:layout_height="40dp"
-        android:ems="10"
-        android:inputType="date"
-        android:hint="Datum"
-        android:drawableLeft="@drawable/ic_date_range_black"
-        android:drawablePadding="5dp"
-        android:drawableStart="@drawable/ic_date_range_black"
-        android:layout_marginLeft="8dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginRight="8dp"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/btnOefeningAfvinken" />
+
 
     <Button
         android:id="@+id/btnOefeningAfvinken"
         android:layout_width="280dp"
         android:layout_height="45dp"
-        android:layout_marginBottom="16dp"
         android:layout_marginEnd="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
@@ -74,27 +58,44 @@
         android:background="@color/colorPrimary"
         android:textColor="#FFFFFF"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintHorizontal_bias="0.508" />
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/etGewicht" />
 
     <ListView
         android:id="@+id/lvOefeningenVanSchema"
         android:layout_width="280dp"
-        android:choiceMode="singleChoice"
-        android:listSelector="#ff8d05"
         android:layout_height="271dp"
         android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
         android:background="@color/colorPrimary"
-        android:layout_marginLeft="8dp"
+        android:choiceMode="singleChoice"
+        android:listSelector="#ff8d05"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginRight="8dp"
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginTop="8dp"
-        app:layout_constraintTop_toBottomOf="@+id/tvSchemaType"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/etGewicht" />
+        app:layout_constraintTop_toBottomOf="@+id/tvSchemaType" />
+
+    <Button
+        android:id="@+id/btnTrainingBeeindigen"
+        android:layout_width="280dp"
+        android:layout_height="45dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:text="Training beëindigen"
+        android:background="@color/colorPrimary"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="75dp"
+        app:layout_constraintTop_toBottomOf="@+id/etGewicht"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="8dp" />
 
 </android.support.constraint.ConstraintLayout>

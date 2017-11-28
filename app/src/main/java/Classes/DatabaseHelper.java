@@ -107,7 +107,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             KEY_SCHEMAID + " INTEGER REFERENCES " + TABLE_SCHEMA + " (" + KEY_ID + "), " +
             KEY_DATUM + " TEXT)";
 
-    private static final String CREATE_TABLE_TRAINING_OEFENING = "CREATE TABLE IF NOT EXISTS " + TABLE_TRAINING +
+    private static final String CREATE_TABLE_TRAINING_OEFENING = "CREATE TABLE IF NOT EXISTS " + TABLE_TRAINING_OEFENING +
             "(" + KEY_OEFENINGID + " INTEGER REFERENCES " + TABLE_OEFENING + " (" + KEY_ID + "), " +
             KEY_TRAININGID + " INTEGER REFERENCES " + TABLE_TRAINING + " (" + KEY_ID + "), " +
             KEY_GEWICHT + " INTEGER)";
@@ -394,6 +394,18 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String INSERT_BENENSCHEMA_SEATEDLEGPRESS = "INSERT INTO " + TABLE_SCHEMA_OEFENING +
             " (" + KEY_SCHEMAID + "," + KEY_OEFENINGID + "," + KEY_AANTALSETS + "," + KEY_AANTALREPS +
             ") VALUES (" + 3 + "," + 5 + "," + 4 + "," + 10 + ")";
+
+    private static final String INSERT_BORSTSCHEMA_BENCHPRESS = "INSERT INTO " + TABLE_SCHEMA_OEFENING +
+            " (" + KEY_SCHEMAID + "," + KEY_OEFENINGID + "," + KEY_AANTALSETS + "," + KEY_AANTALREPS +
+            ") VALUES (" + 1 + "," + 1 + "," + 4 + "," + 10 + ")";
+
+    private static final String INSERT_BORSTSCHEMA_INCLINE_BENCHPRESS = "INSERT INTO " + TABLE_SCHEMA_OEFENING +
+            " (" + KEY_SCHEMAID + "," + KEY_OEFENINGID + "," + KEY_AANTALSETS + "," + KEY_AANTALREPS +
+            ") VALUES (" + 1 + "," + 15 + "," + 4 + "," + 10 + ")";
+
+    private static final String INSERT_BORSTSCHEMA_DUMBBELL_PRESS = "INSERT INTO " + TABLE_SCHEMA_OEFENING +
+            " (" + KEY_SCHEMAID + "," + KEY_OEFENINGID + "," + KEY_AANTALSETS + "," + KEY_AANTALREPS +
+            ") VALUES (" + 1 + "," + 12 + "," + 4 + "," + 10 + ")";
     //endregion
 
     //region Insert oefeningen van spiergroep
@@ -563,6 +575,34 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     //endregion
 
+    //region Insert trainingen
+    private static final String INSERT_TRAINING1 = "INSERT INTO " + TABLE_TRAINING +
+            " (" + KEY_ID + "," + KEY_SCHEMAID + "," + KEY_DATUM +
+            ") VALUES (" + 1 + "," + 1 + "," + "'28/11/17'" + ")";
+
+    private static final String INSERT_TRAINING2 = "INSERT INTO " + TABLE_TRAINING +
+            " (" + KEY_ID + "," + KEY_SCHEMAID + "," + KEY_DATUM +
+            ") VALUES (" + 2 + "," + 2 + "," + "'29/11/17'" + ")";
+
+    private static final String INSERT_TRAINING3 = "INSERT INTO " + TABLE_TRAINING +
+            " (" + KEY_ID + "," + KEY_SCHEMAID + "," + KEY_DATUM +
+            ") VALUES (" + 3 + "," + 3 + "," + "'30/11/17'" + ")";
+    //endregion
+
+    //region Insert oefeningen van training
+    private static final String INSERT_BENCHPRESS_TRAINING1 = "INSERT INTO " + TABLE_TRAINING_OEFENING +
+            " (" + KEY_OEFENINGID + "," + KEY_TRAININGID + "," + KEY_GEWICHT +
+            ") VALUES (" + 1 + "," + 1 + "," + 55 + ")";
+
+    private static final String INSERT_INCLINEBENCHPRESS_TRAINING1 = "INSERT INTO " + TABLE_TRAINING_OEFENING +
+            " (" + KEY_OEFENINGID + "," + KEY_TRAININGID + "," + KEY_GEWICHT +
+            ") VALUES (" + 15 + "," + 1 + "," + 50 + ")";
+
+    private static final String INSERT_DUMBBELLPRESS_TRAINING1 = "INSERT INTO " + TABLE_TRAINING_OEFENING +
+            " (" + KEY_OEFENINGID + "," + KEY_TRAININGID + "," + KEY_GEWICHT +
+            ") VALUES (" + 12 + "," + 1 + "," + 18 + ")";
+    //endregion
+
 
 
     public DatabaseHelper(Context context) {
@@ -612,6 +652,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         insertSchemas(db);
         insertOefeningenVanSpiergroep(db);
         insertOefeningenVanSchemas(db);
+        insertTrainingen(db);
+        insertOefeningenVanTraining(db);
     }
 
     private void insertOefeningen(SQLiteDatabase db){
@@ -739,8 +781,25 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(INSERT_BENENSCHEMA_LEGEXTENSION);
         db.execSQL(INSERT_BENENSCHEMA_LYINGLEGCURL);
         db.execSQL(INSERT_BENENSCHEMA_SEATEDLEGPRESS);
+
+        db.execSQL(INSERT_BORSTSCHEMA_BENCHPRESS);
+        db.execSQL(INSERT_BORSTSCHEMA_DUMBBELL_PRESS);
+        db.execSQL(INSERT_BORSTSCHEMA_INCLINE_BENCHPRESS);
+    }
+
+    private void insertTrainingen(SQLiteDatabase db){
+        db.execSQL(INSERT_TRAINING1);
+        db.execSQL(INSERT_TRAINING2);
+        db.execSQL(INSERT_TRAINING3);
+    }
+
+    private void insertOefeningenVanTraining(SQLiteDatabase db){
+        db.execSQL(INSERT_BENCHPRESS_TRAINING1);
+        db.execSQL(INSERT_INCLINEBENCHPRESS_TRAINING1);
+        db.execSQL(INSERT_DUMBBELLPRESS_TRAINING1);
     }
     //endregion
+
 
     //region Queries
     public List<Product> HaalAlleProductenOp(){
@@ -802,6 +861,20 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return oefeningList;
     }
 
+    public List<int[]> HaalHerhalingenEnSetsOp(int schemaID){
+        List<int[]> setsEnReps = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor result = db.rawQuery("select * from schemas_oefeningen " +
+                "WHERE schemaID = ?", new String[] {""+schemaID});
+
+        while (result.moveToNext()) {
+            int aantalSets = result.getInt(result.getColumnIndex("aantalsets"));
+            int aantalReps = result.getInt(result.getColumnIndex("aantalreps"));
+            setsEnReps.add(new int[]{aantalSets, aantalReps});
+        }
+        return setsEnReps;
+    }
+
     public List<Oefening> HaalOefeningenOpBijSpiergroep(String spiergroepnaam){
         List<Oefening> oefeningList = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
@@ -837,7 +910,20 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         String query = "INSERT INTO " + TABLE_TRAINING_OEFENING + " (oefeningID, trainingID, gewicht) VALUES (?, ?, ?)";
         db.execSQL(query, new String[]{""+oefeningID, ""+trainingID, ""+gewicht});
+    }
 
+    public List<Training> HaalAlleTrainingenOp(){
+        List<Training> trainingList = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor result = db.rawQuery("select * from " + TABLE_TRAINING, null);
+
+        while (result.moveToNext()) {
+            int id = result.getInt(result.getColumnIndex("ID"));
+            int schemaID = result.getInt(result.getColumnIndex("schemaID"));
+            String datum = result.getString(result.getColumnIndex("datum"));
+            trainingList.add(new Training(id, schemaID, datum));
+        }
+        return trainingList;
     }
     //endregion
 }

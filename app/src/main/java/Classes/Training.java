@@ -28,4 +28,9 @@ public class Training {
     public int getSchemaID() {
         return schemaID;
     }
+
+    @Override
+    public String toString(){
+        return datum;
+    }
 }

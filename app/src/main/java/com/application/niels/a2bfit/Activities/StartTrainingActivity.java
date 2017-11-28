@@ -1,5 +1,6 @@
 package com.application.niels.a2bfit.Activities;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Color;
@@ -12,15 +13,20 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 
 import com.application.niels.a2bfit.R;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import Adapters.MyLayoutAdapter;
 import Classes.DatabaseHelper;
@@ -31,9 +37,11 @@ import Classes.Training;
 public class StartTrainingActivity extends AppCompatActivity {
 
     DatabaseHelper db;
+    Calendar calendar;
     Spinner spinner;
     Button btnStartTraining;
     Schema selectedSchema;
+    EditText etDatum;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,11 +51,43 @@ public class StartTrainingActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("Start training");
         spinner = (Spinner) findViewById(R.id.spinnerSchemas);
         btnStartTraining = (Button) findViewById(R.id.btnStartTraining);
+        etDatum = (EditText) findViewById(R.id.etDatum);
+        etDatum.setFocusable(false);
+        etDatum.setClickable(true);
+        calendar = Calendar.getInstance();
         db = new DatabaseHelper(this);
 
         getSchemas();
         getSelectedSchema();
+        goToDatePicker();
         startTraining();
+    }
+
+    DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener(){
+        @Override
+        public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+            calendar.set(Calendar.YEAR, year);
+            calendar.set(Calendar.MONTH, monthOfYear);
+            calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+            updateLabel();
+        }
+
+    };
+
+    public void updateLabel(){
+        String myFormat = "dd/MM/yy"; //In which you need put here
+        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.GERMANY);
+
+        etDatum.setText(sdf.format(calendar.getTime()));
+    }
+
+    public void goToDatePicker(){
+        etDatum.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new DatePickerDialog(StartTrainingActivity.this,R.style.DatePickerTheme, date, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show();
+            }
+        });
     }
 
     public void getSelectedSchema(){
@@ -69,7 +109,7 @@ public class StartTrainingActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 int schemaID = selectedSchema.getSchemaID();
-                String datum = new Date().toString();
+                String datum = etDatum.getText().toString();
 
                 Training training = new Training(schemaID, datum);
                 int trainingID = (int)db.StartTraining(training);

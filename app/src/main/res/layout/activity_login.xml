@@ -44,7 +44,6 @@
         android:layout_height="43dp"
         android:ems="10"
         android:hint="Wachtwoord"
-        android:drawableLeft="@drawable/ic_https_black"
         android:drawablePadding="5dp"
         android:drawableStart="@drawable/ic_https_black"
         android:inputType="textPassword"
