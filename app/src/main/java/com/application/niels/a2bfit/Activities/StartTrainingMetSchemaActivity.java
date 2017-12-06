@@ -40,12 +40,12 @@ public class StartTrainingMetSchemaActivity extends AppCompatActivity {
     ListView lvOefeningenVanSchema;
     Button btnOefeningAfvinken;
     Button btnTrainingBeeindigen;
+    Button btnBekijkOefening;
     int selectedIndex;
     List<Oefening> oefeningenVanSchema;
     ListAdapter listAdapter;
     boolean clickedListItem = false;
-
-    int[] VINKJESFOTO = {R.drawable.checkmark};
+    Oefening selectedOefening;
 
 
     @Override
@@ -59,11 +59,42 @@ public class StartTrainingMetSchemaActivity extends AppCompatActivity {
         lvOefeningenVanSchema = (ListView) findViewById(R.id.lvOefeningenVanSchema);
         btnOefeningAfvinken = (Button) findViewById(R.id.btnOefeningAfvinken);
         btnTrainingBeeindigen = (Button) findViewById(R.id.btnTrainingBeeindigen);
+        btnBekijkOefening = (Button) findViewById(R.id.btnBekijkOefening);
 
         setOefeningenListbox();
         getClickedOefening();
         VinkOefeningAf();
         TrainingBeeindigen();
+        bekijkOefening();
+        selectedListItem();
+    }
+
+    public void selectedListItem(){
+        lvOefeningenVanSchema.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                selectedOefening = (Oefening) lvOefeningenVanSchema.getItemAtPosition(position);
+            }
+        });
+    }
+
+    public void bekijkOefening() {
+        btnBekijkOefening.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int oefeningID = selectedOefening.getOefeningID();
+                String naam = selectedOefening.getNaam();
+                String foto = selectedOefening.getFoto();
+                String omschrijving = selectedOefening.getOmschrijving();
+
+                Intent oefeningDetailsIntent = new Intent(StartTrainingMetSchemaActivity.this, OefeningDetailsActivity.class);
+                oefeningDetailsIntent.putExtra("ID", oefeningID);
+                oefeningDetailsIntent.putExtra("naam", naam);
+                oefeningDetailsIntent.putExtra("oefeningfoto", foto);
+                oefeningDetailsIntent.putExtra("oefeningomschrijving", omschrijving);
+                startActivity(oefeningDetailsIntent);
+            }
+        });
     }
 
     public void getClickedOefening(){
@@ -120,10 +151,12 @@ public class StartTrainingMetSchemaActivity extends AppCompatActivity {
 
     public void TrainingBeeindigen(){
         btnTrainingBeeindigen.setOnClickListener(new View.OnClickListener() {
+            AlertDialog.Builder adb;
             @Override
             public void onClick(View view) {
                 if (oefeningenVanSchema.size() > 0){
-                    AlertDialog.Builder adb=new AlertDialog.Builder(StartTrainingMetSchemaActivity.this);
+                    adb =new AlertDialog.Builder(StartTrainingMetSchemaActivity.this);
+                    //adb.setView(R.layout.);
                     adb.setTitle("Training beëindigen");
                     adb.setMessage("Weet je zeker dat je de training wilt beëindigen, er zijn nog oefeningen over");
                     adb.setNegativeButton("Cancel", null);

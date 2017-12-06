@@ -1,40 +1,26 @@
 package com.application.niels.a2bfit.Activities;
 
 import android.content.Intent;
-import android.database.Cursor;
 import android.graphics.Color;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.application.niels.a2bfit.R;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
 
 import Adapters.MyLayoutAdapter;
 import Classes.DatabaseHelper;
 import Classes.Oefening;
-import Classes.Product;
 import Classes.Spiergroep;
-import Contexts.ISpiergroepContext;
 import Repositories.SpiergroepRepository;
 import SqlContexts.SqlSpiergroepContext;
 

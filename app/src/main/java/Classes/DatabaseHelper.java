@@ -802,21 +802,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 
     //region Queries
-    public List<Product> HaalAlleProductenOp(){
-        List<Product> productList = new ArrayList<>();
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor result = db.rawQuery("select * from " + TABLE_PRODUCT, null);
-
-        while (result.moveToNext()) {
-            int id = result.getInt(result.getColumnIndex("ID"));
-            String naam = result.getString(result.getColumnIndex("productnaam"));
-            double kosten = result.getDouble(result.getColumnIndex("productkosten"));
-            String omschrijving = result.getString(result.getColumnIndex("omschrijving"));
-            productList.add(new Product(id, naam, kosten, omschrijving));
-        }
-        return productList;
-    }
-
     public List<Spiergroep> HaalAlleSpiergroepenOp(){
         List<Spiergroep> spiergroepList = new ArrayList<Spiergroep>();
         SQLiteDatabase db = this.getReadableDatabase();
@@ -861,18 +846,39 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return oefeningList;
     }
 
-    public List<int[]> HaalHerhalingenEnSetsOp(int schemaID){
-        List<int[]> setsEnReps = new ArrayList<>();
+    public int[] HaalSetsEnRepsOp(int oefeningID){
+        Cursor result = null;
+        int[] setEnRep = null;
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor result = db.rawQuery("select * from schemas_oefeningen " +
-                "WHERE schemaID = ?", new String[] {""+schemaID});
+        try{
+            result = db.rawQuery("select * from schemas_oefeningen " +
+                    "WHERE oefeningID = ?", new String[] {""+oefeningID});
+            if (result.getCount()>0){
+                result.moveToFirst();
+                int aantalSets = result.getInt(result.getColumnIndex("aantalsets"));
+                int aantalReps = result.getInt(result.getColumnIndex("aantalreps"));
+                setEnRep = new int[]{aantalSets, aantalReps};
+            }
+            return setEnRep;
+        }
+        finally{
+            result.close();
+        }
+    }
+
+    public List<TrainingsOefening> HaalOefeningenOpBijTraining(int trainingID){
+        List<TrainingsOefening> oefeningenVanTraining = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor result = db.rawQuery("select * from trainingen_oefeningen " +
+                "WHERE trainingID = ?", new String[] {""+trainingID});
 
         while (result.moveToNext()) {
-            int aantalSets = result.getInt(result.getColumnIndex("aantalsets"));
-            int aantalReps = result.getInt(result.getColumnIndex("aantalreps"));
-            setsEnReps.add(new int[]{aantalSets, aantalReps});
+            int oefeningID = result.getInt(result.getColumnIndex("oefeningID"));
+            int trainingId = result.getInt(result.getColumnIndex("trainingID"));
+            int gewicht = result.getInt(result.getColumnIndex("gewicht"));
+            oefeningenVanTraining.add(new TrainingsOefening(oefeningID, trainingId, gewicht));
         }
-        return setsEnReps;
+        return oefeningenVanTraining;
     }
 
     public List<Oefening> HaalOefeningenOpBijSpiergroep(String spiergroepnaam){
@@ -915,7 +921,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public List<Training> HaalAlleTrainingenOp(){
         List<Training> trainingList = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor result = db.rawQuery("select * from " + TABLE_TRAINING, null);
+        Cursor result = db.rawQuery("select * from trainingen", null);
 
         while (result.moveToNext()) {
             int id = result.getInt(result.getColumnIndex("ID"));

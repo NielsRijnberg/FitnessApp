@@ -73,46 +73,41 @@ public class OverzichtschermActivity extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(MenuItem menuItem) {
 
-                if(menuItem.isChecked()) menuItem.setChecked(false);
-                else menuItem.setChecked(true);
+            if(menuItem.isChecked()) menuItem.setChecked(false);
+            else menuItem.setChecked(true);
 
-                mDrawerLayout.closeDrawers();
+            mDrawerLayout.closeDrawers();
 
-                switch (menuItem.getItemId()){
-                    case R.id.nav_Producten:
-                        Toast.makeText(getApplicationContext(), "Producten", Toast.LENGTH_SHORT).show();
-                        Intent productIntent = new Intent(OverzichtschermActivity.this, ProductActivity.class);
-                        startActivity(productIntent);
-                        return true;
-                    case R.id.nav_Oefeningen:
-                        Toast.makeText(getApplicationContext(), "Oefeningen", Toast.LENGTH_SHORT).show();
-                        Intent oefeningenIntent = new Intent(OverzichtschermActivity.this, OefeningenActivity.class);
-                        startActivity(oefeningenIntent);
-                        return true;
-                    case R.id.nav_Schemas:
-                        Toast.makeText(getApplicationContext(), "Schema's", Toast.LENGTH_SHORT).show();
-                        Intent schemasIntent = new Intent(OverzichtschermActivity.this, SchemasActivity.class);
-                        startActivity(schemasIntent);
-                        return true;
-                    case R.id.nav_StartTraining:
-                        Toast.makeText(getApplicationContext(), "Start training", Toast.LENGTH_SHORT).show();
-                        Intent startTrainingIntent = new Intent(OverzichtschermActivity.this, StartTrainingActivity.class);
-                        startActivity(startTrainingIntent);
-                        return true;
-                    case R.id.nav_Trainingsdetails:
-                        Toast.makeText(getApplicationContext(), "Trainingsdetails", Toast.LENGTH_SHORT).show();
-                        Intent trainingsDetailsIntent = new Intent(OverzichtschermActivity.this, TrainingDetailsActivity.class);
-                        startActivity(trainingsDetailsIntent);
-                        return true;
-                    case R.id.nav_Uitloggen:
-                        Toast.makeText(getApplicationContext(), "Uitloggen", Toast.LENGTH_SHORT).show();
-                        Intent uitloggenIntent = new Intent(OverzichtschermActivity.this, LoginActivity.class);
-                        startActivity(uitloggenIntent);
-                        return true;
-                    default:
-                        Toast.makeText(getApplicationContext(), "Er is iets mis gegaan...", Toast.LENGTH_SHORT).show();
-                        return true;
-                }
+            switch (menuItem.getItemId()){
+                case R.id.nav_Oefeningen:
+                    Toast.makeText(getApplicationContext(), "Oefeningen", Toast.LENGTH_SHORT).show();
+                    Intent oefeningenIntent = new Intent(OverzichtschermActivity.this, OefeningenActivity.class);
+                    startActivity(oefeningenIntent);
+                    return true;
+                case R.id.nav_Schemas:
+                    Toast.makeText(getApplicationContext(), "Schema's", Toast.LENGTH_SHORT).show();
+                    Intent schemasIntent = new Intent(OverzichtschermActivity.this, SchemasActivity.class);
+                    startActivity(schemasIntent);
+                    return true;
+                case R.id.nav_StartTraining:
+                    Toast.makeText(getApplicationContext(), "Start training", Toast.LENGTH_SHORT).show();
+                    Intent startTrainingIntent = new Intent(OverzichtschermActivity.this, StartTrainingActivity.class);
+                    startActivity(startTrainingIntent);
+                    return true;
+                case R.id.nav_Trainingsdetails:
+                    Toast.makeText(getApplicationContext(), "Trainingsdetails", Toast.LENGTH_SHORT).show();
+                    Intent trainingsDetailsIntent = new Intent(OverzichtschermActivity.this, TrainingDetailsActivity.class);
+                    startActivity(trainingsDetailsIntent);
+                    return true;
+                case R.id.nav_Uitloggen:
+                    Toast.makeText(getApplicationContext(), "Uitloggen", Toast.LENGTH_SHORT).show();
+                    Intent uitloggenIntent = new Intent(OverzichtschermActivity.this, LoginActivity.class);
+                    startActivity(uitloggenIntent);
+                    return true;
+                default:
+                    Toast.makeText(getApplicationContext(), "Er is iets mis gegaan...", Toast.LENGTH_SHORT).show();
+                    return true;
+            }
             }
         });
     }

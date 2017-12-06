@@ -53,7 +53,7 @@
         android:layout_height="102dp"
         android:text="'omschrijving van oefening'"
         android:textColor="@color/colorPrimary"
-        android:textSize="18dp"
+        android:textSize="16dp"
         android:layout_marginLeft="8dp"
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginRight="8dp"
