@@ -1,8 +1,8 @@
 package Classes;
 
 public class Spiergroep {
-    int spiergroepID;
-    String naam;
+    private int spiergroepID;
+    private String naam;
 
     public int getSpiergroepID() {
         return spiergroepID;

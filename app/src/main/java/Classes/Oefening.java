@@ -3,10 +3,10 @@ package Classes;
 import java.util.List;
 
 public class Oefening {
-    int oefeningID;
-    String naam;
-    String foto;
-    String omschrijving;
+    private int oefeningID;
+    private String naam;
+    private String foto;
+    private String omschrijving;
 
     public int getOefeningID() {
         return oefeningID;

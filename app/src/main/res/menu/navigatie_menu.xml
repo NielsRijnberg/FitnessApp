@@ -3,12 +3,14 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:id="@+id/nav_StartTraining"
         android:title="Start training" />
+    <item android:id="@+id/nav_Trainingsdetails"
+        android:title="Trainingsdetails" />
     <item android:id="@+id/nav_Schemas"
         android:title="Schema's" />
     <item android:id="@+id/nav_Oefeningen"
         android:title="Oefeningen" />
-    <item android:id="@+id/nav_Trainingsdetails"
-        android:title="Trainingsdetails" />
+    <item android:id="@+id/nav_Prestaties"
+        android:title="Prestaties" />
     <item android:id="@+id/nav_Uitloggen"
         android:title="Uitloggen" />
 </menu>

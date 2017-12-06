@@ -1,9 +1,9 @@
 package Classes;
 
 public class TrainingsOefening {
-    int trainingID;
-    int oefeningID;
-    int gewicht;
+    private int trainingID;
+    private int oefeningID;
+    private int gewicht;
 
     public TrainingsOefening(int trainingID, int oefeningID, int gewicht) {
         this.trainingID = trainingID;

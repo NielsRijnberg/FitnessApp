@@ -28,8 +28,7 @@ public class OverzichtschermActivity extends AppCompatActivity {
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mDrawerToggle;
     private NavigationView navigationView;
-
-    private static ViewPager mPager;
+    private ViewPager mPager;
     private static int currentPage = 0;
     private static final Integer[] FOTOS = {R.drawable.apparaten_bfit, R.drawable.apparaten_bfitt, R.drawable.apparaten_bfittt};
     private ArrayList<Integer> FOTOArray = new ArrayList<Integer>();
@@ -44,16 +43,12 @@ public class OverzichtschermActivity extends AppCompatActivity {
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.open, R.string.close);
-
         mDrawerLayout.addDrawerListener(mDrawerToggle);
         mDrawerToggle.syncState();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
         navigationView = (NavigationView) findViewById(R.id.navigation_view);
 
         getSupportActionBar().setTitle("2BFIT");
-
-        //Setting Navigation View Item Selected Listener to handle the item click of the navigation menu
         HandleMenuItems();
     }
 

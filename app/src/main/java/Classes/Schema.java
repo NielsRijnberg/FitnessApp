@@ -3,8 +3,8 @@ package Classes;
 import java.util.List;
 
 public class Schema {
-    int schemaID;
-    String type;
+    private int schemaID;
+    private String type;
 
     public int getSchemaID() {
         return schemaID;

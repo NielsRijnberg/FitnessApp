@@ -2,9 +2,9 @@ package Classes;
 
 public class Training {
 
-    int trainingID;
-    int schemaID;
-    String datum;
+    private int trainingID;
+    private int schemaID;
+    private String datum;
 
     public Training(int trainingID, int schemaID, String datum) {
         this.trainingID = trainingID;

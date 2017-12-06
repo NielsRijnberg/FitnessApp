@@ -27,7 +27,8 @@
         <activity android:name=".Activities.StartTrainingActivity" />
         <activity android:name=".Activities.OefeningDetailsActivity" />
         <activity android:name=".Activities.StartTrainingMetSchemaActivity" />
-        <activity android:name=".Activities.TrainingDetailsActivity"></activity>
+        <activity android:name=".Activities.TrainingDetailsActivity" />
+        <activity android:name=".Activities.PrestatieActivity"></activity>
     </application>
 
 </manifest>
