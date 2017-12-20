@@ -8,9 +8,7 @@ import Classes.Spiergroep;
 
 public interface IOefeningContext {
 
-    List<Oefening> HaalAlleOefeningenOp();
+    List<Oefening> HaalOefeningenOpBijSchema(int schemaID);
 
-    List<Oefening> HaalOefeningenPerSpiergroepOp(Spiergroep spiergroep);
-
-    List<Oefening> HaalOefeningenOpBijSchema(Schema schema);
+    List<Oefening> HaalOefeningenOpBijSpiergroep(String spiergroepNaam);
 }

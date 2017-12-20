@@ -1,5 +1,6 @@
 package com.application.niels.a2bfit.Activities;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.support.v7.app.AlertDialog;
@@ -9,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
@@ -33,6 +35,8 @@ public class SchemasActivity extends AppCompatActivity {
     DatabaseHelper db;
     Spinner spinner;
     ListView listview;
+    Button btnBekijkOefeningVanSchema;
+    Oefening selectedOefening;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,14 +46,43 @@ public class SchemasActivity extends AppCompatActivity {
         db = new DatabaseHelper(this);
         spinner = (Spinner) findViewById(R.id.SchemaSpinner);
         listview = (ListView) findViewById(R.id.ListViewOefeningenVanSchema);
+        btnBekijkOefeningVanSchema = (Button) findViewById(R.id.btnBekijkOefeningVanSchema);
 
         getSupportActionBar().setTitle("Schema's");
 
         getSchemas();
         getOefeningenVanSchema();
+        selectedListItem();
+        bekijkOefening();
     }
 
+    public void selectedListItem(){
+        listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                selectedOefening = (Oefening) listview.getItemAtPosition(position);
+            }
+        });
+    }
 
+    public void bekijkOefening() {
+        btnBekijkOefeningVanSchema.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int oefeningID = selectedOefening.getOefeningID();
+                String naam = selectedOefening.getNaam();
+                String foto = selectedOefening.getFoto();
+                String omschrijving = selectedOefening.getOmschrijving();
+
+                Intent oefeningDetailsIntent = new Intent(SchemasActivity.this, OefeningDetailsActivity.class);
+                oefeningDetailsIntent.putExtra("ID", oefeningID);
+                oefeningDetailsIntent.putExtra("naam", naam);
+                oefeningDetailsIntent.putExtra("oefeningfoto", foto);
+                oefeningDetailsIntent.putExtra("oefeningomschrijving", omschrijving);
+                startActivity(oefeningDetailsIntent);
+            }
+        });
+    }
 
     public void getOefeningenVanSchema(){
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {

@@ -15,15 +15,11 @@ public class OefeningRepository {
         this.context = context;
     }
 
-    public List<Oefening> HaalAlleOefeningenOp(){
-        return context.HaalAlleOefeningenOp();
+    public List<Oefening> HaalOefeningenOpBijSchema(int schemaID){
+        return context.HaalOefeningenOpBijSchema(schemaID);
     }
 
-    public List<Oefening> HaalOefeningenPerSpiergroepOp(Spiergroep spiergroep){
-        return context.HaalOefeningenPerSpiergroepOp(spiergroep);
-    }
-
-    public List<Oefening> HaalOefeningenOpBijSchema(Schema schema){
-        return context.HaalOefeningenOpBijSchema(schema);
+    public List<Oefening> HaalOefeningenOpBijSpiergroep(String spiergroepNaam){
+        return context.HaalOefeningenOpBijSpiergroep(spiergroepNaam);
     }
 }

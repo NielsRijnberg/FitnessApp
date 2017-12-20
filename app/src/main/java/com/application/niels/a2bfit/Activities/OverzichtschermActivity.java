@@ -94,6 +94,11 @@ public class OverzichtschermActivity extends AppCompatActivity {
                     Intent trainingsDetailsIntent = new Intent(OverzichtschermActivity.this, TrainingDetailsActivity.class);
                     startActivity(trainingsDetailsIntent);
                     return true;
+                case R.id.nav_Prestaties:
+                    Toast.makeText(getApplicationContext(), "Prestaties", Toast.LENGTH_SHORT).show();
+                    Intent prestatiesIntent = new Intent(OverzichtschermActivity.this, PrestatieActivity.class);
+                    startActivity(prestatiesIntent);
+                    return true;
                 case R.id.nav_Uitloggen:
                     Toast.makeText(getApplicationContext(), "Uitloggen", Toast.LENGTH_SHORT).show();
                     Intent uitloggenIntent = new Intent(OverzichtschermActivity.this, LoginActivity.class);
