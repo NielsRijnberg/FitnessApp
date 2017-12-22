@@ -1,25 +1,38 @@
 package Classes;
 
-public class TrainingsOefening {
-    private int trainingID;
-    private int oefeningID;
-    private int gewicht;
+import android.content.ContentValues;
+import android.content.Context;
 
-    public TrainingsOefening(int trainingID, int oefeningID, int gewicht) {
+public class TrainingsOefening {
+    private long trainingID;
+    private long oefeningID;
+    private int gewicht;
+    private Context context;
+
+    public TrainingsOefening(long trainingID, long oefeningID, int gewicht) {
         this.trainingID = trainingID;
         this.oefeningID = oefeningID;
         this.gewicht = gewicht;
     }
 
-    public int getTrainingID() {
+    public void setContext(Context context){
+        this.context = context;
+    }
+
+    public long getTrainingID() {
         return trainingID;
     }
 
-    public int getOefeningID() {
+    public long getOefeningID() {
         return oefeningID;
     }
 
     public int getGewicht() {
         return gewicht;
+    }
+
+    public void VinkTrainingAf(){
+        DatabaseHelper db = new DatabaseHelper(context);
+        db.VinkTrainingAf(this);
     }
 }

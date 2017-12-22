@@ -70,7 +70,7 @@ public class TrainingDetailsActivity extends AppCompatActivity {
 
     public void setAantalOefeningen(){
         Training selectedTraining = (Training) TrainingSpinner.getSelectedItem();
-        int trainingID = selectedTraining.getTrainingID();
+        long trainingID = selectedTraining.getTrainingID();
         List<TrainingsOefening> oefeningenVanTraining = db.HaalOefeningenOpBijTraining(trainingID);
         int aantalOefeningen = oefeningenVanTraining.size();
         etTotaalAantalOefeningen.setText(aantalOefeningen + " oefeningen gedaan.");
@@ -80,7 +80,7 @@ public class TrainingDetailsActivity extends AppCompatActivity {
         int totaalAantalHerhalingen = 0;
 
         Training selectedTraining = (Training) TrainingSpinner.getSelectedItem();
-        int trainingID = selectedTraining.getTrainingID();
+        long trainingID = selectedTraining.getTrainingID();
 
         List<TrainingsOefening> oefeningenVanTraining = db.HaalOefeningenOpBijTraining(trainingID);
         for (TrainingsOefening trainingsOefening : oefeningenVanTraining) {
@@ -95,7 +95,7 @@ public class TrainingDetailsActivity extends AppCompatActivity {
         int totaalGewicht = 0;
 
         Training selectedTraining = (Training) TrainingSpinner.getSelectedItem();
-        int trainingID = selectedTraining.getTrainingID();
+        long trainingID = selectedTraining.getTrainingID();
 
 
         List<TrainingsOefening> oefeningenVanTraining = db.HaalOefeningenOpBijTraining(trainingID);

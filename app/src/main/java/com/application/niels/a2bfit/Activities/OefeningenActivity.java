@@ -40,7 +40,6 @@ public class OefeningenActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("Oefeningen");
 
         db = new DatabaseHelper(this);
-        spiergroepRepo = new SpiergroepRepository(new SqlSpiergroepContext());
 
         listView = (ListView) findViewById(R.id.listViewOefeningen);
         spinner = (Spinner) findViewById(R.id.spinner);
@@ -91,7 +90,7 @@ public class OefeningenActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
                 Oefening selectedOefening = (Oefening) listView.getItemAtPosition(position);
 
-                int oefeningID = selectedOefening.getOefeningID();
+                long oefeningID = selectedOefening.getOefeningID();
                 String naam = selectedOefening.getNaam();
                 String foto = selectedOefening.getFoto();
                 String omschrijving = selectedOefening.getOmschrijving();

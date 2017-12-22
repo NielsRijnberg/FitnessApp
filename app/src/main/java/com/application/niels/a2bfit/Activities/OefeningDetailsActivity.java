@@ -21,7 +21,7 @@ import java.io.InputStream;
 
 public class OefeningDetailsActivity extends AppCompatActivity {
 
-    int oefeningID;
+    long oefeningID;
     String naam;
     String foto;
     String omschrijving;
@@ -47,7 +47,7 @@ public class OefeningDetailsActivity extends AppCompatActivity {
     }
 
     private void getOefeningDetails(){
-        oefeningID = getIntent().getExtras().getInt("ID");
+        oefeningID = getIntent().getExtras().getLong("ID");
         naam = getIntent().getExtras().getString("naam");
         foto = getIntent().getExtras().getString("oefeningfoto");
         omschrijving = getIntent().getExtras().getString("oefeningomschrijving");

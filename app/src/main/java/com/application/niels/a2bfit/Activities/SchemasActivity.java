@@ -69,7 +69,7 @@ public class SchemasActivity extends AppCompatActivity {
         btnBekijkOefeningVanSchema.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                int oefeningID = selectedOefening.getOefeningID();
+                long oefeningID = selectedOefening.getOefeningID();
                 String naam = selectedOefening.getNaam();
                 String foto = selectedOefening.getFoto();
                 String omschrijving = selectedOefening.getOmschrijving();

@@ -1,14 +1,18 @@
 package Classes;
 
-import java.util.List;
 
 public class Oefening {
-    private int oefeningID;
+    private long oefeningID;
     private String naam;
     private String foto;
     private String omschrijving;
+    private long spiergroepID;
 
-    public int getOefeningID() {
+    public long getSpiergroep() {
+        return spiergroepID;
+    }
+
+    public long getOefeningID() {
         return oefeningID;
     }
 
@@ -24,11 +28,12 @@ public class Oefening {
         return omschrijving;
     }
 
-    public Oefening(int oefeningID, String naam, String foto, String omschrijving) {
+    public Oefening(long oefeningID, String naam, String foto, String omschrijving, long spiergroepID) {
         this.oefeningID = oefeningID;
         this.naam = naam;
         this.foto = foto;
         this.omschrijving = omschrijving;
+        this.spiergroepID = spiergroepID;
     }
 
     @Override

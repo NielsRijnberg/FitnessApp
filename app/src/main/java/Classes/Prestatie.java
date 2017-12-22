@@ -2,11 +2,11 @@ package Classes;
 
 
 public class Prestatie {
-    private int prestatieID;
+    private long prestatieID;
     private String naam;
     private String omschrijving;
 
-    public int getPrestatieID() {
+    public long getPrestatieID() {
         return prestatieID;
     }
 
@@ -18,7 +18,7 @@ public class Prestatie {
         return omschrijving;
     }
 
-    public Prestatie(int prestatieID, String naam, String omschrijving) {
+    public Prestatie(long prestatieID, String naam, String omschrijving) {
         this.prestatieID = prestatieID;
         this.naam = naam;
         this.omschrijving = omschrijving;

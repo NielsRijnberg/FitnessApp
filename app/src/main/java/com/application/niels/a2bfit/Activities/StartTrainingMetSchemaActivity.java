@@ -28,7 +28,9 @@ import java.util.Locale;
 
 import Adapters.MyLayoutAdapter;
 import Classes.DatabaseHelper;
+import Classes.Gebruiker;
 import Classes.Oefening;
+import Classes.Schema;
 import Classes.Training;
 import Classes.TrainingsOefening;
 
@@ -36,11 +38,11 @@ public class StartTrainingMetSchemaActivity extends AppCompatActivity {
 
     TextView tvSchemaType;
     EditText etGewicht;
-    DatabaseHelper db;
     ListView lvOefeningenVanSchema;
     Button btnOefeningAfvinken;
     Button btnTrainingBeeindigen;
     Button btnBekijkOefening;
+
     int selectedIndex;
     List<Oefening> oefeningenVanSchema;
     ListAdapter listAdapter;
@@ -55,11 +57,13 @@ public class StartTrainingMetSchemaActivity extends AppCompatActivity {
 
         tvSchemaType = (TextView) findViewById(R.id.tvSchemaType);
         etGewicht = (EditText) findViewById(R.id.etGewicht);
-        db = new DatabaseHelper(this);
         lvOefeningenVanSchema = (ListView) findViewById(R.id.lvOefeningenVanSchema);
         btnOefeningAfvinken = (Button) findViewById(R.id.btnOefeningAfvinken);
         btnTrainingBeeindigen = (Button) findViewById(R.id.btnTrainingBeeindigen);
         btnBekijkOefening = (Button) findViewById(R.id.btnBekijkOefening);
+
+        long schemaID = getIntent().getExtras().getLong("schemaID");
+        oefeningenVanSchema = Schema.getOefeningen(schemaID, this);
 
         setOefeningenListbox();
         getClickedOefening();
@@ -82,7 +86,7 @@ public class StartTrainingMetSchemaActivity extends AppCompatActivity {
         btnBekijkOefening.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                int oefeningID = selectedOefening.getOefeningID();
+                long oefeningID = selectedOefening.getOefeningID();
                 String naam = selectedOefening.getNaam();
                 String foto = selectedOefening.getFoto();
                 String omschrijving = selectedOefening.getOmschrijving();
@@ -108,8 +112,6 @@ public class StartTrainingMetSchemaActivity extends AppCompatActivity {
     }
 
     public void setOefeningenListbox(){
-        int schemaID = getIntent().getExtras().getInt("schemaID");
-        oefeningenVanSchema = db.HaalOefeningenOpBijSchema(schemaID);
         listAdapter = new MyLayoutAdapter<Oefening>(this, android.R.layout.simple_list_item_1, android.R.id.text1, oefeningenVanSchema);
         lvOefeningenVanSchema.setAdapter(listAdapter);
 
@@ -129,11 +131,11 @@ public class StartTrainingMetSchemaActivity extends AppCompatActivity {
                     int gewicht = Integer.valueOf(gewichtAsString);
 
                     if (clickedListItem){
-                        int trainingID = getIntent().getExtras().getInt("trainingID");
-                        int oefeningID = ((Oefening)lvOefeningenVanSchema.getItemAtPosition(selectedIndex)).getOefeningID();
+                        long trainingID = getIntent().getExtras().getInt("trainingID");
+                        long oefeningID = ((Oefening)lvOefeningenVanSchema.getItemAtPosition(selectedIndex)).getOefeningID();
 
                         TrainingsOefening currentTrainingsOefening = new TrainingsOefening(trainingID, oefeningID, gewicht);
-                        db.VinkTrainingAf(currentTrainingsOefening);
+                        currentTrainingsOefening.VinkTrainingAf();
                         Toast.makeText(StartTrainingMetSchemaActivity.this, "Training afgevinkt", Toast.LENGTH_LONG).show();
                     }
                     else {

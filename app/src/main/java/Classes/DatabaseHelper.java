@@ -827,25 +827,28 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return schemaList;
     }
 
-    public List<Oefening> HaalOefeningenOpBijSchema(int schemaID){
+    public List<Oefening> HaalOefeningenOpBijSchema(long schemaID){
         List<Oefening> oefeningList = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor result = db.rawQuery("SELECT * FROM oefeningen as o " +
                 "INNER JOIN schemas_oefeningen so ON so.oefeningID = o.ID " +
                 "INNER JOIN schemas s ON s.ID = so.schemaID " +
+                "INNER JOIN oefeningen_spiergroepen os ON os.oefeningID = o.ID " +
+                "INNER JOIN spiergroepen sg ON sg.ID = os.spiergroepID " +
                 "WHERE s.ID = ?", new String[] {""+schemaID});
 
         while (result.moveToNext()) {
-            int id = result.getInt(result.getColumnIndex("ID"));
+            long id = result.getInt(result.getColumnIndex("ID"));
+            long spiergroepID = result.getInt(result.getColumnIndex("spiergroepID"));
             String naam = result.getString(result.getColumnIndex("oefeningnaam"));
             String foto = result.getString(result.getColumnIndex("oefeningfoto"));
             String omschrijving = result.getString(result.getColumnIndex("oefeningomschrijving"));
-            oefeningList.add(new Oefening(id, naam, foto, omschrijving));
+            oefeningList.add(new Oefening(id, naam, foto, omschrijving, spiergroepID));
         }
         return oefeningList;
     }
 
-    public int[] HaalSetsEnRepsOp(int oefeningID){
+    public int[] HaalSetsEnRepsOp(long oefeningID){
         Cursor result = null;
         int[] setEnRep = null;
         SQLiteDatabase db = this.getReadableDatabase();
@@ -865,15 +868,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
-    public List<TrainingsOefening> HaalOefeningenOpBijTraining(int trainingID){
+    public List<TrainingsOefening> HaalOefeningenOpBijTraining(long trainingID){
         List<TrainingsOefening> oefeningenVanTraining = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor result = db.rawQuery("select * from trainingen_oefeningen " +
                 "WHERE trainingID = ?", new String[] {""+trainingID});
 
         while (result.moveToNext()) {
-            int oefeningID = result.getInt(result.getColumnIndex("oefeningID"));
-            int trainingId = result.getInt(result.getColumnIndex("trainingID"));
+            long oefeningID = result.getInt(result.getColumnIndex("oefeningID"));
+            long trainingId = result.getInt(result.getColumnIndex("trainingID"));
             int gewicht = result.getInt(result.getColumnIndex("gewicht"));
             oefeningenVanTraining.add(new TrainingsOefening(oefeningID, trainingId, gewicht));
         }
@@ -889,27 +892,29 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 "WHERE s.spiergroepnaam = ?", new String[] {spiergroepnaam});
 
         while (result.moveToNext()) {
-            int id = result.getInt(result.getColumnIndex("ID"));
+            long id = result.getInt(result.getColumnIndex("ID"));
+            long spiergroepID = result.getInt(result.getColumnIndex("spiergroepID"));
             String naam = result.getString(result.getColumnIndex("oefeningnaam"));
             String foto = result.getString(result.getColumnIndex("oefeningfoto"));
             String omschrijving = result.getString(result.getColumnIndex("oefeningomschrijving"));
-            oefeningList.add(new Oefening(id, naam, foto, omschrijving));
+            oefeningList.add(new Oefening(id, naam, foto, omschrijving, spiergroepID));
         }
         return oefeningList;
     }
 
-    public long StartTraining(Training training){
+    public Training StartTraining(Training training){
         ContentValues contentValues = new ContentValues();
         contentValues.put("schemaID", training.getSchemaID());
         contentValues.put("datum", training.getDatum());
 
         SQLiteDatabase db = this.getWritableDatabase();
-        return db.insert(TABLE_TRAINING, null, contentValues);
+        long trainingID = db.insert(TABLE_TRAINING, null, contentValues);
+        return new Training(trainingID, training.getSchemaID(), training.getDatum());
     }
 
     public void VinkTrainingAf(TrainingsOefening trainingsOefening){
-        int trainingID = trainingsOefening.getTrainingID();
-        int oefeningID = trainingsOefening.getOefeningID();
+        long trainingID = trainingsOefening.getTrainingID();
+        long oefeningID = trainingsOefening.getOefeningID();
         int gewicht = trainingsOefening.getGewicht();
 
         SQLiteDatabase db = this.getWritableDatabase();

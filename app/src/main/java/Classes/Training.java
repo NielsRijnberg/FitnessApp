@@ -2,22 +2,22 @@ package Classes;
 
 public class Training {
 
-    private int trainingID;
-    private int schemaID;
+    private long trainingID;
+    private long schemaID;
     private String datum;
 
-    public Training(int trainingID, int schemaID, String datum) {
+    public Training(long trainingID, long schemaID, String datum) {
         this.trainingID = trainingID;
         this.schemaID = schemaID;
         this.datum = datum;
     }
 
-    public Training(int schemaID, String datum) {
+    public Training(long schemaID, String datum) {
         this.schemaID = schemaID;
         this.datum = datum;
     }
 
-    public int getTrainingID() {
+    public long getTrainingID() {
         return trainingID;
     }
 
@@ -25,7 +25,7 @@ public class Training {
         return datum;
     }
 
-    public int getSchemaID() {
+    public long getSchemaID() {
         return schemaID;
     }
 

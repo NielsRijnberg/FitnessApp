@@ -1,10 +1,10 @@
 package Classes;
 
 public class Spiergroep {
-    private int spiergroepID;
+    private long spiergroepID;
     private String naam;
 
-    public int getSpiergroepID() {
+    public long getSpiergroepID() {
         return spiergroepID;
     }
 
@@ -12,7 +12,7 @@ public class Spiergroep {
         return naam;
     }
 
-    public Spiergroep(int spiergroepID, String naam) {
+    public Spiergroep(long spiergroepID, String naam) {
         this.spiergroepID = spiergroepID;
         this.naam = naam;
     }

@@ -1,6 +1,7 @@
 package com.application.niels.a2bfit.Activities;
 
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Color;
@@ -30,13 +31,13 @@ import java.util.Locale;
 
 import Adapters.MyLayoutAdapter;
 import Classes.DatabaseHelper;
+import Classes.Gebruiker;
 import Classes.Oefening;
 import Classes.Schema;
 import Classes.Training;
 
 public class StartTrainingActivity extends AppCompatActivity {
 
-    DatabaseHelper db;
     Calendar calendar;
     Spinner spinner;
     Button btnStartTraining;
@@ -55,7 +56,6 @@ public class StartTrainingActivity extends AppCompatActivity {
         etDatum.setFocusable(false);
         etDatum.setClickable(true);
         calendar = Calendar.getInstance();
-        db = new DatabaseHelper(this);
 
         getSchemas();
         getSelectedSchema();
@@ -105,18 +105,19 @@ public class StartTrainingActivity extends AppCompatActivity {
     }
 
     public void startTraining(){
+        final Context context = this;
         btnStartTraining.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                int schemaID = selectedSchema.getSchemaID();
+                long schemaID = selectedSchema.getSchemaID();
                 String datum = etDatum.getText().toString();
 
-                Training training = new Training(schemaID, datum);
-                int trainingID = (int)db.StartTraining(training);
+                Training training = Gebruiker.startTraining(schemaID, datum, context);
+
 
                 Intent startTrainingMetSchema = new Intent(StartTrainingActivity.this, StartTrainingMetSchemaActivity.class);
                 startTrainingMetSchema.putExtra("schemaID", schemaID);
-                startTrainingMetSchema.putExtra("trainingID", trainingID);
+                startTrainingMetSchema.putExtra("trainingID", training.getTrainingID());
                 startTrainingMetSchema.putExtra("datum", datum);
 
                 startActivity(startTrainingMetSchema);
@@ -125,7 +126,7 @@ public class StartTrainingActivity extends AppCompatActivity {
     }
 
     public void getSchemas(){
-        List<Schema> schemaList = db.HaalAlleSchemasOp();
+        List<Schema> schemaList = Gebruiker.getSchemas(this);
         SpinnerAdapter spinnerAdapter = new MyLayoutAdapter<Schema>(this, android.R.layout.simple_list_item_1, android.R.id.text1, schemaList, 20, Color.BLUE);
         spinner.setAdapter(spinnerAdapter);
 
