@@ -19,16 +19,17 @@ import java.util.List;
 
 import Adapters.MyLayoutAdapter;
 import Classes.DatabaseHelper;
-import Classes.Oefening;
-import Classes.Spiergroep;
+import Model.Oefening;
+import Model.Spiergroep;
+import Model.Fitness;
+import Repo.FitnessRepo;
 import Repositories.SpiergroepRepository;
-import SqlContexts.SqlSpiergroepContext;
 
 public class OefeningenActivity extends AppCompatActivity {
 
-    DatabaseHelper db;
     ListView listView;
     Spinner spinner;
+    Fitness fitness;
 
     SpiergroepRepository spiergroepRepo;
 
@@ -39,12 +40,14 @@ public class OefeningenActivity extends AppCompatActivity {
 
         getSupportActionBar().setTitle("Oefeningen");
 
-        db = new DatabaseHelper(this);
+        DatabaseHelper db = new DatabaseHelper(this);
+        FitnessRepo fitnessRepo = new FitnessRepo(db);
+        fitness = new Fitness(fitnessRepo);
 
         listView = (ListView) findViewById(R.id.listViewOefeningen);
         spinner = (Spinner) findViewById(R.id.spinner);
 
-        getSpiergroepen();
+        fillSpiergroepenListbox();
         getOefeningenVanSpiergroep();
         bekijkOefening();
     }
@@ -54,7 +57,7 @@ public class OefeningenActivity extends AppCompatActivity {
 
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                getOefeningen();
+                fillOefeningenListboxBijSpiergroep();
             }
 
             @Override
@@ -64,8 +67,8 @@ public class OefeningenActivity extends AppCompatActivity {
         });
     }
 
-    public void getOefeningen() {
-        List<Oefening> oefeningList = db.HaalOefeningenOpBijSpiergroep(spinner.getSelectedItem().toString());
+    public void fillOefeningenListboxBijSpiergroep() {
+        List<Oefening> oefeningList = fitness.getOefeningen(spinner.getSelectedItem().toString());
         ListAdapter listAdapter = new MyLayoutAdapter<Oefening>(this, android.R.layout.simple_list_item_1, android.R.id.text1, oefeningList);
         listView.setAdapter(listAdapter);
 
@@ -74,8 +77,8 @@ public class OefeningenActivity extends AppCompatActivity {
         }
     }
 
-    public void getSpiergroepen() {
-        List<Spiergroep> spiergroepList = db.HaalAlleSpiergroepenOp();
+    public void fillSpiergroepenListbox() {
+        List<Spiergroep> spiergroepList = fitness.getSpiergroepen();
         SpinnerAdapter spinnerAdapter = new MyLayoutAdapter<Spiergroep>(this, android.R.layout.simple_list_item_1, android.R.id.text1, spiergroepList, 20, Color.BLUE);
         spinner.setAdapter(spinnerAdapter);
 

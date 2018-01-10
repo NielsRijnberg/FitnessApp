@@ -14,7 +14,6 @@ import Classes.DatabaseHelper;
 
 public class RegistreerActivity extends AppCompatActivity {
 
-    DatabaseHelper myDb;
     EditText editNaam, editMail, editWachtwoord, editLeeftijd;
     Button btnRegistreer;
 
@@ -22,8 +21,6 @@ public class RegistreerActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registreer);
-
-        myDb = new DatabaseHelper(this);
 
         editNaam = (EditText) findViewById(R.id.etNaam);
         editMail = (EditText) findViewById(R.id.etMail);
@@ -40,21 +37,7 @@ public class RegistreerActivity extends AppCompatActivity {
         btnRegistreer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /*boolean isInserted = myDb.insertData(editNaam.getText().toString(),
-                                                        editWachtwoord.getText().toString(),
-                                                        editLeeftijd.getText().toString(),
-                                                        editMail.getText().toString());
-                if (isInserted = true){
-                    Toast.makeText(RegistreerActivity.this, "Geregistreerd", Toast.LENGTH_LONG).show();
-                }
-                else {
-                    Toast.makeText(RegistreerActivity.this, "db functie werkt niet", Toast.LENGTH_LONG).show();
-                }*/
 
-
-
-                /*Intent registreerIntent = new Intent(RegistreerActivity.this, LoginActivity.class);
-                RegistreerActivity.this.startActivity(registreerIntent);*/
             }
         });
     }

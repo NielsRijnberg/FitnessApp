@@ -1,17 +1,13 @@
 package com.application.niels.a2bfit.Activities;
 
-import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
-import android.provider.CalendarContract;
+import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ListAdapter;
 import android.widget.ListView;
@@ -20,19 +16,14 @@ import android.widget.Toast;
 
 import com.application.niels.a2bfit.R;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 import Adapters.MyLayoutAdapter;
 import Classes.DatabaseHelper;
-import Classes.Gebruiker;
-import Classes.Oefening;
-import Classes.Schema;
-import Classes.Training;
-import Classes.TrainingsOefening;
+import Model.Oefening;
+import Model.TrainingsOefening;
+import Model.Gebruiker;
+import Repo.GebruikerRepo;
 
 public class StartTrainingMetSchemaActivity extends AppCompatActivity {
 
@@ -48,12 +39,15 @@ public class StartTrainingMetSchemaActivity extends AppCompatActivity {
     ListAdapter listAdapter;
     boolean clickedListItem = false;
     Oefening selectedOefening;
+    Gebruiker gebruiker;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start_training_met_schema);
+
+        gebruiker = new Gebruiker(new GebruikerRepo(new DatabaseHelper(this)));
 
         tvSchemaType = (TextView) findViewById(R.id.tvSchemaType);
         etGewicht = (EditText) findViewById(R.id.etGewicht);
@@ -63,7 +57,7 @@ public class StartTrainingMetSchemaActivity extends AppCompatActivity {
         btnBekijkOefening = (Button) findViewById(R.id.btnBekijkOefening);
 
         long schemaID = getIntent().getExtras().getLong("schemaID");
-        oefeningenVanSchema = Schema.getOefeningen(schemaID, this);
+        oefeningenVanSchema = gebruiker.getOefeningenVoorSchema(schemaID);
 
         setOefeningenListbox();
         getClickedOefening();
@@ -135,7 +129,7 @@ public class StartTrainingMetSchemaActivity extends AppCompatActivity {
                         long oefeningID = ((Oefening)lvOefeningenVanSchema.getItemAtPosition(selectedIndex)).getOefeningID();
 
                         TrainingsOefening currentTrainingsOefening = new TrainingsOefening(trainingID, oefeningID, gewicht);
-                        currentTrainingsOefening.VinkTrainingAf();
+                        gebruiker.vinkOefeningAf(currentTrainingsOefening);
                         Toast.makeText(StartTrainingMetSchemaActivity.this, "Training afgevinkt", Toast.LENGTH_LONG).show();
                     }
                     else {

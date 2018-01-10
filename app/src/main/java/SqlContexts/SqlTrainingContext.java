@@ -2,7 +2,7 @@ package SqlContexts;
 
 import java.util.List;
 
-import Classes.Training;
+import Model.Training;
 import Contexts.ITrainingContext;
 
 public class SqlTrainingContext implements ITrainingContext{

@@ -2,7 +2,7 @@ package Contexts;
 
 import java.util.List;
 
-import Classes.Prestatie;
+import Model.Prestatie;
 
 public interface IPrestatieContext {
 

@@ -2,7 +2,7 @@ package Repositories;
 
 import java.util.List;
 
-import Classes.TrainingsOefening;
+import Model.TrainingsOefening;
 import Contexts.ITrainingsOefeningContext;
 
 public class TrainingsOefeningRepository {

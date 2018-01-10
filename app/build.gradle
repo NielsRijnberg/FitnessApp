@@ -2,7 +2,6 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 26
-    buildToolsVersion "26.0.1"
     defaultConfig {
         applicationId "com.application.niels.a2bfit"
         minSdkVersion 18
@@ -31,4 +30,6 @@ dependencies {
     compile 'com.android.support:support-v4:26.+'
     compile 'me.relex:circleindicator:1.2.2@aar'
     testCompile 'junit:junit:4.12'
+    testCompile group: 'org.mockito', name: 'mockito-core', version: '2.13.0'
+
 }

@@ -1,13 +1,8 @@
 package SqlContexts;
 
-import android.content.Context;
-
 import java.util.List;
 
-import Classes.DatabaseHelper;
-import Classes.Oefening;
-import Classes.Schema;
-import Classes.Spiergroep;
+import Model.Oefening;
 import Contexts.IOefeningContext;
 
 public class SqlOefeningContext implements IOefeningContext {

@@ -9,7 +9,12 @@ import android.database.sqlite.SQLiteOpenHelper;
 import java.util.ArrayList;
 import java.util.List;
 
-import static android.os.Build.ID;
+import Model.Oefening;
+import Model.Prestatie;
+import Model.Schema;
+import Model.Spiergroep;
+import Model.Training;
+import Model.TrainingsOefening;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
@@ -912,7 +917,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return new Training(trainingID, training.getSchemaID(), training.getDatum());
     }
 
-    public void VinkTrainingAf(TrainingsOefening trainingsOefening){
+    public void VinkOefeningAf(TrainingsOefening trainingsOefening){
         long trainingID = trainingsOefening.getTrainingID();
         long oefeningID = trainingsOefening.getOefeningID();
         int gewicht = trainingsOefening.getGewicht();

@@ -1,10 +1,9 @@
-package Classes;
-
-import android.content.ContentValues;
-import android.content.Context;
+package Model;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import Model.Oefening;
 
 public class Schema {
 
@@ -30,11 +29,6 @@ public class Schema {
         this.schemaID = schemaID;
         this.type = type;
         this.oefeningen = new ArrayList<>();
-    }
-
-    public static List<Oefening> getOefeningen(long schemaID, Context context){
-        DatabaseHelper db = new DatabaseHelper(context);
-        return db.HaalOefeningenOpBijSchema(schemaID);
     }
 
     @Override

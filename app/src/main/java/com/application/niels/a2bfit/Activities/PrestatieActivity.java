@@ -15,29 +15,32 @@ import java.util.List;
 
 import Adapters.MyLayoutAdapter;
 import Classes.DatabaseHelper;
-import Classes.Oefening;
-import Classes.Prestatie;
-import Classes.Schema;
+import Model.Prestatie;
+import Model.Gebruiker;
+import Repo.GebruikerRepo;
 
 public class PrestatieActivity extends AppCompatActivity {
 
-    DatabaseHelper db;
     ListView lvPrestaties;
     Prestatie selectedPrestatie;
     TextView tvPrestatieOmschrijving;
+    Gebruiker gebruiker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_prestatie);
 
-        db = new DatabaseHelper(this);
+        DatabaseHelper db = new DatabaseHelper(this);
+        GebruikerRepo gebruikerRepo = new GebruikerRepo(db);
+        gebruiker = new Gebruiker(gebruikerRepo);
+
         lvPrestaties = (ListView) findViewById(R.id.ListViewPrestaties);
         tvPrestatieOmschrijving = (TextView) findViewById(R.id.tvPrestatieOmschrijving);
 
 
         getSupportActionBar().setTitle("Prestaties");
-        getPrestaties();
+        FillPrestatieListbox();
         selectedListItem();
     }
 
@@ -51,8 +54,8 @@ public class PrestatieActivity extends AppCompatActivity {
         });
     }
 
-    public void getPrestaties() {
-        List<Prestatie> prestatieList = db.HaalAllePrestatiesOp();
+    public void FillPrestatieListbox() {
+        List<Prestatie> prestatieList = gebruiker.getPrestaties();
         ListAdapter listAdapter = new MyLayoutAdapter<Prestatie>(this, android.R.layout.simple_list_item_1, android.R.id.text1, prestatieList);
         lvPrestaties.setAdapter(listAdapter);
 

@@ -2,7 +2,7 @@ package Repositories;
 
 import java.util.List;
 
-import Classes.Prestatie;
+import Model.Prestatie;
 import Contexts.IPrestatieContext;
 
 public class PrestatieRepository {

@@ -1,23 +1,8 @@
 package SqlContexts;
 
-import android.content.Context;
-import android.database.Cursor;
-import android.graphics.Color;
-import android.util.Log;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.SpinnerAdapter;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import com.application.niels.a2bfit.Activities.OefeningenActivity;
-
-import java.util.ArrayList;
 import java.util.List;
 
-import Classes.DatabaseHelper;
-import Classes.Spiergroep;
+import Model.Spiergroep;
 import Contexts.ISpiergroepContext;
 
 public class SqlSpiergroepContext implements ISpiergroepContext{

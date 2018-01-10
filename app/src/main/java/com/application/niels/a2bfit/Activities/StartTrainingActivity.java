@@ -1,40 +1,32 @@
 package com.application.niels.a2bfit.Activities;
 
 import android.app.DatePickerDialog;
-import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
 import android.graphics.Color;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
-import android.widget.TextView;
 
 import com.application.niels.a2bfit.R;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
 import Adapters.MyLayoutAdapter;
 import Classes.DatabaseHelper;
-import Classes.Gebruiker;
-import Classes.Oefening;
-import Classes.Schema;
-import Classes.Training;
+import Model.Schema;
+import Model.Training;
+import Model.Gebruiker;
+import Repo.GebruikerRepo;
 
 public class StartTrainingActivity extends AppCompatActivity {
 
@@ -43,11 +35,14 @@ public class StartTrainingActivity extends AppCompatActivity {
     Button btnStartTraining;
     Schema selectedSchema;
     EditText etDatum;
+    Gebruiker gebruiker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start_training);
+
+        gebruiker = new Gebruiker(new GebruikerRepo(new DatabaseHelper(this)));
 
         getSupportActionBar().setTitle("Start training");
         spinner = (Spinner) findViewById(R.id.spinnerSchemas);
@@ -105,14 +100,13 @@ public class StartTrainingActivity extends AppCompatActivity {
     }
 
     public void startTraining(){
-        final Context context = this;
         btnStartTraining.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 long schemaID = selectedSchema.getSchemaID();
                 String datum = etDatum.getText().toString();
 
-                Training training = Gebruiker.startTraining(schemaID, datum, context);
+                Training training = gebruiker.startTraining(schemaID, datum);
 
 
                 Intent startTrainingMetSchema = new Intent(StartTrainingActivity.this, StartTrainingMetSchemaActivity.class);
@@ -126,7 +120,7 @@ public class StartTrainingActivity extends AppCompatActivity {
     }
 
     public void getSchemas(){
-        List<Schema> schemaList = Gebruiker.getSchemas(this);
+        List<Schema> schemaList = gebruiker.getSchemas();
         SpinnerAdapter spinnerAdapter = new MyLayoutAdapter<Schema>(this, android.R.layout.simple_list_item_1, android.R.id.text1, schemaList, 20, Color.BLUE);
         spinner.setAdapter(spinnerAdapter);
 

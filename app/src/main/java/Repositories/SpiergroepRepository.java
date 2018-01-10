@@ -1,7 +1,7 @@
 package Repositories;
 
 import java.util.List;
-import Classes.Spiergroep;
+import Model.Spiergroep;
 import Contexts.ISpiergroepContext;
 
 public class SpiergroepRepository {

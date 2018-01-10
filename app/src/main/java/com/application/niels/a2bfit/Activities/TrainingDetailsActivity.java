@@ -14,36 +14,38 @@ import com.application.niels.a2bfit.R;
 import java.util.List;
 import Adapters.MyLayoutAdapter;
 import Classes.DatabaseHelper;
-import Classes.Oefening;
-import Classes.Spiergroep;
-import Classes.Training;
-import Classes.TrainingsOefening;
+import Model.Spiergroep;
+import Model.Training;
+import Model.TrainingsOefening;
+import Model.Gebruiker;
+import Repo.GebruikerRepo;
 
 public class TrainingDetailsActivity extends AppCompatActivity {
 
     Spinner TrainingSpinner;
-    DatabaseHelper db;
     EditText etTotaalAantalOefeningen;
     EditText etTotaalAantalHerhalingen;
     EditText etTotaalGewicht;
+    Gebruiker gebruiker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_training_details);
 
+        gebruiker = new Gebruiker(new GebruikerRepo(new DatabaseHelper(this)));
+
         TrainingSpinner = (Spinner) findViewById(R.id.TrainingSpinner);
         etTotaalAantalOefeningen = (EditText) findViewById(R.id.etTotaalAantalOefeningen);
         etTotaalAantalHerhalingen = (EditText) findViewById(R.id.etTotaalAantalHerhalingen);
         etTotaalGewicht = (EditText) findViewById(R.id.etTotaalGewicht);
-        db = new DatabaseHelper(this);
 
-        VulSpinner();
+        fillSpinner();
         updateSpinner();
     }
 
-    public void VulSpinner(){
-        List<Training> trainingList = db.HaalAlleTrainingenOp();
+    public void fillSpinner(){
+        List<Training> trainingList = gebruiker.getTrainingen();
         SpinnerAdapter spinnerAdapter = new MyLayoutAdapter<Spiergroep>(this, android.R.layout.simple_list_item_1, android.R.id.text1, trainingList, 20, Color.BLUE);
         TrainingSpinner.setAdapter(spinnerAdapter);
 
@@ -71,7 +73,7 @@ public class TrainingDetailsActivity extends AppCompatActivity {
     public void setAantalOefeningen(){
         Training selectedTraining = (Training) TrainingSpinner.getSelectedItem();
         long trainingID = selectedTraining.getTrainingID();
-        List<TrainingsOefening> oefeningenVanTraining = db.HaalOefeningenOpBijTraining(trainingID);
+        List<TrainingsOefening> oefeningenVanTraining = gebruiker.getOefeningenBijTraining(trainingID);
         int aantalOefeningen = oefeningenVanTraining.size();
         etTotaalAantalOefeningen.setText(aantalOefeningen + " oefeningen gedaan.");
     }
@@ -82,9 +84,9 @@ public class TrainingDetailsActivity extends AppCompatActivity {
         Training selectedTraining = (Training) TrainingSpinner.getSelectedItem();
         long trainingID = selectedTraining.getTrainingID();
 
-        List<TrainingsOefening> oefeningenVanTraining = db.HaalOefeningenOpBijTraining(trainingID);
+        List<TrainingsOefening> oefeningenVanTraining = gebruiker.getOefeningenBijTraining(trainingID);
         for (TrainingsOefening trainingsOefening : oefeningenVanTraining) {
-            int[] setsEnReps = db.HaalSetsEnRepsOp(trainingsOefening.getOefeningID());
+            int[] setsEnReps = gebruiker.getSetsEnReps(trainingsOefening.getOefeningID());
             totaalAantalHerhalingen += (setsEnReps[0] * setsEnReps[1]);
         }
 
@@ -98,14 +100,14 @@ public class TrainingDetailsActivity extends AppCompatActivity {
         long trainingID = selectedTraining.getTrainingID();
 
 
-        List<TrainingsOefening> oefeningenVanTraining = db.HaalOefeningenOpBijTraining(trainingID);
+        List<TrainingsOefening> oefeningenVanTraining = gebruiker.getOefeningenBijTraining(trainingID);
         for (TrainingsOefening trainingsOefening : oefeningenVanTraining) {
-            int[] setsEnReps = db.HaalSetsEnRepsOp(trainingsOefening.getOefeningID());
+            int[] setsEnReps = gebruiker.getSetsEnReps(trainingsOefening.getOefeningID());
             totaalGewicht += (trainingsOefening.getGewicht() * setsEnReps[0] * setsEnReps[1]);
         }
 
 
-        etTotaalGewicht.setText(totaalGewicht+" kg getild.");
+        etTotaalGewicht.setText(totaalGewicht+" kilo getild.");
     }
 
     public void showMessage(String title, String message){

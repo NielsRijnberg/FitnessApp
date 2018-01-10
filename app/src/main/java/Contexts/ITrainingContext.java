@@ -2,7 +2,7 @@ package Contexts;
 
 import java.util.List;
 
-import Classes.Training;
+import Model.Training;
 
 public interface ITrainingContext {
 

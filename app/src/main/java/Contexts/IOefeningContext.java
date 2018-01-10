@@ -2,9 +2,7 @@ package Contexts;
 
 import java.util.List;
 
-import Classes.Oefening;
-import Classes.Schema;
-import Classes.Spiergroep;
+import Model.Oefening;
 
 public interface IOefeningContext {
 

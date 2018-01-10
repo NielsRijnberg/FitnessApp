@@ -2,8 +2,7 @@ package Contexts;
 
 import java.util.List;
 
-import Classes.Oefening;
-import Classes.Schema;
+import Model.Schema;
 
 public interface ISchemaContext {
 
