@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activities.LoginActivity">
+        <activity android:name="com.a2bfit.Activity.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -17,18 +17,18 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Activities.RegistreerActivity"
-            android:parentActivityName=".Activities.LoginActivity" />
+            android:name="com.a2bfit.Activity.RegistreerActivity"
+            android:parentActivityName="com.a2bfit.Activity.LoginActivity" />
         <activity
-            android:name=".Activities.OverzichtschermActivity"
-            android:parentActivityName=".Activities.LoginActivity" />
-        <activity android:name=".Activities.OefeningenActivity" />
-        <activity android:name=".Activities.SchemasActivity" />
-        <activity android:name=".Activities.StartTrainingActivity" />
-        <activity android:name=".Activities.OefeningDetailsActivity" />
-        <activity android:name=".Activities.StartTrainingMetSchemaActivity" />
-        <activity android:name=".Activities.TrainingDetailsActivity" />
-        <activity android:name=".Activities.PrestatieActivity"></activity>
+            android:name="com.a2bfit.Activity.OverzichtschermActivity"
+            android:parentActivityName="com.a2bfit.Activity.LoginActivity" />
+        <activity android:name="com.a2bfit.Activity.OefeningenActivity" />
+        <activity android:name="com.a2bfit.Activity.SchemasActivity" />
+        <activity android:name="com.a2bfit.Activity.StartTrainingActivity" />
+        <activity android:name="com.a2bfit.Activity.OefeningDetailsActivity" />
+        <activity android:name="com.a2bfit.Activity.StartTrainingMetSchemaActivity" />
+        <activity android:name="com.a2bfit.Activity.TrainingDetailsActivity" />
+        <activity android:name="com.a2bfit.Activity.PrestatieActivity"></activity>
     </application>
 
 </manifest>

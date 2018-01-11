@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:focusable="true"
     android:focusableInTouchMode="true"
-    tools:context="com.application.niels.a2bfit.Activities.StartTrainingMetSchemaActivity">
+    tools:context="com.a2bfit.Activity.StartTrainingMetSchemaActivity">
 
 
     <TextView
