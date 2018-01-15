@@ -37,7 +37,7 @@ public class StartTrainingMetSchemaActivity extends AppCompatActivity {
     int selectedIndex;
     List<Oefening> oefeningenVanSchema;
     ListAdapter listAdapter;
-    boolean clickedListItem = false;
+    boolean isOefeningSelected = false;
     Oefening selectedOefening;
     Gebruiker gebruiker;
 
@@ -96,11 +96,16 @@ public class StartTrainingMetSchemaActivity extends AppCompatActivity {
     }
 
     public void getClickedOefening(){
-        lvOefeningenVanSchema.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        lvOefeningenVanSchema.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                 selectedIndex = i;
-                clickedListItem = true;
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                selectedIndex = i;
+                isOefeningSelected = true;
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+                isOefeningSelected = false;
             }
         });
     }
@@ -124,17 +129,17 @@ public class StartTrainingMetSchemaActivity extends AppCompatActivity {
                 if (!gewichtAsString.isEmpty()){
                     int gewicht = Integer.valueOf(gewichtAsString);
 
-                    if (clickedListItem){
-                        long trainingID = getIntent().getExtras().getInt("trainingID");
-                        long oefeningID = ((Oefening)lvOefeningenVanSchema.getItemAtPosition(selectedIndex)).getOefeningID();
 
-                        TrainingsOefening currentTrainingsOefening = new TrainingsOefening(trainingID, oefeningID, gewicht);
-                        gebruiker.vinkOefeningAf(currentTrainingsOefening);
-                        Toast.makeText(StartTrainingMetSchemaActivity.this, "Training afgevinkt", Toast.LENGTH_LONG).show();
-                    }
-                    else {
+                    long trainingID = getIntent().getExtras().getInt("trainingID");
+                    long oefeningID = ((Oefening)lvOefeningenVanSchema.getItemAtPosition(selectedIndex)).getOefeningID();
+
+                    TrainingsOefening currentTrainingsOefening = new TrainingsOefening(trainingID, oefeningID, gewicht);
+                    gebruiker.vinkOefeningAf(currentTrainingsOefening);
+                    Toast.makeText(StartTrainingMetSchemaActivity.this, "Oefening afgevinkt", Toast.LENGTH_LONG).show();
+
+/*                    else {
                         Toast.makeText(StartTrainingMetSchemaActivity.this, "Selecteer een oefening", Toast.LENGTH_LONG).show();
-                    }
+                    }*/
                 }
                 else{
                     Toast.makeText(StartTrainingMetSchemaActivity.this, "Vul een gewicht in", Toast.LENGTH_LONG).show();

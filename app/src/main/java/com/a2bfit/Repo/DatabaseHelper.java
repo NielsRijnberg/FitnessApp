@@ -20,11 +20,8 @@ import com.a2bfit.Model.TrainingsOefening;
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     private static final String LOG = "DatabaseHelper";
-
-    //DB version and name
     private static final int DATABASE_VERSION = 1;
     public static final String DATABASE_NAME = "Sportschool";
-
 
 
     //region Table names
