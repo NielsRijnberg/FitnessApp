@@ -62,20 +62,27 @@ public class SchemasActivity extends AppCompatActivity {
     }
 
     public void bekijkOefening() {
+
         btnBekijkOefeningVanSchema.setOnClickListener(new View.OnClickListener() {
+            final boolean isClicked = listview.isSelected();
             @Override
             public void onClick(View view) {
-                long oefeningID = selectedOefening.getOefeningID();
-                String naam = selectedOefening.getNaam();
-                String foto = selectedOefening.getFoto();
-                String omschrijving = selectedOefening.getOmschrijving();
+                if (isClicked) {
+                    long oefeningID = selectedOefening.getOefeningID();
+                    String naam = selectedOefening.getNaam();
+                    String foto = selectedOefening.getFoto();
+                    String omschrijving = selectedOefening.getOmschrijving();
 
-                Intent oefeningDetailsIntent = new Intent(SchemasActivity.this, OefeningDetailsActivity.class);
-                oefeningDetailsIntent.putExtra("ID", oefeningID);
-                oefeningDetailsIntent.putExtra("naam", naam);
-                oefeningDetailsIntent.putExtra("oefeningfoto", foto);
-                oefeningDetailsIntent.putExtra("oefeningomschrijving", omschrijving);
-                startActivity(oefeningDetailsIntent);
+                    Intent oefeningDetailsIntent = new Intent(SchemasActivity.this, OefeningDetailsActivity.class);
+                    oefeningDetailsIntent.putExtra("ID", oefeningID);
+                    oefeningDetailsIntent.putExtra("naam", naam);
+                    oefeningDetailsIntent.putExtra("oefeningfoto", foto);
+                    oefeningDetailsIntent.putExtra("oefeningomschrijving", omschrijving);
+                    startActivity(oefeningDetailsIntent);
+                }
+                else {
+                    showMessage("Error", "Selecteer een oefening");
+                }
             }
         });
     }

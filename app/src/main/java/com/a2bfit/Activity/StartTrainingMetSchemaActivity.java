@@ -130,7 +130,7 @@ public class StartTrainingMetSchemaActivity extends AppCompatActivity {
                     int gewicht = Integer.valueOf(gewichtAsString);
 
 
-                    long trainingID = getIntent().getExtras().getInt("trainingID");
+                    long trainingID = getIntent().getExtras().getLong("trainingID");
                     long oefeningID = ((Oefening)lvOefeningenVanSchema.getItemAtPosition(selectedIndex)).getOefeningID();
 
                     TrainingsOefening currentTrainingsOefening = new TrainingsOefening(trainingID, oefeningID, gewicht);
