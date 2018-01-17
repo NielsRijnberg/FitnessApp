@@ -15,7 +15,10 @@ import com.a2bfit.Model.TrainingsOefening;
 
 import static com.a2bfit.Repo.DatabaseHelper.KEY_DATUM;
 import static com.a2bfit.Repo.DatabaseHelper.KEY_SCHEMAID;
+import static com.a2bfit.Repo.DatabaseHelper.TABLE_OEFENING;
+import static com.a2bfit.Repo.DatabaseHelper.TABLE_PRESTATIE;
 import static com.a2bfit.Repo.DatabaseHelper.TABLE_SCHEMA;
+import static com.a2bfit.Repo.DatabaseHelper.TABLE_SCHEMA_OEFENING;
 import static com.a2bfit.Repo.DatabaseHelper.TABLE_TRAINING;
 import static com.a2bfit.Repo.DatabaseHelper.TABLE_TRAINING_OEFENING;
 
@@ -29,7 +32,7 @@ public class GebruikerRepo {
     public List<Prestatie> getPrestaties(){
         List<Prestatie> prestatieList = new ArrayList<>();
         SQLiteDatabase db = databaseHelper.getReadableDatabase();
-        Cursor result = db.rawQuery("select * from prestaties", null);
+        Cursor result = db.rawQuery("select * from " + TABLE_PRESTATIE, null);
 
         while(result.moveToNext()) {
             int id = result.getInt(result.getColumnIndex("ID"));
@@ -43,7 +46,7 @@ public class GebruikerRepo {
     public List<Oefening> getOefeningenVoorSchema(long schemaID){
         List<Oefening> oefeningList = new ArrayList<>();
         SQLiteDatabase db = databaseHelper.getReadableDatabase();
-        Cursor result = db.rawQuery("SELECT * FROM oefeningen as o " +
+        Cursor result = db.rawQuery("SELECT * FROM " + TABLE_OEFENING + " as o " +
                 "INNER JOIN schemas_oefeningen so ON so.oefeningID = o.ID " +
                 "INNER JOIN schemas s ON s.ID = so.schemaID " +
                 "INNER JOIN oefeningen_spiergroepen os ON os.oefeningID = o.ID " +
@@ -98,7 +101,7 @@ public class GebruikerRepo {
     public List<Training> getTrainingen() {
         List<Training> trainingList = new ArrayList<>();
         SQLiteDatabase db = databaseHelper.getReadableDatabase();
-        Cursor result = db.rawQuery("select * from trainingen", null);
+        Cursor result = db.rawQuery("select * from " + TABLE_TRAINING, null);
 
         while (result.moveToNext()) {
             int id = result.getInt(result.getColumnIndex("ID"));
@@ -112,7 +115,7 @@ public class GebruikerRepo {
     public List<TrainingsOefening> getOefeningenBijTraining(long trainingID) {
         List<TrainingsOefening> oefeningenVanTraining = new ArrayList<>();
         SQLiteDatabase db = databaseHelper.getReadableDatabase();
-        Cursor result = db.rawQuery("select * from trainingen_oefeningen " +
+        Cursor result = db.rawQuery("select * from " + TABLE_TRAINING_OEFENING +
                 "WHERE trainingID = ?", new String[] {""+trainingID});
 
         while (result.moveToNext()) {
@@ -129,7 +132,7 @@ public class GebruikerRepo {
         int[] setEnRep = null;
         SQLiteDatabase db = databaseHelper.getReadableDatabase();
         try{
-            result = db.rawQuery("select * from schemas_oefeningen " +
+            result = db.rawQuery("select * from " + TABLE_SCHEMA_OEFENING +
                     "WHERE oefeningID = ?", new String[] {""+oefeningID});
             if (result.getCount()>0){
                 result.moveToFirst();

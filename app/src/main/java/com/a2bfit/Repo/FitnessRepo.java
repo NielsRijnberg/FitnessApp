@@ -9,6 +9,7 @@ import java.util.List;
 import com.a2bfit.Model.Oefening;
 import com.a2bfit.Model.Spiergroep;
 
+import static com.a2bfit.Repo.DatabaseHelper.TABLE_OEFENING;
 import static com.a2bfit.Repo.DatabaseHelper.TABLE_SPIERGROEP;
 
 public class FitnessRepo {
@@ -21,7 +22,7 @@ public class FitnessRepo {
     public List<Oefening> getOefeningen(String spiergroepNaam){
         List<Oefening> oefeningList = new ArrayList<>();
         SQLiteDatabase db = databaseHelper.getReadableDatabase();
-        Cursor result = db.rawQuery("SELECT * FROM oefeningen as o " +
+        Cursor result = db.rawQuery("SELECT * FROM " + TABLE_OEFENING + " as o " +
                 "INNER JOIN oefeningen_spiergroepen os ON os.oefeningID = o.ID " +
                 "INNER JOIN spiergroepen s ON s.ID = os.spiergroepID " +
                 "WHERE s.spiergroepnaam = ?", new String[] {spiergroepNaam});
