@@ -38,7 +38,6 @@ public class StartTrainingMetSchemaActivity extends AppCompatActivity {
     List<Oefening> oefeningenVanSchema;
     ListAdapter listAdapter;
     boolean isOefeningSelected = false;
-    Oefening selectedOefening;
     Gebruiker gebruiker;
 
 
@@ -64,22 +63,13 @@ public class StartTrainingMetSchemaActivity extends AppCompatActivity {
         VinkOefeningAf();
         TrainingBeeindigen();
         bekijkOefening();
-        selectedListItem();
-    }
-
-    public void selectedListItem(){
-        lvOefeningenVanSchema.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                selectedOefening = (Oefening) lvOefeningenVanSchema.getItemAtPosition(position);
-            }
-        });
     }
 
     public void bekijkOefening() {
         btnBekijkOefening.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Oefening selectedOefening = (Oefening) lvOefeningenVanSchema.getItemAtPosition(selectedIndex);
                 long oefeningID = selectedOefening.getOefeningID();
                 String naam = selectedOefening.getNaam();
                 String foto = selectedOefening.getFoto();
@@ -108,19 +98,34 @@ public class StartTrainingMetSchemaActivity extends AppCompatActivity {
                 isOefeningSelected = false;
             }
         });
+        lvOefeningenVanSchema.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                selectedIndex = i;
+                isOefeningSelected = true;
+            }
+        });
     }
 
     public void setOefeningenListbox(){
+        for (Oefening oefening:oefeningenVanSchema){
+            System.out.println("OefeningID = " + oefening.getOefeningID());
+        }
+
         listAdapter = new MyLayoutAdapter<Oefening>(this, android.R.layout.simple_list_item_1, android.R.id.text1, oefeningenVanSchema);
         lvOefeningenVanSchema.setAdapter(listAdapter);
 
-        if (oefeningenVanSchema.isEmpty()){
-            showMessage("Error", "Geen oefeningen gevonden");
+        if (!oefeningenVanSchema.isEmpty()){
+            selectedIndex = 0;
+        }
+        else {
+            btnBekijkOefening.setEnabled(false);
+            btnOefeningAfvinken.setEnabled(false);
+            btnBekijkOefening.setVisibility(View.INVISIBLE);
+            btnOefeningAfvinken.setVisibility(View.INVISIBLE);
         }
     }
 
-
-    //TODO zorgen dat ifstatement die checkt op gewicht het doet
     public void VinkOefeningAf(){
         btnOefeningAfvinken.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -129,11 +134,11 @@ public class StartTrainingMetSchemaActivity extends AppCompatActivity {
                 if (!gewichtAsString.isEmpty()){
                     int gewicht = Integer.valueOf(gewichtAsString);
 
-
                     long trainingID = getIntent().getExtras().getLong("trainingID");
                     long oefeningID = ((Oefening)lvOefeningenVanSchema.getItemAtPosition(selectedIndex)).getOefeningID();
 
                     TrainingsOefening currentTrainingsOefening = new TrainingsOefening(trainingID, oefeningID, gewicht);
+                    System.out.println("Trainingsoefening: trainingID =" + trainingID + " oefeningID =" + oefeningID + " gewicht= " + gewicht);
                     gebruiker.vinkOefeningAf(currentTrainingsOefening);
                     Toast.makeText(StartTrainingMetSchemaActivity.this, "Oefening afgevinkt", Toast.LENGTH_LONG).show();
 
@@ -145,6 +150,7 @@ public class StartTrainingMetSchemaActivity extends AppCompatActivity {
                     Toast.makeText(StartTrainingMetSchemaActivity.this, "Vul een gewicht in", Toast.LENGTH_LONG).show();
                 }
                 oefeningenVanSchema.remove(selectedIndex);
+                setOefeningenListbox();
                 lvOefeningenVanSchema.invalidateViews();
             }
         });

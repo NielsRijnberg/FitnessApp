@@ -54,12 +54,12 @@ public class GebruikerRepo {
                 "WHERE s.ID = ?", new String[] {""+schemaID});
 
         while (result.moveToNext()) {
-            long id = result.getInt(result.getColumnIndex("ID"));
+            long oefeningID = result.getInt(result.getColumnIndex("oefeningID"));
             long spiergroepID = result.getInt(result.getColumnIndex("spiergroepID"));
             String naam = result.getString(result.getColumnIndex("oefeningnaam"));
             String foto = result.getString(result.getColumnIndex("oefeningfoto"));
             String omschrijving = result.getString(result.getColumnIndex("oefeningomschrijving"));
-            oefeningList.add(new Oefening(id, naam, foto, omschrijving, spiergroepID));
+            oefeningList.add(new Oefening(oefeningID, naam, foto, omschrijving, spiergroepID));
         }
         return oefeningList;
     }

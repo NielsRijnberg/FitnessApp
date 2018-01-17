@@ -802,4 +802,18 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(INSERT_PRESTATIE10);
     }
     //endregion
+
+//    private List<Object[]> getOefeningen(String spiergroepNaam){
+//        List<Object[]> data = new ArrayList<Object[]>();
+//        SQLiteDatabase db = this.getReadableDatabase();
+//        Cursor result = db.rawQuery("SELECT * FROM " + TABLE_OEFENING + " as o " +
+//                "INNER JOIN oefeningen_spiergroepen os ON os.oefeningID = o.ID " +
+//                "INNER JOIN spiergroepen s ON s.ID = os.spiergroepID " +
+//                "WHERE s.spiergroepnaam = ?", new String[] {spiergroepNaam});
+//
+//        while(result.moveToNext()){
+//            data.add(new Object[])
+//        }
+//
+//    }
 }
