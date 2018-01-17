@@ -64,10 +64,9 @@ public class SchemasActivity extends AppCompatActivity {
     public void bekijkOefening() {
 
         btnBekijkOefeningVanSchema.setOnClickListener(new View.OnClickListener() {
-            final boolean isClicked = listview.isSelected();
             @Override
             public void onClick(View view) {
-                if (isClicked) {
+                if (selectedOefening != null) {
                     long oefeningID = selectedOefening.getOefeningID();
                     String naam = selectedOefening.getNaam();
                     String foto = selectedOefening.getFoto();
@@ -109,6 +108,9 @@ public class SchemasActivity extends AppCompatActivity {
 
         if (oefeningList.isEmpty()) {
             showMessage("Error", "Geen oefeningen gevonden");
+            selectedOefening = null;
+        } else {
+            selectedOefening = oefeningList.get(0);
         }
     }
 

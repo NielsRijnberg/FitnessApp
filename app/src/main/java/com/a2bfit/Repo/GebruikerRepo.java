@@ -116,7 +116,7 @@ public class GebruikerRepo {
         List<TrainingsOefening> oefeningenVanTraining = new ArrayList<>();
         SQLiteDatabase db = databaseHelper.getReadableDatabase();
         Cursor result = db.rawQuery("select * from " + TABLE_TRAINING_OEFENING +
-                "WHERE trainingID = ?", new String[] {""+trainingID});
+                " WHERE trainingID = ?", new String[] {""+trainingID});
 
         while (result.moveToNext()) {
             long oefeningID = result.getInt(result.getColumnIndex("oefeningID"));
@@ -133,7 +133,7 @@ public class GebruikerRepo {
         SQLiteDatabase db = databaseHelper.getReadableDatabase();
         try{
             result = db.rawQuery("select * from " + TABLE_SCHEMA_OEFENING +
-                    "WHERE oefeningID = ?", new String[] {""+oefeningID});
+                    " WHERE oefeningID = ?", new String[] {""+oefeningID});
             if (result.getCount()>0){
                 result.moveToFirst();
                 int aantalSets = result.getInt(result.getColumnIndex("aantalsets"));
